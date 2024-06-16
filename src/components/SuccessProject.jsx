@@ -66,33 +66,35 @@ function TheChallenge() {
 
 function TheResult() {
   return (
-    <div className="the-result secondary-container container">
-      <h1>THE RESULT</h1>
-      <div className="the-result-stats">
-        <div className="col">
-          <div className="number">46.3 k</div>
-          <div className="underline"></div>
-          <p>
-            Social Media Likes <br />
-            After Campaign
-          </p>
-        </div>
-        <div className="col">
-          <div className="number">2 WEEKS</div>
-          <div className="underline"></div>
-          <p>
-            Trending Topic on <br />
-            Social Media
-          </p>
-        </div>
-        <div className="col">
-          <div className="number">467 k</div>
-          <div className="underline"></div>
-          <p>
-            Share on Social
-            <br />
-            Media in 6weeks
-          </p>
+    <div className="secondary-container container">
+      <div className="the-result">
+        <h1>THE RESULT</h1>
+        <div className="the-result-stats">
+          <div className="col">
+            <div className="number">46.3 k</div>
+            <div className="underline"></div>
+            <p>
+              Social Media Likes <br />
+              After Campaign
+            </p>
+          </div>
+          <div className="col">
+            <div className="number">2 WEEKS</div>
+            <div className="underline"></div>
+            <p>
+              Trending Topic on <br />
+              Social Media
+            </p>
+          </div>
+          <div className="col">
+            <div className="number">467 k</div>
+            <div className="underline"></div>
+            <p>
+              Share on Social
+              <br />
+              Media in 6weeks
+            </p>
+          </div>
         </div>
       </div>
     </div>

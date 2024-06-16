@@ -20,6 +20,11 @@ ul {
   list-style: none;
 }
 
+input,
+textarea {
+  outline: none;
+}
+
 a {
   text-decoration: none;
 }
@@ -370,7 +375,7 @@ header .row {
 /* the result */
 .the-result {
   font-family: var(--Montserrat);
-  padding-top: 88px;
+  padding-top: 150px;
   padding-bottom: 194px;
 }
 
@@ -1260,8 +1265,19 @@ header .row {
 
 /* tablet */
 @media (max-width: 900px) {
+  :root {
+    --Opensan: "Open Sans", sans-serif;
+    --Montserrat: "Montserrat", sans-serif;
+    --font-xxxxl: 50px;
+    --font-xxxl: 32px;
+    --font-xxl: 28px;
+    --font-xl: 18px;
+    --font-lg: 16px;
+    --font-sm: 16px;
+  }
+
   .secondary-container {
-    padding: 0 30px;
+    padding: 0 15px;
   }
 
   .menu-btn {
@@ -1317,8 +1333,16 @@ header .row {
     margin-top: 114px;
   }
 
+  .hero .hero_content-big {
+    width: 100%;
+  }
+
+  .hero_content p {
+    width: 80%;
+  }
+
   .hero {
-    padding: 200px 0px 150px 0px;
+    padding: 150px 0px 150px 0px;
   }
 
   .hero-mobile-img {
@@ -1328,7 +1352,7 @@ header .row {
   /* app development */
 
   .app-development {
-    padding-top: clamp(200px, 42vw, 800px);
+    padding-top: clamp(200px, 45vw, 800px);
   }
 
   .app-development-title {
@@ -1404,26 +1428,25 @@ header .row {
 
   .the-result {
     font-family: var(--Montserrat);
-    padding-top: 230px;
+    padding-top: 250px;
     padding-bottom: 194px;
   }
 
   .the-result-stats {
     margin-top: 48.3px;
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(auto-fit, minmax(180px, auto));
     align-items: center;
     justify-content: start;
-    gap: 40px;
   }
 
-  .feature-project_cards {
+  .feature-project_cards .card {
     max-width: 400px;
     margin-inline: auto;
   }
 
   .the-result-stats .number {
-    /*  font-size: 40px; */
+    font-size: 40px;
   }
 
   /* benefits */
@@ -1490,7 +1513,7 @@ header .row {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
   :root {
     --Opensan: "Open Sans", sans-serif;
     --Montserrat: "Montserrat", sans-serif;
@@ -1503,11 +1526,11 @@ header .row {
   }
 
   .secondary-container {
-    padding: 0px 15px;
+    padding: 0px;
   }
 
   .container {
-    width: 95%;
+    width: 90%;
   }
 
   .btn {
@@ -1703,11 +1726,12 @@ header .row {
   }
 
   .challenge-images .blur-image {
-    height: 43vw;
+    height: 35vw;
     width: 36.4%;
-    top: 27%;
-    min-height: 144px;
-    left: 100px;
+    top: 50%;
+    min-height: 100px;
+    min-width: 110px;
+    left: 22%;
   }
 
   .the-challenge-photo-one {
@@ -1742,8 +1766,8 @@ header .row {
 
   .the-result-stats {
     margin-top: 16.3px;
-    gap: 20px;
     align-items: start;
+    gap: 40px;
   }
 
   .the-result-stats p {
@@ -1759,6 +1783,7 @@ header .row {
     margin-top: 27px;
     gap: 22px;
     justify-items: stretch;
+    justify-content: center;
   }
   /* benefits */
   .benefits {
@@ -1769,6 +1794,7 @@ header .row {
   .benefits-card-container {
     margin-top: 41px;
     justify-items: stretch;
+    justify-content: center;
   }
 
   /* palns */
@@ -1929,7 +1955,7 @@ header .row {
   /* app development */
   .app-development .row {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 30px;
   }
 
   .activities {
