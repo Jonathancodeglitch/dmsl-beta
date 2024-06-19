@@ -1,6 +1,7 @@
 import logo from "../img/Logo-dark.svg";
 import { Divide as Hamburger } from "hamburger-react";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
@@ -21,25 +22,25 @@ export default function Header() {
         </div>
 
         <ul className={isOpen ? "nav show" : "nav"}>
-          <li className="nav_list active">
-            <a className="nav_link" href="#">
+          <li className="nav_list">
+            <NavLink className="nav_link" to="/">
               Home
-            </a>
+            </NavLink>
           </li>
           <li className="nav_list">
-            <a className="nav_link" href="#">
+            <NavLink className="nav_link" to="/about-us">
               ABOUT US
-            </a>
+            </NavLink>
           </li>
           <li className="nav_list">
-            <a className="nav_link" href="#">
+            <NavLink className="nav_link" to="/projects">
               PROJECTS
-            </a>
+            </NavLink>
           </li>
           <li className="nav_list  nav_btn btn">
-            <a className="nav_link" href="#">
+            <NavLink className="nav_link" to="/contact-us">
               CONTACT US
-            </a>
+            </NavLink>
           </li>
         </ul>
       </div>
