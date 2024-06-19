@@ -37,8 +37,8 @@ export default function Header() {
               PROJECTS
             </NavLink>
           </li>
-          <li className="nav_list  nav_btn btn">
-            <NavLink className="nav_link" to="/contact-us">
+          <li className="nav_list">
+            <NavLink className="nav_link  nav_btn btn" to="/contact-us">
               CONTACT US
             </NavLink>
           </li>
