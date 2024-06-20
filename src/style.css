@@ -226,6 +226,67 @@ header .row {
   margin-bottom: 600px;
 }
 
+/*about us hero*/
+.about-us .hero_content p {
+  width: 70%;
+}
+
+/* meet us */
+.meetUs {
+  margin-block: 400px;
+}
+
+.meetUs h5 {
+  color: #27bdf3;
+  font-weight: 700;
+  font-size: var(--font-xl);
+  text-align: center;
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  text-align: center;
+  margin-top: 99px;
+  gap: 30px 100px;
+  align-items: end;
+}
+
+.meetUs h2 {
+  color: #363636;
+  font-size: var(--font-xxxl);
+  font-weight: 700;
+  text-align: center;
+  margin-top: 31px;
+}
+
+.profile {
+  background-color: #d6d6d6;
+  border-radius: 16px;
+  height: 25vw;
+}
+
+.team.stepdown {
+  margin-bottom: 125px;
+}
+
+.team .name,
+.team .role {
+  font-size: var(--font-xxl);
+  color: #363636;
+}
+
+.team .name {
+  font-weight: 700;
+  margin-top: 42px;
+}
+
+.team .role {
+  font-weight: 500;
+  margin-top: 8px;
+}
+
 /*  app-development section */
 
 .app-development {
@@ -1104,6 +1165,11 @@ header .row {
     margin-bottom: 400px;
   }
 
+  /*about us hero*/
+  .about-us .hero_content p {
+    width: 90%;
+  }
+
   /*  app-development section */
   .app-development {
     padding-top: clamp(100px, 35vw, 800px);
@@ -1245,6 +1311,15 @@ header .row {
   .testimonials .client-info {
     padding: 29px 23px;
   }
+
+  /* meet us */
+  .meetUs {
+    margin-bottom: 200px;
+  }
+
+  .team.stepdown {
+    margin-bottom: 70px;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -1295,6 +1370,21 @@ header .row {
   /* contact us hero */
   .contact-us-hero {
     margin-bottom: 300px;
+  }
+
+  /* meet us */
+  .meetUs {
+    margin-bottom: 200px;
+    margin-top: 300px;
+  }
+
+  .team .name,
+  .team .role {
+    font-size: 20px;
+  }
+
+  .team.stepdown {
+    margin-bottom: 70px;
   }
 
   /* app development */
@@ -1647,6 +1737,21 @@ header .row {
   }
   .contact-us form {
     width: 100%;
+  }
+
+  /* about us page */
+  .team-container {
+    gap: 30px;
+    margin-top: 70px;
+  }
+
+  .team .name,
+  .team .role {
+    font-size: 18px;
+  }
+
+  .team.stepdown {
+    margin-bottom: 50px;
   }
 }
 
@@ -2097,6 +2202,38 @@ header .row {
   .copyright {
     margin-top: 69px;
   }
+
+  /* about us */
+  .meetUs {
+    margin-top: 200px;
+    margin-bottom: 150px;
+  }
+
+  .team-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    text-align: center;
+    align-items: stretch;
+    gap: 30px 40px;
+  }
+
+  .team.stepdown {
+    margin-bottom: 0;
+  }
+
+  .team .profile {
+    height: 42vw;
+  }
+
+  .team .name {
+    margin-top: 20px;
+  }
+
+  .team .name,
+  .team .role {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 375px) {
@@ -2169,5 +2306,29 @@ header .row {
   .plan-cards .card:nth-child(1) {
     background-color: #fdf1a6;
     margin-top: 0px;
+  }
+
+  /* about us */
+  .meetUs {
+    margin-top: 170px;
+    margin-bottom: 150px;
+  }
+
+  .meetUs h2 {
+    margin-top: 15px;
+  }
+
+  .team-container {
+    grid-template-columns: 1fr;
+    gap: 30px 40px;
+    margin-top: 50px;
+  }
+
+  .team .profile {
+    height: 78vw;
+  }
+
+  .team .name {
+    margin-top: 20px;
   }
 }
