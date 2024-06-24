@@ -1,7 +1,7 @@
 import jayeImage from "../img/jaye-img.png";
 import bookYard from "../img/bookyard-img.png";
 import townSend from "../img/townsend-img.png";
-
+import { Link } from "react-router-dom";
 
 export default function Projects({ home = true }) {
   let projects = [
@@ -80,7 +80,11 @@ export default function Projects({ home = true }) {
         <div className="feature-project_cards">
           {projects.map((project, index) => {
             return (
-              <div className="card" key={project.id}>
+              <Link
+                to={`/${project.id}`}
+                className="card"
+                key={project.id}
+              >
                 <div className="category">{project.category}</div>
                 <div className="company-name">{project.projectName}</div>
                 <img
@@ -108,7 +112,7 @@ export default function Projects({ home = true }) {
                     <span>{project.Budget}</span>
                   </p>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

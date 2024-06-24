@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 export default function AboutUsPage() {
   return (
     <>
-      <Header />
       <SecondaryHeroSection
         heroIntro="GET TO KNOW US"
         heroBigText={
@@ -20,7 +19,6 @@ export default function AboutUsPage() {
         name="about-us"
       />
       <MeetUs />
-      <Footer />
     </>
   );
 }

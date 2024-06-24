@@ -13,7 +13,6 @@ export default function ProjectPage() {
   );
   return (
     <>
-      <Header />
       <SecondaryHeroSection
         heroIntro="FEATURED PROJECTS"
         heroBigText={heroBigText}
@@ -23,7 +22,6 @@ export default function ProjectPage() {
       />
       <Projects home={false} />
       <Plan />
-      <Footer />
     </>
   );
 }

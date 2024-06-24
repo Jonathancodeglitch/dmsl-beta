@@ -13,7 +13,6 @@ import Footer from "../components/Footer";
 export default function HomePage() {
   return (
     <>
-      <Header />
       <HeroSection />
       <AppDevelopment />
       <SuccessProject />
@@ -23,7 +22,6 @@ export default function HomePage() {
       <AstonishingResult />
       <Testimonial />
       <ContactUs />
-      <Footer />
     </>
   );
 }

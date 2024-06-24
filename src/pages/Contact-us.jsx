@@ -1,5 +1,3 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import ContactUs from "../components/ContactUs";
 import SecondaryHeroSection from "../components/SecondaryHeroSection";
 import contactUsHeroImg from "../img/businesswoman-img.png";
@@ -13,7 +11,6 @@ export default function ContactUsPage() {
 
   return (
     <>
-      <Header />
       <SecondaryHeroSection
         heroIntro="TELL US EVERYTHING"
         heroBigText={heroBigText}
@@ -22,7 +19,6 @@ export default function ContactUsPage() {
         name="contact-us-hero"
       />
       <ContactUs />
-      <Footer />
     </>
   );
 }

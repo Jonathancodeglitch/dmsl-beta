@@ -2,12 +2,16 @@ import logo from "../img/Logo-dark.svg";
 import { Divide as Hamburger } from "hamburger-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
+  // to check if we are currently on the project overview page
+  // check if the property exist
+  //if it does add a class to the header
 
   return (
-    <header>
+    <header className={"projectName" in useParams() ? "project-overview" : ""}>
       <div className="container row  navbar_expand">
         <div className="logo">
           <img src={logo} alt="logo" />
@@ -28,7 +32,7 @@ export default function Header() {
             </NavLink>
           </li>
           <li className="nav_list">
-            <NavLink className="nav_link" to="/about-us">
+            <NavLink className="nav_link" to="about-us">
               ABOUT US
             </NavLink>
           </li>

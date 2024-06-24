@@ -1113,14 +1113,14 @@ header .row {
   align-items: flex-end;
 }
 
-.project-overview header {
+header.project-overview {
   background: transparent;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.project-overview header .nav_link {
+header.project-overview .nav_link {
   color: #fff;
 }
 
@@ -1243,6 +1243,12 @@ header .row {
   background-color: #27bdf3;
   padding: 0.8em 1.5em;
   cursor: pointer;
+  transition: transform 300ms ease-in-out;
+}
+
+.about-project .enquiry-btn:hover,
+.about-project .enquiry-btn:active {
+  transform: scale(0.9);
 }
 
 /* next project */
@@ -2004,12 +2010,12 @@ header .row {
 
   /* project overview */
 
-  .project-overview header {
+  header.project-overview {
     background: #fff;
     position: fixed;
   }
 
-  .project-overview header .nav_link {
+  header.project-overview .nav_link {
     color: #363636;
   }
 

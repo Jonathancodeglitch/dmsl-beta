@@ -5,6 +5,7 @@ import AboutUsPage from "./pages/About-us";
 import ProjectPage from "./pages/Projects";
 import ProjectOverview from "./components/ProjectOverview";
 
+
 function App() {
   return (
     <Routes>
@@ -12,7 +13,7 @@ function App() {
       <Route path="/contact-us" element={<ContactUsPage />} />
       <Route path="/about-us" element={<AboutUsPage />} />
       <Route path="/projects" element={<ProjectPage />} />
-      <Route path="/project-overview" element={<ProjectOverview />} />
+      <Route path="/project-overview/:projectId" element={<ProjectOverview />} />
     </Routes>
   );
 }

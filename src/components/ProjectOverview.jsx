@@ -1,5 +1,3 @@
-import Header from "./Header";
-import Footer from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretDown,
@@ -11,7 +9,6 @@ import NextProjectImg from "../img/next-project-img.png";
 export default function ProjectOverview() {
   return (
     <section className="project-overview">
-      <Header />
       <div className="overview-hero">
         <div className="container row">
           <div className="project-name">YWIIT</div>
@@ -75,7 +72,6 @@ export default function ProjectOverview() {
         </div>
       </div>
       <NextProject />
-      <Footer />
     </section>
   );
 }
