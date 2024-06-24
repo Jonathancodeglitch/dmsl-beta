@@ -2671,4 +2671,18 @@ header.project-overview .nav_link {
   .next-project_button .next-project_button_icon {
     font-size: 40px;
   }
+
+  .about-project_content .right ul li {
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .about-project_content .right ul li > span:first-child {
+    max-width: 170px;
+    width: 100%;
+  }
+
+  .about-project_content .right ul li > span:last-child {
+    display: block;
+  }
 }
