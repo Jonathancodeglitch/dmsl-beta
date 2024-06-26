@@ -1127,7 +1127,7 @@ header.project-overview .nav_link {
 .overview-hero .row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding-bottom: 40px;
 }
 
@@ -1135,6 +1135,7 @@ header.project-overview .nav_link {
   font-size: 117px;
   font-weight: 800;
   color: #fff;
+  line-height: 1.1;
 }
 
 .overview-hero .dropdown-icon {
@@ -1207,10 +1208,11 @@ header.project-overview .nav_link {
   margin-top: 293px;
 }
 
-.project-gallery .about-project .project-img {
+/* .project-gallery  .project-img {
   background-color: #a0a0a0;
+  min-height: 250px;
 }
-
+ */
 .project-img + .project-img {
   margin-top: 40px;
 }

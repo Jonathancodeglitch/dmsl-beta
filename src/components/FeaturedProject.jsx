@@ -7,6 +7,7 @@ export default function Projects({ home = true }) {
   let projects = [
     {
       id: 1,
+      linkTo: "jaye-food",
       category: "BRANDING",
       projectName: "Jaye Foods",
       img: jayeImage,
@@ -17,6 +18,7 @@ export default function Projects({ home = true }) {
     },
     {
       id: 2,
+      linkTo:"book-yard-podcast",
       category: "DIGITAL MARKETING",
       projectName: "Book Yard Podcast",
       img: bookYard,
@@ -27,6 +29,7 @@ export default function Projects({ home = true }) {
     },
     {
       id: 3,
+      linkTo: "townsend-rail",
       category: "DIGITAL STRATEGY",
       projectName: "Townsend Rail",
       img: townSend,
@@ -37,6 +40,7 @@ export default function Projects({ home = true }) {
     },
     {
       id: 4,
+      linkTo: "ywiit",
       category: "DIGITAL MARKETING",
       projectName: "Young Women In IT",
       img: jayeImage,
@@ -47,6 +51,7 @@ export default function Projects({ home = true }) {
     },
     {
       id: 5,
+      linkTo: "shea-origin",
       category: "DIGITAL MARKETING",
       projectName: "Shea Origin",
       img: jayeImage,
@@ -57,6 +62,7 @@ export default function Projects({ home = true }) {
     },
     {
       id: 6,
+      linkTo: "olby",
       category: "DIGITAL CONSULTANCY",
       projectName: "Olby",
       img: jayeImage,
@@ -80,11 +86,7 @@ export default function Projects({ home = true }) {
         <div className="feature-project_cards">
           {projects.map((project, index) => {
             return (
-              <Link
-                to={`/${project.id}`}
-                className="card"
-                key={project.id}
-              >
+              <Link to={`/${project.linkTo}`} className="card" key={project.id}>
                 <div className="category">{project.category}</div>
                 <div className="company-name">{project.projectName}</div>
                 <img
