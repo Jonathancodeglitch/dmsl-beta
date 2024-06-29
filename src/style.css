@@ -1208,12 +1208,13 @@ header.project-overview .nav_link {
   margin-top: 293px;
 }
 
-/* .project-gallery  .project-img {
+.project-gallery .project-asset {
+  display: block;
   background-color: #a0a0a0;
-  min-height: 250px;
+  width: 100%;
 }
- */
-.project-img + .project-img {
+
+.project-asset + .project-asset {
   margin-top: 40px;
 }
 
@@ -1557,6 +1558,10 @@ header.project-overview .nav_link {
 
   .about-project_content .right {
     padding: 150px 40px 150px 50px;
+  }
+
+  .project-gallery .project-asset {
+    max-height: 500px;
   }
 
   .about-project .enquiry {
@@ -2533,7 +2538,7 @@ header.project-overview .nav_link {
   }
 
   .about-project .project-gallery {
-    margin-top: 100px;
+    margin-top: 80px;
   }
 
   .about-project .enquiry {
@@ -2666,7 +2671,7 @@ header.project-overview .nav_link {
     font-size: 3rem;
   }
 
-  .project-img + .project-img {
+  .project-asset + .project-asset {
     margin-top: 20px;
   }
 

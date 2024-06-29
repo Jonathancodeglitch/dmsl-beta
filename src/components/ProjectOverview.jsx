@@ -6,8 +6,9 @@ import {
 import { Link, useParams } from "react-router-dom";
 
 import ywiitHero from "../img/ywiit.png";
-import ywiitBannner from "../img/ywiit-banner.png";
-import bookYard from "../img/next-project-img.png";
+import ywiitImg1 from "../img/ywiit-img-1.jpg";
+import ywiitImg2 from "../img/ywiit-img-2.jpg";
+import ywiitImg3 from "../img/ywiit-img-3.jpg";
 
 import jayeHeroImg from "../img/Jaye-hero-img.jpg";
 import jayeImg1 from "../img/jaye-img-1.jpg";
@@ -17,15 +18,27 @@ import jayeImg4 from "../img/jaye-img-4.png";
 
 import sheaOriginHero from "../img/shea-origin-hero.png";
 import sheaOriginImg1 from "../img/shea-origin-img-1.png";
+import sheaOriginImg2 from "../img/shea-origin-img-2.jpg";
+import sheaOriginImg3 from "../img/shea-origin-img-3.jpg";
 
 import bookYardHeroImg from "../img/bookyard-hero.png";
-import bookYardImg1 from "../img/bookyard-img1.png";
+import bookYardImg1 from "../img/bookyard-img-1.jpg";
+import bookYardImg2 from "../img/bookyard-img-2.jpg";
+import bookYardVideo from "../img/bookyard-video.mp4";
 
 import townSendHero from "../img/townsend-hero-img.png";
-import townSendImg1 from "../img/townsend-img1.png";
+import townSendImg1 from "../img/townsend-img-1.jpg";
+import townSendImg2 from "../img/townsend-img-2.jpg";
+import townSendImg3 from "../img/townsend-img-3.jpg";
+import townSendImg4 from "../img/townsend-img-4.jpg";
+import townSendImg5 from "../img/townsend-img-5.jpg";
 
 import oblyHeroImg from "../img/olby-hero.png";
-import oblyImg1 from "../img/olby-img1.png";
+import oblyImg1 from "../img/olby-img-1.jpg";
+import oblyImg2 from "../img/olby-img-2.jpg";
+import oblyImg3 from "../img/olby-img-3.jpg";
+import oblyImg4 from "../img/olby-img-4.jpg";
+import oblyImg5 from "../img/olby-img-5.jpg";
 
 export default function ProjectOverview() {
   const projectOverview = [
@@ -41,7 +54,7 @@ export default function ProjectOverview() {
       timeEstimation: "2 months",
       asset: [jayeImg4, jayeImg1, jayeImg2, jayeImg3],
       nextProjectName: "Shea Origin",
-      nextProjectImage: ywiitBannner,
+      nextProjectImage: sheaOriginImg2,
     },
     {
       url: "shea-origin",
@@ -53,7 +66,7 @@ export default function ProjectOverview() {
       company: "Shea Origin",
       projectType: "Digital branding",
       timeEstimation: "2 months",
-      asset: [sheaOriginImg1, sheaOriginImg1, sheaOriginImg1],
+      asset: [sheaOriginImg2, sheaOriginImg3, sheaOriginImg1],
       nextProjectName: "Ywiit",
       nextProjectImage: ywiitHero,
     },
@@ -67,9 +80,9 @@ export default function ProjectOverview() {
       company: "YWIIT",
       projectType: "Digital Strategy",
       timeEstimation: "4 months",
-      asset: [ywiitBannner, ywiitBannner, ywiitBannner],
+      asset: [ywiitImg1, ywiitImg2, ywiitImg3],
       nextProjectName: "Book Yard Podcast",
-      nextProjectImage: bookYard,
+      nextProjectImage: bookYardHeroImg,
     },
     {
       url: "book-yard-podcast",
@@ -81,7 +94,7 @@ export default function ProjectOverview() {
       company: "Book Yard Podcast",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
-      asset: [bookYardImg1, bookYardImg1, bookYardImg1],
+      asset: [bookYardImg1, bookYardImg2, bookYardVideo],
       nextProjectName: "Townsend Rail",
       nextProjectImage: townSendHero,
     },
@@ -95,7 +108,13 @@ export default function ProjectOverview() {
       company: "Townsend Rail",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
-      asset: [oblyImg1, oblyImg1, oblyImg1],
+      asset: [
+        townSendImg1,
+        townSendImg2,
+        townSendImg3,
+        townSendImg4,
+        townSendImg5,
+      ],
       nextProjectName: "Olby",
       nextProjectImage: oblyHeroImg,
     },
@@ -109,7 +128,7 @@ export default function ProjectOverview() {
       company: "Olby",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
-      asset: [oblyImg1, oblyImg1, oblyImg1],
+      asset: [oblyImg1, oblyImg2, oblyImg3, oblyImg4, oblyImg5],
       nextProjectName: "jaye-food",
       nextProjectImage: jayeHeroImg,
     },
@@ -163,15 +182,32 @@ export default function ProjectOverview() {
               </ul>
             </div>
           </div>
-          {/* project details ends */}
-          {/* project gallery*/}
+
           <div className="project-gallery">
             {requestedPage.asset.map((src) => {
-              return (
-                <div className="project-img">
-                  <img src={src} alt="a photo of women in tech" />
-                </div>
-              );
+              //check the source file is mp4
+              if (CheckIfFileTypeIsVideo(src)) {
+                //if its mp4 use a video tag to display it
+                return (
+                  <video
+                    className="project-asset"
+                    width="100%"
+                    min-height="500px"
+                    controls
+                  >
+                    <source src={src} type="video/mp4" />
+                  </video>
+                );
+              } else {
+                //else its an img
+                return (
+                  <img
+                    className="project-asset"
+                    src={src}
+                    alt="a photo of women in tech"
+                  />
+                );
+              }
             })}
           </div>
           {/* project gallery ends*/}
@@ -216,4 +252,16 @@ function NextProject({ nextProjectImage, nextProjectName, nextProjectUrl }) {
       </Link>
     </div>
   );
+}
+
+//get file extension
+function getFileExtension(file) {
+  let fileArr = file.split(".");
+  let fileExtension = fileArr[fileArr.length - 1];
+  return fileExtension;
+}
+
+function CheckIfFileTypeIsVideo(file) {
+  if (getFileExtension(file) === "mp4") return true;
+  return false;
 }
