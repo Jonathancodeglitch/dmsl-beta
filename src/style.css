@@ -2046,6 +2046,19 @@ header.project-overview .nav_link {
   .about-project .enquiry p {
     width: 90%;
   }
+
+  /* overview-heros */
+  .overview-hero {
+    min-height: 90vh;
+    background-image: url("./img/ywiit.png");
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
 }
 
 @media (max-width: 550px) {
