@@ -1,7 +1,3 @@
-import lightBulb from "../img/lightbulb.svg";
-import caution from "../img/report-problem.svg";
-import voiceChat from "../img/voice-chat.svg";
-
 export default function AstonishingResult() {
   return (
     <section className="astonishing-result">
@@ -12,7 +8,10 @@ export default function AstonishingResult() {
         <div className="row">
           <div className="result">
             <div className="icons">
-              <img src={voiceChat} alt="icon" />
+              <img
+                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745379/DMSL-BETA/voice-chat_vykhvz.svg"
+                alt="icon"
+              />
             </div>
             <div className="result-header">Free Consultation</div>
             <p>
@@ -22,7 +21,10 @@ export default function AstonishingResult() {
           </div>
           <div className="result">
             <div className="icons">
-              <img src={caution} alt="icon" />
+              <img
+                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745350/DMSL-BETA/report-problem_x0lizi.svg"
+                alt="icon"
+              />
             </div>
             <div className="result-header">Identify the problem</div>
             <p>
@@ -32,7 +34,10 @@ export default function AstonishingResult() {
           </div>
           <div className="result">
             <div className="icons">
-              <img src={lightBulb} alt="icon" />
+              <img
+                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745322/DMSL-BETA/lightbulb_rkfsw2.svg"
+                alt="icon"
+              />
             </div>
             <div className="result-header">Apply effective solution</div>
             <p>

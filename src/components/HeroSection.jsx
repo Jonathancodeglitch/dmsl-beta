@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiamond } from "@fortawesome/free-solid-svg-icons";
-import mobile from "../img/mobile.png";
 
 function HeroContentSecondary() {
   return (
@@ -12,7 +11,10 @@ function HeroContentSecondary() {
         since its launch.
       </p>
       <div className="hero-mobile-img">
-        <img src={mobile} alt="mobile devices" />
+        <img
+          src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745338/DMSL-BETA/mobile_ngn2wm.png"
+          alt="mobile devices"
+        />
       </div>
     </div>
   );

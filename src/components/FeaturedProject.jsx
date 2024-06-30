@@ -1,6 +1,3 @@
-import jayeImage from "../img/jaye-img.png";
-import bookYard from "../img/bookyard-img.png";
-import townSend from "../img/townsend-img.png";
 import { Link } from "react-router-dom";
 
 export default function Projects({ home = true }) {
@@ -10,7 +7,7 @@ export default function Projects({ home = true }) {
       linkTo: "jaye-food",
       category: "BRANDING",
       projectName: "Jaye Foods",
-      img: jayeImage,
+      img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745326/DMSL-BETA/jaye-img_vzgxvv.png",
       client: "Ajaye Crowther",
       location: "Nigeria",
       Date: "03-jun-23",
@@ -18,10 +15,10 @@ export default function Projects({ home = true }) {
     },
     {
       id: 2,
-      linkTo:"book-yard-podcast",
+      linkTo: "book-yard-podcast",
       category: "DIGITAL MARKETING",
       projectName: "Book Yard Podcast",
-      img: bookYard,
+      img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745305/DMSL-BETA/bookyard-img_fli0d8.png",
       client: "AT Sonola",
       location: "United Kingdom",
       Date: "12–May-23",
@@ -32,7 +29,7 @@ export default function Projects({ home = true }) {
       linkTo: "townsend-rail",
       category: "DIGITAL STRATEGY",
       projectName: "Townsend Rail",
-      img: townSend,
+      img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745366/DMSL-BETA/townsend-img_qbhxjs.png",
       client: "Ajaye Crowther",
       location: "Nigeria",
       Date: "03-jun-23",
@@ -43,7 +40,7 @@ export default function Projects({ home = true }) {
       linkTo: "ywiit",
       category: "DIGITAL MARKETING",
       projectName: "Young Women In IT",
-      img: jayeImage,
+      img: "https://res.cloudinary.com/dv6uz0bks/image/upload/c_crop,w_531,h_380/v1719751822/DMSL-BETA/ywiit-img_axvipz.png",
       client: "Ajaye Crowther",
       location: "Nigeria",
       Date: "03-jun-23",
@@ -54,7 +51,7 @@ export default function Projects({ home = true }) {
       linkTo: "shea-origin",
       category: "DIGITAL MARKETING",
       projectName: "Shea Origin",
-      img: jayeImage,
+      img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719751822/DMSL-BETA/shea-origin-img_yhsjqi.png",
       client: "AT Sonola",
       location: "Nigeria",
       Date: "03-jun-23",
@@ -65,7 +62,7 @@ export default function Projects({ home = true }) {
       linkTo: "olby",
       category: "DIGITAL CONSULTANCY",
       projectName: "Olby",
-      img: jayeImage,
+      img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719751820/DMSL-BETA/olby-img_ukirx5.png",
       client: "Ajaye Crowther",
       location: "Nigeria",
       Date: "03-jun-23",

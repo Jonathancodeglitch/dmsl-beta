@@ -8,7 +8,10 @@ export default function Footer() {
     <section className="footer">
       <div className="container">
         <div className="footer-logo">
-          <img src={Logo} alt="logo" />
+          <img
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745335/DMSL-BETA/logo-white_lddtkw.svg"
+            alt="logo"
+          />
         </div>
         <div className="row">
           <div className="footer_contact-us">
@@ -18,9 +21,18 @@ export default function Footer() {
               services.
             </p>
             <div className="footer-social-icon">
-              <img src={twitter} alt="twitter" />
-              <img src={instagram} alt="twitter" />
-              <img src={linkedin} alt="twitter" />
+              <img
+                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745378/DMSL-BETA/twitter_rp9tgu.svg"
+                alt="twitter"
+              />
+              <img
+                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745313/DMSL-BETA/instagram_axsel9.svg"
+                alt="twitter"
+              />
+              <img
+                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745323/DMSL-BETA/linkedin_gzaozh.svg"
+                alt="twitter"
+              />
             </div>
           </div>
           <ul className="footer-links">

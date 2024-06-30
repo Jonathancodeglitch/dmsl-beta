@@ -1,4 +1,3 @@
-import testimonial from "../video/testimonial.mp4";
 
 export default function Testimonial() {
   return (
@@ -9,8 +8,14 @@ export default function Testimonial() {
         <div className="card">
           <div className="testimonial_video">
             <video controls>
-              <source src={testimonial} type="video/mp4" />
-              <source src={testimonial} type="video/ogg" />
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1719747233/DMSL-BETA/bookyard-video_uj8ck1.mp4"
+                type="video/mp4"
+              />
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1719747233/DMSL-BETA/bookyard-video_uj8ck1.mp4"
+                type="video/ogg"
+              />
             </video>
           </div>
           <div className="client-info">
@@ -24,8 +29,14 @@ export default function Testimonial() {
         <div className="card">
           <div className="testimonial_video">
             <video controls>
-              <source src={testimonial} type="video/mp4" />
-              <source src={testimonial} type="video/ogg" />
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1719747233/DMSL-BETA/bookyard-video_uj8ck1.mp4"
+                type="video/mp4"
+              />
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1719747233/DMSL-BETA/bookyard-video_uj8ck1.mp4"
+                type="video/ogg"
+              />
             </video>
           </div>
           <div className="client-info">
@@ -39,8 +50,14 @@ export default function Testimonial() {
         <div className="card">
           <div className="testimonial_video">
             <video controls>
-              <source src={testimonial} type="video/mp4" />
-              <source src={testimonial} type="video/ogg" />
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1719747233/DMSL-BETA/bookyard-video_uj8ck1.mp4"
+                type="video/mp4"
+              />
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1719747233/DMSL-BETA/bookyard-video_uj8ck1.mp4"
+                type="video/ogg"
+              />
             </video>
           </div>
           <div className="client-info">
@@ -54,8 +71,14 @@ export default function Testimonial() {
         <div className="card">
           <div className="testimonial_video">
             <video controls>
-              <source src={testimonial} type="video/mp4" />
-              <source src={testimonial} type="video/ogg" />
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1719747233/DMSL-BETA/bookyard-video_uj8ck1.mp4"
+                type="video/mp4"
+              />
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1719747233/DMSL-BETA/bookyard-video_uj8ck1.mp4"
+                type="video/ogg"
+              />
             </video>
           </div>
           <div className="client-info">

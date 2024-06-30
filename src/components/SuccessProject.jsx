@@ -1,7 +1,3 @@
-import theChallengePhotoOne from "../img/the-challenge-img_1.png";
-import theChallengePhotoTwo from "../img/the-challenge-img_2.png";
-import theChallengePhotoThree from "../img/the-challenge-img_3.png";
-
 export default function SuccessProject() {
   return (
     <section className="Success-project">
@@ -45,17 +41,17 @@ function TheChallenge() {
           <div className="blur-image"></div>
           <img
             className="the-challenge-photo-one"
-            src={theChallengePhotoOne}
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745363/DMSL-BETA/the-challenge-img_1_oaxuix.png"
             alt="the challenge photo"
           />
           <img
             className="the-challenge-photo-two"
-            src={theChallengePhotoTwo}
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745362/DMSL-BETA/the-challenge-img_2_jpb39p.png"
             alt="the challenge photo"
           />
           <img
             className="the-challenge-photo-three"
-            src={theChallengePhotoThree}
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745364/DMSL-BETA/the-challenge-img_3_rf4zzc.png"
             alt="the challenge photo"
           />
         </div>

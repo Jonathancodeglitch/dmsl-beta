@@ -45,63 +45,89 @@ export default function ProjectOverview() {
     {
       url: "jaye-food",
       nextProjectUrl: "shea-origin",
-      HeroImg: jayeHeroImg,
+      HeroImg:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745327/DMSL-BETA/Jaye-hero-img_jjvxqa.jpg",
       projectName: "Jaye<br/>Foods",
       aboutUs:
         "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
       company: "Jaye Foods",
       projectType: "Digital branding",
       timeEstimation: "2 months",
-      asset: [jayeImg4, jayeImg1, jayeImg2, jayeImg3],
+      asset: [
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745334/DMSL-BETA/jaye-img-4_ucputu.png",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745322/DMSL-BETA/jaye-img-1_aggqrn.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745318/DMSL-BETA/jaye-img-2_bd9hla.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745321/DMSL-BETA/jaye-img-3_gtoeuq.jpg",
+      ],
       nextProjectName: "Shea Origin",
-      nextProjectImage: sheaOriginImg2,
+      nextProjectImage:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745362/DMSL-BETA/shea-origin-img-2_wpofka.jpg",
     },
     {
       url: "shea-origin",
       nextProjectUrl: "ywiit",
-      HeroImg: sheaOriginHero,
+      HeroImg:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745377/DMSL-BETA/shea-origin-hero_hz1boz.png",
       projectName: "Shea<br/>Origin",
       aboutUs:
         "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
       company: "Shea Origin",
       projectType: "Digital branding",
       timeEstimation: "2 months",
-      asset: [sheaOriginImg2, sheaOriginImg3, sheaOriginImg1],
+      asset: [
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745362/DMSL-BETA/shea-origin-img-2_wpofka.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745360/DMSL-BETA/shea-origin-img-3_gbfhvf.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745371/DMSL-BETA/shea-origin-img-1_zz1ugp.png",
+      ],
       nextProjectName: "Ywiit",
-      nextProjectImage: ywiitHero,
+      nextProjectImage:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745391/DMSL-BETA/ywiit_zfxw9q.png",
     },
     {
       url: "ywiit",
       nextProjectUrl: "book-yard-podcast",
-      HeroImg: ywiitHero,
+      HeroImg:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745391/DMSL-BETA/ywiit_zfxw9q.png",
       projectName: "ywiit",
       aboutUs:
         "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
       company: "YWIIT",
       projectType: "Digital Strategy",
       timeEstimation: "4 months",
-      asset: [ywiitImg1, ywiitImg2, ywiitImg3],
+      asset: [
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745387/DMSL-BETA/ywiit-img-1_mvvt4w.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745388/DMSL-BETA/ywiit-img-2_uon4eb.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745390/DMSL-BETA/ywiit-img-3_bcrowp.jpg",
+      ],
       nextProjectName: "Book Yard Podcast",
-      nextProjectImage: bookYardHeroImg,
+      nextProjectImage:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745308/DMSL-BETA/bookyard-hero_sxodza.png",
     },
     {
       url: "book-yard-podcast",
       nextProjectUrl: "townsend-rail",
-      HeroImg: bookYardHeroImg,
+      HeroImg:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745308/DMSL-BETA/bookyard-hero_sxodza.png",
       projectName: "Book Yard<br/>Podcast",
       aboutUs:
         "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
       company: "Book Yard Podcast",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
-      asset: [bookYardImg1, bookYardImg2, bookYardVideo],
+      asset: [
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745302/DMSL-BETA/bookyard-img-1_esizii.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745306/DMSL-BETA/bookyard-img-2_avifpr.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/video/upload/v1719745378/DMSL-BETA/bookyard-video_jb7ijl.mp4",
+      ],
       nextProjectName: "Townsend Rail",
-      nextProjectImage: townSendHero,
+      nextProjectImage:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745378/DMSL-BETA/townsend-hero-img_vvnxdm.png",
     },
     {
       url: "townsend-rail",
       nextProjectUrl: "olby",
-      HeroImg: townSendHero,
+      HeroImg:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745378/DMSL-BETA/townsend-hero-img_vvnxdm.png",
       projectName: "Book Yard<br/>Podcast",
       aboutUs:
         "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
@@ -109,28 +135,37 @@ export default function ProjectOverview() {
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
       asset: [
-        townSendImg1,
-        townSendImg2,
-        townSendImg3,
-        townSendImg4,
-        townSendImg5,
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745365/DMSL-BETA/townsend-img-1_shvrtr.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745368/DMSL-BETA/townsend-img-2_rvf72m.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745368/DMSL-BETA/townsend-img-3_ow0suu.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745369/DMSL-BETA/townsend-img-4_ha6wcp.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745379/DMSL-BETA/townsend-img-5_njfaju.jpg",
       ],
       nextProjectName: "Olby",
-      nextProjectImage: oblyHeroImg,
+      nextProjectImage:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745337/DMSL-BETA/olby-hero_yvku0h.png",
     },
     {
       url: "olby",
       nextProjectUrl: "jaye-food",
-      HeroImg: oblyHeroImg,
+      HeroImg:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745337/DMSL-BETA/olby-hero_yvku0h.png",
       projectName: "Olby",
       aboutUs:
         "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
       company: "Olby",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
-      asset: [oblyImg1, oblyImg2, oblyImg3, oblyImg4, oblyImg5],
+      asset: [
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745344/DMSL-BETA/olby-img-1_nobnzp.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745348/DMSL-BETA/olby-img-2_eeznuj.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745350/DMSL-BETA/olby-img-3_zdjilk.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745348/DMSL-BETA/olby-img-4_hshcc7.jpg",
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745349/DMSL-BETA/olby-img-5_gp6pjz.jpg",
+      ],
       nextProjectName: "jaye-food",
-      nextProjectImage: jayeHeroImg,
+      nextProjectImage:
+        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745327/DMSL-BETA/Jaye-hero-img_jjvxqa.jpg",
     },
   ];
 

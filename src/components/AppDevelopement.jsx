@@ -1,7 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserGroup, faDownload } from "@fortawesome/free-solid-svg-icons";
-import lineChart from "../img/line-chart.png";
-import pieChart from "../img/pie-chart.png";
 
 export default function AppDevelopment() {
   return (
@@ -37,11 +35,17 @@ export default function AppDevelopment() {
         </div>
         <div className="graph">
           <div className="line-chart">
-            <img src={lineChart} alt="line chart" />
+            <img
+              src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745322/DMSL-BETA/line-chart_gavyjg.png"
+              alt="line chart"
+            />
             <p>Graph showing increase in Perfomance metrics</p>
           </div>
           <div className="pie-chart">
-            <img src={pieChart} alt="pie chart" />
+            <img
+              src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745351/DMSL-BETA/pie-chart_jvkclk.png"
+              alt="pie chart"
+            />
             <p>Difference in audience size Over timeframe</p>
           </div>
         </div>
