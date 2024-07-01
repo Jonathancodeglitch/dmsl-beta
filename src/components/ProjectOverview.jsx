@@ -5,41 +5,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useParams } from "react-router-dom";
 
-import ywiitHero from "../img/ywiit.png";
-import ywiitImg1 from "../img/ywiit-img-1.jpg";
-import ywiitImg2 from "../img/ywiit-img-2.jpg";
-import ywiitImg3 from "../img/ywiit-img-3.jpg";
-
-import jayeHeroImg from "../img/Jaye-hero-img.jpg";
-import jayeImg1 from "../img/jaye-img-1.jpg";
-import jayeImg2 from "../img/jaye-img-2.jpg";
-import jayeImg3 from "../img/jaye-img-3.jpg";
-import jayeImg4 from "../img/jaye-img-4.png";
-
-import sheaOriginHero from "../img/shea-origin-hero.png";
-import sheaOriginImg1 from "../img/shea-origin-img-1.png";
-import sheaOriginImg2 from "../img/shea-origin-img-2.jpg";
-import sheaOriginImg3 from "../img/shea-origin-img-3.jpg";
-
-import bookYardHeroImg from "../img/bookyard-hero.png";
-import bookYardImg1 from "../img/bookyard-img-1.jpg";
-import bookYardImg2 from "../img/bookyard-img-2.jpg";
-import bookYardVideo from "../img/bookyard-video.mp4";
-
-import townSendHero from "../img/townsend-hero-img.png";
-import townSendImg1 from "../img/townsend-img-1.jpg";
-import townSendImg2 from "../img/townsend-img-2.jpg";
-import townSendImg3 from "../img/townsend-img-3.jpg";
-import townSendImg4 from "../img/townsend-img-4.jpg";
-import townSendImg5 from "../img/townsend-img-5.jpg";
-
-import oblyHeroImg from "../img/olby-hero.png";
-import oblyImg1 from "../img/olby-img-1.jpg";
-import oblyImg2 from "../img/olby-img-2.jpg";
-import oblyImg3 from "../img/olby-img-3.jpg";
-import oblyImg4 from "../img/olby-img-4.jpg";
-import oblyImg5 from "../img/olby-img-5.jpg";
-
 export default function ProjectOverview() {
   const projectOverview = [
     {
@@ -128,7 +93,7 @@ export default function ProjectOverview() {
       nextProjectUrl: "olby",
       HeroImg:
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745378/DMSL-BETA/townsend-hero-img_vvnxdm.png",
-      projectName: "Book Yard<br/>Podcast",
+      projectName: "Townsend<br/>Rail",
       aboutUs:
         "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
       company: "Townsend Rail",
