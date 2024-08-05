@@ -816,6 +816,11 @@ header .row {
   margin-top: 20px;
 }
 
+.feature-list > * {
+  font-weight: 600;
+  font-size: var(--font-xl);
+}
+
 .feature-list > * + * {
   margin-top: 8px;
 }
@@ -831,12 +836,6 @@ header .row {
 
 .feature-list > li:not(.feature-list-title):before {
   content: "- ";
-}
-
-.feature-list > * {
-  margin-top: 8px;
-  font-weight: 600;
-  font-size: var(--font-xl);
 }
 
 .plan-cards .btn {
