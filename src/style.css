@@ -54,7 +54,9 @@ body {
   background-color: #00376e;
   color: #fff !important;
   padding: 16px 56px;
+  border: none;
   border-radius: 38px;
+  cursor: pointer;
 }
 
 /* header */
@@ -786,21 +788,49 @@ header .row {
   margin-top: 40px;
   font-size: 64px;
   font-weight: 700;
+  line-height: 1;
 }
 
-.feature-list-title {
+.plan-amount span {
+  font-style: italic;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.feature-list-label {
   font-size: var(--font-xl);
   font-weight: 600;
   margin-top: 69px;
   color: #363636;
 }
 
-.feature-list {
-  margin-top: 23px;
+.feature-list-title {
+  font-size: var(--font-xl) !important;
+  font-weight: 600 !important;
+  margin-top: 69px;
+  color: #363636;
+  margin-bottom: 18px;
+}
+
+.feature-list .feature-list-title {
+  margin-top: 20px;
 }
 
 .feature-list > * + * {
   margin-top: 8px;
+}
+
+.feature-list li {
+  font-size: 17px;
+}
+
+/* show dash at the begining of text  */
+.feature-list > li:not(.feature-list-title) {
+  text-indent: -7px;
+}
+
+.feature-list > li:not(.feature-list-title):before {
+  content: "- ";
 }
 
 .feature-list > * {
