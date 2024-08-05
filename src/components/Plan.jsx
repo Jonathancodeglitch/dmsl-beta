@@ -28,7 +28,7 @@ export default function Plan() {
             <ul className="feature-list">
               <li className="feature-list-title">Social Media Management:</li>
               <li>
-                 10 posts per month across 2 platforms (Facebook and
+                10 posts per month across 2 platforms (Facebook and
                 LinkedIn/Instagram)
               </li>
               <li> Basic engagement (replying to comments and messages)</li>
@@ -56,7 +56,7 @@ export default function Plan() {
               <li>Basic performance report across all platforms.</li>
             </ul>
             {/*  */}
-            <div className="btn">SELECT PACKAGE</div>
+            <button className="btn">SELECT PACKAGE</button>
           </div>
           <div className="card">
             <div className="card-title">Standard Package</div>
@@ -104,7 +104,7 @@ export default function Plan() {
                 Detailed performance report with insights and recommendations
               </li>
             </ul>
-            <div className="btn">SELECT PACKAGE</div>
+            <button className="btn">SELECT PACKAGE</button>
           </div>
           <div className="card">
             <div className="card-title">Premium Package</div>
@@ -118,8 +118,7 @@ export default function Plan() {
               <li className="feature-list-title">Social Media Management: </li>
               <li>30 posts per month across 4 platforms</li>
               <li>
-                Advanced engagement, community management, and growth
-                strategies
+                Advanced engagement, community management, and growth strategies
               </li>
             </ul>
             <ul className="feature-list">

@@ -830,9 +830,6 @@ header .row {
 }
 
 /* show dash at the begining of text  */
-.feature-list > li:not(.feature-list-title) {
-  text-indent: -7px;
-}
 
 .feature-list > li:not(.feature-list-title):before {
   content: "- ";
@@ -841,6 +838,7 @@ header .row {
 .plan-cards .btn {
   margin-top: 57px;
   text-align: center;
+  width: 1;
 }
 
 .plan-cards .card:nth-child(3) .btn {
