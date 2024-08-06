@@ -747,7 +747,6 @@ header .row {
 .plan-cards .card {
   padding: 80px 38px 26px 38px;
   border-radius: 32px;
-  /*  max-width: 311px; */
 }
 
 .plan-cards .card:nth-child(1) {
@@ -772,7 +771,6 @@ header .row {
   color: #363636;
   font-weight: 700;
   font-size: 56px;
-  min-width: 0;
 }
 
 .plan-cards .card-desc {
@@ -788,7 +786,7 @@ header .row {
   margin-top: 40px;
   font-size: 64px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 40px;
 }
 
 .plan-amount span {
@@ -797,43 +795,37 @@ header .row {
   font-weight: 600;
 }
 
-.feature-list-label {
+.service {
+  margin-top: 72px;
+}
+
+.featuredlist-label {
+  margin-bottom: 23px;
+}
+
+.featuredlist-label,
+.featuredlist-title {
   font-size: var(--font-xl);
   font-weight: 600;
-  margin-top: 69px;
   color: #363636;
 }
 
-.feature-list-title {
-  font-size: var(--font-xl) !important;
-  font-weight: 600 !important;
-  margin-top: 69px;
-  color: #363636;
-  margin-bottom: 18px;
-}
-
-.feature-list .feature-list-title {
-  margin-top: 20px;
-}
-
-.feature-list > * {
-  font-weight: 600;
-  font-size: var(--font-xl);
-}
-
-.feature-list > * + * {
+.service-list + .service-list {
   margin-top: 8px;
 }
 
-.feature-list li {
-  font-size: 17px;
+.service-list ul {
+  font-size: 22px;
+  list-style: disc;
+  list-style-position: inside;
+  font-weight: 400;
+
 }
 
-/* show dash at the begining of text  */
-
-.feature-list > li:not(.feature-list-title):before {
-  content: "- ";
+.service-list ul > * + * {
+  margin-top: 5px;
 }
+
 
 .plan-cards .btn {
   margin-top: 57px;
@@ -2384,7 +2376,7 @@ header.project-overview .nav_link {
   }
 
   .plan-cards .card {
-    padding: 40px 10px 26px 10px;
+    padding: 40px 15px 26px;
   }
 
   .plan-cards .card:nth-child(2) .btn {
