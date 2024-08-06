@@ -838,7 +838,7 @@ header .row {
 .plan-cards .btn {
   margin-top: 57px;
   text-align: center;
-  width: 1;
+  width: 100%;
 }
 
 .plan-cards .card:nth-child(3) .btn {
