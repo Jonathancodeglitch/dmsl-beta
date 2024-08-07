@@ -742,6 +742,7 @@ header .row {
   justify-content: start;
   align-items: start;
   gap: 13px;
+  border: 1px solid red;
 }
 
 .plan-cards .card {
@@ -761,7 +762,6 @@ header .row {
 
 .plan-cards .card:nth-child(3) {
   background-color: #c5a9f9;
-  align-self: flex-end;
   margin-top: 70px;
   padding-top: 55px;
 }
@@ -799,33 +799,35 @@ header .row {
   margin-top: 72px;
 }
 
-.featuredlist-label {
+.service_list-label {
   margin-bottom: 23px;
 }
 
-.featuredlist-label,
-.featuredlist-title {
+.service_list-label,
+.service_list-title {
   font-size: var(--font-xl);
   font-weight: 600;
   color: #363636;
 }
 
-.service-list + .service-list {
+.service_list {
+  cursor: pointer;
+}
+
+.service_list + .service_list {
   margin-top: 8px;
 }
 
-.service-list ul {
+.service_list ul {
   font-size: 22px;
   list-style: disc;
   list-style-position: inside;
   font-weight: 400;
-
 }
 
-.service-list ul > * + * {
+.service_list ul > * + * {
   margin-top: 5px;
 }
-
 
 .plan-cards .btn {
   margin-top: 57px;
@@ -1340,6 +1342,7 @@ header.project-overview .nav_link {
 }
 
 @media (max-width: 1500px) {
+  /*make services responsives */
   :root {
     --Opensan: "Open Sans", sans-serif;
     --Montserrat: "Montserrat", sans-serif;
@@ -1504,8 +1507,11 @@ header.project-overview .nav_link {
     font-size: 40px;
   }
 
-  .feature-list-title {
-    margin-top: 50px;
+  .service_list ul {
+    font-size: 18px;
+    list-style: disc;
+    list-style-position: inside;
+    font-weight: 400;
   }
 
   .plan-cards .card:nth-child(3) .btn {
@@ -2351,7 +2357,7 @@ header.project-overview .nav_link {
     justify-content: center;
   }
 
-  /* palns */
+  /* plans */
   .plan-content {
     width: 100%;
     margin-top: 0;
@@ -2373,6 +2379,20 @@ header.project-overview .nav_link {
     grid-template-columns: repeat(2, 1fr);
     padding: 54px 0px;
     align-items: end;
+  }
+
+  .service_list-label,
+  .service_list-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #363636;
+  }
+
+  .service_list ul {
+    font-size: 18px;
+    list-style: disc;
+    list-style-position: inside;
+    font-weight: 400;
   }
 
   .plan-cards .card {
