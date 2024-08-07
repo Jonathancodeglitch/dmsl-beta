@@ -742,7 +742,6 @@ header .row {
   justify-content: start;
   align-items: start;
   gap: 13px;
-  border: 1px solid red;
 }
 
 .plan-cards .card {
