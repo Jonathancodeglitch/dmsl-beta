@@ -1,0 +1,135 @@
+[
+  {
+    "id": 1,
+    "packageName": "Starter Package",
+    "desc": "Best for new/small businesses",
+    "amount": "£500",
+    "services": [
+      {
+        "name": "Social Media Management",
+        "list": [
+          "10 posts per month across 2 platforms (Facebook and LinkedIn/Instagram)",
+          "Basic engagement (replying to comments and messages)",
+          "Sponsored ads (At your discretion)"
+        ]
+      },
+      {
+        "name": "Longform Content Creation",
+        "list": ["2 blog posts per month (500 words each)"]
+      },
+      {
+        "name": "Email Marketing",
+        "list": ["1 email/Newsletter campaign per month"]
+      },
+      {
+        "name": "Search Engine Optimisation (SEO):",
+        "list": ["Basic web page and social media page SEO"]
+      },
+      {
+        "name": "Monthly Reporting:",
+        "list": ["Basic performance report across all platforms."]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "packageName": "Standard Package",
+    "desc": "Best for established/stable businesses",
+    "amount": "£1000",
+    "services": [
+      {
+        "name": "Social Media Management",
+        "list": [
+          "20 posts per month across 3 platforms - with Content Calendar Built",
+          "Enhanced engagement and community management"
+        ]
+      },
+      {
+        "name": "Content Creation:",
+        "list": [
+          "4 blog posts per month (700 words each)",
+          "2 infographics or custom graphics per month"
+        ]
+      },
+      {
+        "name": "Email Marketing",
+        "list": ["2 email campaigns per month", "A/B testing and segmentation"]
+      },
+      {
+        "name": "Search Engine Optimisation (SEO):",
+        "list": [
+          "Advanced on-page SEO for up to 10 pages",
+          "5 keyword tracking and optimization"
+        ]
+      },
+      {
+        "name": "Pay-Per-Click (PPC) Advertising:",
+        "list": [
+          "Monthly budget management (up to £500 ad spend)",
+          "Campaign setup and monitoring"
+        ]
+      },
+      {
+        "name": "Monthly Reporting:",
+        "list": [
+          "Detailed performance report with insights and recommendations"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "packageName": "Premium Package",
+    "desc": "Best for SME's",
+    "amount": "£2000",
+    "services": [
+      {
+        "name": "Social Media Management: ",
+        "list": [
+          "30 posts per month across 4 platforms",
+          "Advanced engagement, community management, and growth strategies"
+        ]
+      },
+      {
+        "name": "Content Creation:",
+        "list": [
+          "6 blog posts per month (1,000 words each)",
+          "4 infographics or custom graphics per month",
+          "2 videos per month (short-form)"
+        ]
+      },
+      {
+        "name": "Email Marketing",
+        "list": [
+          "4 email campaigns per month",
+          "Comprehensive A/B testing, segmentation, and automation"
+        ]
+      },
+      {
+        "name": "Search Engine Optimisation (SEO):",
+        "list": [
+          "Comprehensive on-page SEO for up to 20 pages",
+          "10 keyword tracking and optimizatio",
+          "Link building and outreach"
+        ]
+      },
+      {
+        "name": "Pay-Per-Click (PPC) Advertising:",
+        "list": [
+          "Monthly budget management (up to £1,000 ad spend)",
+          "Campaign setup, monitoring, and optimization"
+        ]
+      },
+      {
+        "name": "Website Management:",
+        "list": ["Monthly updates and maintenance", "Performance optimization"]
+      },
+      {
+        "name": "Monthly Reporting:",
+        "list": [
+          "In-depth performance report with actionable insights and quarterly strategy meetings"
+        ]
+      }
+    ]
+  }
+]
