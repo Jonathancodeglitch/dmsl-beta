@@ -111,7 +111,7 @@ function ServiceListing({ serviceName, serviceListing }) {
 
 function CheckOutButton({ id }) {
   function handleClick(itemId) {
-    fetch("http://localhost:8000/create-checkout-session", {
+    fetch("https://dmsl-beta-xrq6.vercel.app/create-checkout-session", {
       method: "post",
       headers: {
         "content-Type": "application/json",
