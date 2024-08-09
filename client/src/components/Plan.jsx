@@ -110,6 +110,7 @@ function ServiceListing({ serviceName, serviceListing }) {
 }
 
 function CheckOutButton({ id }) {
+  //https://dmsl-beta-xrq6.vercel.app/
   function handleClick(itemId) {
     fetch("https://dmsl-beta-xrq6.vercel.app/create-checkout-session", {
       method: "post",

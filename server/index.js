@@ -8,11 +8,17 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(
+/* app.use(
   cors({
     origin: "https://dmsl-beta-client.vercel.app/",
   })
-);
+); */
+
+app.use(cors({ origin: "https://dmsl-beta-client.vercel.app" })); // Allow requests only from this domain
+
+app.get("/test_endpoint", (req, res) => {
+  res.json({ message: "Hello from API accessible by specific URL" });
+});
 
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
