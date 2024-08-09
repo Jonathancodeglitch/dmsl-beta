@@ -14,6 +14,7 @@ import { useState } from "react";
 import packages from "../planPackages.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export default function Plan() {
   return (
@@ -110,8 +111,11 @@ function ServiceListing({ serviceName, serviceListing }) {
 }
 
 function CheckOutButton({ id }) {
-  //https://dmsl-beta-xrq6.vercel.app/
+  const [cardClick, setCardClick] = useState(false);
+
   function handleClick(itemId) {
+    setCardClick(true);
+    //post a request to the server
     fetch("https://dmsl-beta-xrq6.vercel.app/create-checkout-session", {
       method: "post",
       headers: {
@@ -143,7 +147,11 @@ function CheckOutButton({ id }) {
       }}
       className="btn"
     >
-      SELECT PACKAGE
+      {!cardClick ? (
+        "SELECT PACKAGE"
+      ) : (
+        <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
+      )}
     </button>
   );
 }

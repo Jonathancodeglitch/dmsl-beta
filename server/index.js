@@ -9,7 +9,11 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors({ origin: "https://dmsl-beta-client.vercel.app" })); // Allow requests only from this domain
+app.use(
+  cors({
+    origin: ["https://dmsl-beta-client.vercel.app", "http://localhost:5173"],
+  })
+); // Allow requests only from this domain
 
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
