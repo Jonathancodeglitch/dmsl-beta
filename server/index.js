@@ -8,11 +8,11 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(
+/* app.use(
   cors({
     origin: ["http://localhost:5173", "https://dmsl-beta-client.vercel.app/"],
   })
-);
+); */
 
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
