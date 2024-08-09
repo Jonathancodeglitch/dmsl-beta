@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://dmsl-beta-client.vercel.app"],
+    origin: ["http://localhost:5173", "https://dmsl-beta-client.vercel.app/"],
   })
 );
 
@@ -40,8 +40,8 @@ app.post("/create-checkout-session", async (req, res) => {
           quantity: item.quantity,
         };
       }),
-      success_url: `${process.env.CLIENT_URL}`,
-      cancel_url: `${process.env.CLIENT_URL}`,
+      success_url: process.env.CLIENT_URL,
+      cancel_url: process.env.CLIENT_URL,
     });
 
     res.json({ url: session.url });
@@ -49,5 +49,7 @@ app.post("/create-checkout-session", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(8000);
