@@ -32,7 +32,7 @@ app.post("/create-checkout-session", async (req, res) => {
         const offer = offers.get(item.id);
         return {
           price_data: {
-            currency: "usd",
+            currency: "gbp",
             product_data: {
               name: offer.name,
             },
@@ -41,7 +41,7 @@ app.post("/create-checkout-session", async (req, res) => {
           quantity: item.quantity,
         };
       }),
-      success_url: process.env.CLIENT_URL,
+      success_url: `${process.env.CLIENT_URL}/success-page`,
       cancel_url: process.env.CLIENT_URL,
     });
 
@@ -49,6 +49,28 @@ app.post("/create-checkout-session", async (req, res) => {
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
+});
+
+app.post("/create-portal-session", async (req, res) => {
+  // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
+  // Typically this is stored alongside the authenticated user in your database.
+  try {
+    const { session_id } = req.body;
+
+    let result = Promise.all([
+      stripe.checkout.sessions.retrieve(session_id, {
+        expand: ["payment_intent.payment_method"],
+      }),
+      stripe.checkout.sessions.listLineItems(session_id),
+    ]);
+
+    res.json(await result);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+
+  // This is the url to which the customer will be redirected when they are done
+  // managing their billing with the portal.
 });
 
 const PORT = process.env.PORT || 3000;
