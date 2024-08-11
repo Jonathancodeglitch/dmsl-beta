@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+.title {
+  margin-bottom: 5px;
+}
+
+.sm-title {
+  font-weight: 600;
+}
+
+.success-page {
+  background-color: #27bdf3;
+  padding: 50px 0px 30px 0px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-page__content {
+  max-width: 600px;
+  width: 90%;
+  background-color: white;
+  padding: 20px;
+  font-weight: 400;
+}
+
+.success-page__content > * + * {
+  margin-top: 8px;
+}
+
+.success-page__title,
+.success-page__next-title,
+.success-page__order-details-title {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #363636;
+}
+
+.success-page__socials-icons,
+.success-page__footer {
+  text-align: center;
+}
+
+.success-page__socials-icons {
+  margin-top: 8px;
+}
+
+.success-page__socials-icons > * {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #00376e;
+}
+
+.success-page__socials-icons > * + * {
+  margin-left: 20px;
+}
+
+.success-page__btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 500px) {
+  .success-page__content {
+    padding: 15px;
+  }
+}

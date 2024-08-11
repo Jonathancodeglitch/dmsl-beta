@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./style.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./css/style.css";
+
 import Root from "./pages/root.jsx";
 import HomePage from "./pages/Home.jsx";
 import AboutUsPage from "./pages/About-us.jsx";
 import ProjectPage from "./pages/Projects.jsx";
 import ContactUsPage from "./pages/Contact-us.jsx";
 import ProjectOverview from "./components/ProjectOverview.jsx";
+import SuccessPage from "./pages/SuccessPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "success-page", element: <SuccessPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
