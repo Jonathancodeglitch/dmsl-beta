@@ -2,12 +2,13 @@ import dotenv from "dotenv";
 import express from "express";
 import Stripe from "stripe";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
 const app = express();
 
-app.use(express.json());
+//app.use(express.json());
 
 app.use(
   cors({
@@ -16,63 +17,111 @@ app.use(
 ); // Allow requests only from this domain
 
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
+const lookupKeys = [
+  "starter_plan-f377473",
+  "standard_plan-f377473",
+  "premium_plan-f377473",
+];
 
-const offers = new Map([
-  [1, { name: "STARTER PACKAGE", price: 50000, quantity: 1 }],
-  [2, { name: "STANDARD PACKAGE", price: 100000, quantity: 1 }],
-  [3, { name: "PREMIUN PACKAGE", price: 200000, quantity: 1 }],
-]);
-
-app.post("/create-checkout-session", async (req, res) => {
+app.post("/create-checkout-session", express.json(), async (req, res) => {
   try {
+    const prices = await stripe.prices.list({
+      lookup_keys: [lookupKeys[req.body.id]],
+      expand: ["data.product"],
+    });
+
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: req.body.packages.map((item) => {
-        const offer = offers.get(item.id);
-        return {
-          price_data: {
-            currency: "gbp",
-            product_data: {
-              name: offer.name,
-            },
-            unit_amount: offer.price,
-          },
-          quantity: item.quantity,
-        };
-      }),
+      billing_address_collection: "auto",
+      line_items: [
+        {
+          price: prices.data[0].id,
+          // For metered billing, do not pass quantity
+          quantity: 1,
+        },
+      ],
+      mode: "subscription",
       success_url: `${process.env.CLIENT_URL}/success-page`,
       cancel_url: process.env.CLIENT_URL,
     });
 
+    //work on this later
     res.json({ url: session.url });
+    //res.redirect(303, session.url);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
 
-app.post("/create-portal-session", async (req, res) => {
-  // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
-  // Typically this is stored alongside the authenticated user in your database.
-  try {
-    const { session_id } = req.body;
+//
+async function handleNewSubscriptionCreated(subscription) {
+  const customerId = subscription.customer;
+  const customer = await stripe.customers.retrieve(customerId);
+  console.log(customer.email);
+}
 
-    let result = Promise.all([
-      stripe.checkout.sessions.retrieve(session_id, {
-        expand: ["payment_intent.payment_method"],
-      }),
-      stripe.checkout.sessions.listLineItems(session_id),
-    ]);
+//get events on payment
+app.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  (request, response) => {
+    let event = request.body;
+    // Replace this endpoint secret with your endpoint's unique secret
+    // If you are testing with the CLI, find the secret by running 'stripe listen'
+    // If you are using an endpoint defined with the API or dashboard, look in your webhook settings
+    // at https://dashboard.stripe.com/webhooks
+    const endpointSecret = process.env.END_POINT_SECRET;
 
-    res.json(await result);
-  } catch (e) {
-    res.status(500).json({ error: e.message });
+    // Only verify the event if you have an endpoint secret defined.
+    // Otherwise use the basic event deserialized with JSON.parse
+    if (endpointSecret) {
+      // Get the signature sent by Stripe
+      const signature = request.headers["stripe-signature"];
+      try {
+        event = stripe.webhooks.constructEvent(
+          request.body,
+          signature,
+          endpointSecret
+        );
+      } catch (err) {
+        console.log(`⚠️  Webhook signature verification failed.`, err.message);
+        return response.sendStatus(400);
+      }
+    }
+    let subscription;
+    let status;
+    // Handle the event
+    switch (event.type) {
+      case "payment_intent.succeeded":
+        subscription = event.data.object;
+        status = subscription.status;
+        console.log(`Subscription status is ${status}.`);
+        // Then define and call a method to handle the subscription trial ending.
+        // handleSubscriptionTrialEnding(subscription);
+        break;
+      case "invoice.payment_failed":
+        subscription = event.data.object;
+        status = subscription.status;
+        console.log(`Subscription status is ${status}.`);
+        // Then define and call a method to handle the subscription trial ending.
+        // handleSubscriptionTrialEnding(subscription);
+        break;
+      case "customer.subscription.created":
+        subscription = event.data.object;
+        status = subscription.status;
+        console.log(`a new subscrition was created ${status}.`);
+        // Then define and call a method to handle the subscription trial ending.
+        handleNewSubscriptionCreated(subscription);
+        break;
+
+      default:
+        // Unexpected event type
+        console.log(`Unhandled event type ${event.type}.`);
+    }
+    // Return a 200 response to acknowledge receipt of the event
+    response.send();
   }
+);
 
-  // This is the url to which the customer will be redirected when they are done
-  // managing their billing with the portal.
-});
-
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.listen(8000);

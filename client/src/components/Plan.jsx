@@ -1,15 +1,3 @@
-// integrate a payment system
-// the user should be able to click a package and re directed to the payment gate way where
-// he can input his card details to process payment
-
-// What i know ---======> NOTHING
-
-// what i need to know to implement
-// node js
-// stripe api
-// how to integrate the payment with react node js,stripe
-// api
-
 import { useState } from "react";
 import packages from "../planPackages.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -122,7 +110,7 @@ function CheckOutButton({ id }) {
         "content-Type": "application/json",
       },
       body: JSON.stringify({
-        packages: [{ id: itemId, quantity: 1 }],
+        id: itemId,
       }),
     })
       .then((res) => {
@@ -155,3 +143,5 @@ function CheckOutButton({ id }) {
     </button>
   );
 }
+
+//display success message if offers was successfully payed for!!

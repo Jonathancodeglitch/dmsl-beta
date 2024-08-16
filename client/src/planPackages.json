@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 0,
     "packageName": "Starter Package",
     "desc": "Best for new/small businesses",
     "amount": "£500",
@@ -32,7 +32,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": 1,
     "packageName": "Standard Package",
     "desc": "Best for established/stable businesses",
     "amount": "£1000",
@@ -78,7 +78,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 2,
     "packageName": "Premium Package",
     "desc": "Best for SME's",
     "amount": "£2000",
