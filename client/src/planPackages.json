@@ -4,6 +4,7 @@
     "packageName": "Starter Package",
     "desc": "Best for new/small businesses",
     "amount": "£500",
+    "amountNG":"₦100,000",
     "services": [
       {
         "name": "Social Media Management",
@@ -36,6 +37,7 @@
     "packageName": "Standard Package",
     "desc": "Best for established/stable businesses",
     "amount": "£1000",
+    "amountNG":"₦200,000",
     "services": [
       {
         "name": "Social Media Management",
@@ -82,6 +84,7 @@
     "packageName": "Premium Package",
     "desc": "Best for SME's",
     "amount": "£2000",
+    "amountNG":"₦300,000",
     "services": [
       {
         "name": "Social Media Management: ",

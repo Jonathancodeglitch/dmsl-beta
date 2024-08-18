@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import packages from "../planPackages.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -28,6 +28,32 @@ export default function Plan() {
 }
 
 function PlanCards({ packages }) {
+  //get user location
+  const [userLocation, setUserLocation] = useState("");
+
+  useEffect(() => {
+    const fetchIpAddress = async () => {
+      try {
+        const response = await fetch(
+          "https://dmsl-beta-xrq6.vercel.app/getUserLocation"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setUserLocation(data.location);
+          console.log(data.location);
+        } else {
+          console.error("Failed to fetch user location");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    // Automatically fetch IP address when the component loads
+    fetchIpAddress();
+  }, []);
+
+  //display amount base on user location
   return (
     <div className="plan-cards">
       {packages.map((packages) => {
@@ -37,7 +63,9 @@ function PlanCards({ packages }) {
             id={packages.id}
             packageName={packages.packageName}
             description={packages.desc}
-            packageAmount={packages.amount}
+            packageAmount={
+              userLocation === "NG" ? packages.amountNG : packages.amount
+            }
             services={packages.services}
           />
         );

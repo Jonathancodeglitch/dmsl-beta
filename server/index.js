@@ -3,10 +3,15 @@ import express from "express";
 import Stripe from "stripe";
 import cors from "cors";
 import bodyParser from "body-parser";
+import createProducts from "./products.js";
 
 dotenv.config();
 
 const app = express();
+
+//make the user location public
+// if they are nigeria then use a nigeria pricing for them
+// else use the pound pricing!!!
 
 //app.use(express.json());
 
@@ -16,12 +21,46 @@ app.use(
   })
 ); // Allow requests only from this domain
 
+//find user location
+function userLocation(req, res, next) {
+  async function getUserLocation() {
+    try {
+      const userIp = req.headers["x-forwarded-for"] || req.ip;
+      const response = await fetch(
+        `https://ipinfo.io/${userIp}?token=521669d8ecf547`
+      );
+      if (response.ok) {
+        const location = await response.json();
+        req.userLocation = location.country;
+      } else {
+        throw new Error(`Response status: ${response.status}`);
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  getUserLocation();
+
+  next();
+}
+
+app.use(userLocation);
+
+//send user location to the client side
+app.get("/getUserLocation", express.json(), (req, res) => {
+  res.send({ location: req.userLocation });
+});
+
+//stripe checkout
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 const lookupKeys = [
   "starter_plan-f377473",
   "standard_plan-f377473",
   "premium_plan-f377473",
 ];
+
+await createProducts("NG");
 
 app.post("/create-checkout-session", express.json(), async (req, res) => {
   try {
@@ -52,7 +91,7 @@ app.post("/create-checkout-session", express.json(), async (req, res) => {
   }
 });
 
-//
+// stripe webhook logic
 async function handleNewSubscriptionCreated(subscription) {
   const customerId = subscription.customer;
   const customer = await stripe.customers.retrieve(customerId);
