@@ -48,8 +48,10 @@ function userLocation(req, res, next) {
 app.use(userLocation);
 
 //send user location to the client side
-app.get("/getUserLocation", express.json(), (req, res) => {
+app.get("/getUserLocation", express.json(), async (req, res) => {
   res.send({ location: req.userLocation });
+  //create pricing base on location
+  await createProducts(req.location);
 });
 
 //stripe checkout
@@ -59,8 +61,6 @@ const lookupKeys = [
   "standard_plan-f377473",
   "premium_plan-f377473",
 ];
-
-await createProducts("NG");
 
 app.post("/create-checkout-session", express.json(), async (req, res) => {
   try {
