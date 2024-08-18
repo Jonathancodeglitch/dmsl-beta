@@ -51,7 +51,7 @@ app.use(userLocation);
 app.get("/getUserLocation", express.json(), async (req, res) => {
   res.send({ location: req.userLocation });
   //create pricing base on location
-  await createProducts(req.location);
+  // await createProducts(req.userLocation);
 });
 
 //stripe checkout
@@ -65,7 +65,10 @@ const lookupKeys = [
 app.post("/create-checkout-session", express.json(), async (req, res) => {
   try {
     const prices = await stripe.prices.list({
-      lookup_keys: [lookupKeys[req.body.id]],
+      lookup_keys:
+        req.userLocation === "NG"
+          ? [`${lookupKeys[req.body.id]}NG`]
+          : [lookupKeys[req.body.id]],
       expand: ["data.product"],
     });
 

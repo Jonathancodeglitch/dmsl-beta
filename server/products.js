@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 function getCurrency(country) {
-  return country === "NG" ? "ngn" : "gdp";
+  return country === "NG" ? "ngn" : "gbp";
 }
 
 function getUnitAmount(country, gdp, ngn) {
@@ -57,8 +57,8 @@ export default async function createProducts(country) {
           interval: "month",
         },
         product: productData.productId,
-        transfer_lookup_key: true,
         lookup_key: productData.lookUpKey,
+        transfer_lookup_key: true,
       });
     });
   } catch (e) {

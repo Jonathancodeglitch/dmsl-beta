@@ -131,7 +131,7 @@ function CheckOutButton({ id }) {
 
   function handleClick(itemId) {
     setCardClick(true);
-    //post a request to the server
+    //post a request to the server https://dmsl-beta-xrq6.vercel.app
     fetch("https://dmsl-beta-xrq6.vercel.app/create-checkout-session", {
       method: "post",
       headers: {
