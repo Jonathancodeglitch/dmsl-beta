@@ -41,6 +41,7 @@ function PlanCards({ packages }) {
           const data = await response.json();
           setUserLocation(data.location);
           console.log(data.location);
+          console.log(data.ip);
         } else {
           console.error("Failed to fetch user location");
         }
