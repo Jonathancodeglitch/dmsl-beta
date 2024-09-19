@@ -1,20 +1,98 @@
+import { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDiamond } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDiamond,
+  faChevronRight,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import Slider from "react-slick";
 
 function HeroContentSecondary() {
+  let sliderRef = useRef(null);
+  const nextSlide = () => {
+    sliderRef.current.slickNext();
+  };
+  const previousSlide = () => {
+    sliderRef.current.slickPrev();
+  };
+
+  let settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    arrows: false,
+    pauseOnHover: true,
+    autoplaySpeed: 2000,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 950,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="hero_content-secondary">
-      <h1 className="hero_content-secondary-title">SUCCESS PROJECT</h1>
+      <h1 className="hero_content-secondary-title">PREVIOUS CLIENTS</h1>
       <p>
         We recently designed and developed a cloud-based mobile app for
         BetaTravel agency. BetaTravel agency has greatly improved customer base
         since its launch.
       </p>
-      <div className="hero-mobile-img">
-        <img
-          src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745338/DMSL-BETA/mobile_ngn2wm.png"
-          alt="mobile devices"
-        />
+      <div className="slider">
+        <Slider {...settings} ref={sliderRef} className="previous-clients">
+          <img
+            className="previous-clients__logo"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745365/DMSL-BETA/townsend-img-1_shvrtr.jpg"
+            alt="previous clients logos"
+          />
+          <img
+            className="previous-clients__logo"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745322/DMSL-BETA/jaye-img-1_aggqrn.jpg"
+            alt="previous clients logos"
+          />
+          <img
+            className="previous-clients__logo"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745371/DMSL-BETA/shea-origin-img-1_zz1ugp.png"
+            alt="previous clients logos"
+          />
+          <img
+            className="previous-clients__logo"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745390/DMSL-BETA/ywiit-img-3_bcrowp.jpg"
+            alt="previous clients logos"
+          />
+          <img
+            className="previous-clients__logo"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745308/DMSL-BETA/bookyard-hero_sxodza.png"
+            alt="previous clients logos"
+          />
+          <img
+            className="previous-clients__logo"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745337/DMSL-BETA/olby-hero_yvku0h.png"
+            alt="previous clients logos"
+          />
+        </Slider>
+        <div className="slider__btns">
+          <div className="slider__btn" onClick={previousSlide}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </div>
+          <div className="slider__btn" onClick={nextSlide}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -32,8 +110,9 @@ export default function HeroSection() {
             Scale your business With our complete <span>Digital</span> Program
           </h1>
           <p>
-            Apply effective and proven ways used by top industry to further
-            improve the accessibility of your trade and generate income.
+            We're on top of the trends and we know the best tools to help you
+            navigate the digital space with ease to achieve targeted outcomes
+            and deliver real results.
           </p>
           <FontAwesomeIcon icon={faDiamond} className="diamond" />
         </div>

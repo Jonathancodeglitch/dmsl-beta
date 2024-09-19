@@ -1,7 +1,23 @@
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+
 export default function Benefits() {
+  // Create refs for the sections you want to scroll to
+  const servicesRef = useRef(null);
+  // Get the current location (to detect hash changes)
+  const location = useLocation();
+  // Handle routing and scrolling to the section
+  useEffect(() => {
+    const hash = location.hash;
+    // Check the hash and scroll to the corresponding section
+    if (hash === "#services" && servicesRef.current) {
+      servicesRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]); // Trigger the effect whenever the location changes
+
   return (
-    <section className="benefits container">
-      <h1 className="benefits-title">What You Get From Us</h1>
+    <section className="benefits container" ref={servicesRef}>
+      <h1 className="benefits-title">Our Solutions</h1>
       <div className="benefits-card-container">
         <div className="card">
           <img

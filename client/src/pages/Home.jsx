@@ -9,12 +9,13 @@ import AstonishingResult from "../components/AstonishingResult";
 import Testimonial from "../components/Testimonials";
 import ContactUs from "../components/ContactUs";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
 
 export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <AppDevelopment />
+      {/* <AppDevelopment /> */}
       <SuccessProject />
       <Projects />
       <Benefits />

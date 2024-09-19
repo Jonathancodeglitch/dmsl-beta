@@ -1,21 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import packages from "../planPackages.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-
+import { useLocation } from "react-router-dom";
 export default function Plan() {
+  // Create refs for the sections you want to scroll to
+  const planSectionRef = useRef(null);
+  // Get the current location (to detect hash changes)
+  const location = useLocation();
+  // Handle routing and scrolling to the section
+  useEffect(() => {
+    const hash = location.hash;
+    // Check the hash and scroll to the corresponding section
+    if (hash === "#packages" && planSectionRef.current) {
+      planSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]); // Trigger the effect whenever the location changes
+
   return (
-    <section className="plan">
+    <section className="plan" ref={planSectionRef}>
       <div className="container row">
         <div className="plan-content">
           <h4>CHOOSE YOUR PLAN</h4>
           <h1>Packages priced to suit your business</h1>
-          <ul className="plan-year">
-            <li>2022</li>
-            <li className="">2023</li>
-            <li className="active">2024</li>
-          </ul>
           <p>
             Our goal is to help you maximize value for you by starting from your
             challenges all the way to your goals.
@@ -34,14 +42,10 @@ function PlanCards({ packages }) {
   useEffect(() => {
     const fetchIpAddress = async () => {
       try {
-        const response = await fetch(
-          "https://dmsl-beta-xrq6.vercel.app/getUserLocation"
-        );
+        const response = await fetch("http://localhost:8000/getUserLocation");
         if (response.ok) {
           const data = await response.json();
           setUserLocation(data.location);
-          console.log(data.location);
-          console.log(data.ip);
         } else {
           console.error("Failed to fetch user location");
         }
@@ -133,7 +137,7 @@ function CheckOutButton({ id }) {
   function handleClick(itemId) {
     setCardClick(true);
     //post a request to the server https://dmsl-beta-xrq6.vercel.app
-    fetch("https://dmsl-beta-xrq6.vercel.app/create-checkout-session", {
+    fetch("http://localhost:8000/create-checkout-session", {
       method: "post",
       headers: {
         "content-Type": "application/json",

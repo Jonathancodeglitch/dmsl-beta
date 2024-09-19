@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./css/style.css";
+/* import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css"; */
 
 import Root from "./pages/root.jsx";
 import HomePage from "./pages/Home.jsx";
@@ -10,6 +12,7 @@ import ProjectPage from "./pages/Projects.jsx";
 import ContactUsPage from "./pages/Contact-us.jsx";
 import ProjectOverview from "./components/ProjectOverview.jsx";
 import SuccessPage from "./pages/SuccessPage.jsx";
+import Admin from "./pages/Admin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/:projectName",
         element: <ProjectOverview />,
+      },
+      {
+        path: "/Admin",
+        element: <Admin />,
       },
     ],
   },
