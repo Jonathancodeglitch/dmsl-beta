@@ -164,7 +164,7 @@ function CheckOutButton({ id }) {
   return (
     <button
       onClick={() => {
-        handleClick(id);
+        //handleClick(id);
       }}
       className="btn"
     >
