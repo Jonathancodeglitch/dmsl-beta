@@ -42,7 +42,7 @@ export default function Header() {
                 ].join(" ")
               }
               to="/"
-              isActive={() => isActive("/", "")}
+              
             >
               Home
             </NavLink>

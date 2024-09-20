@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
+
 export default function Plan() {
   // Create refs for the sections you want to scroll to
   const planSectionRef = useRef(null);
@@ -42,7 +43,7 @@ function PlanCards({ packages }) {
   useEffect(() => {
     const fetchIpAddress = async () => {
       try {
-        const response = await fetch("http://localhost:8000/getUserLocation");
+        const response = await fetch("https://dmsl-beta-xrq6.vercel.app/getUserLocation");
         if (response.ok) {
           const data = await response.json();
           setUserLocation(data.location);
@@ -137,7 +138,7 @@ function CheckOutButton({ id }) {
   function handleClick(itemId) {
     setCardClick(true);
     //post a request to the server https://dmsl-beta-xrq6.vercel.app
-    fetch("http://localhost:8000/create-checkout-session", {
+    fetch(" https://dmsl-beta-xrq6.vercel.app/create-checkout-session", {
       method: "post",
       headers: {
         "content-Type": "application/json",
@@ -164,7 +165,7 @@ function CheckOutButton({ id }) {
   return (
     <button
       onClick={() => {
-        //handleClick(id);
+        handleClick(id);
       }}
       className="btn"
     >
@@ -176,5 +177,3 @@ function CheckOutButton({ id }) {
     </button>
   );
 }
-
-//display success message if offers was successfully payed for!!
