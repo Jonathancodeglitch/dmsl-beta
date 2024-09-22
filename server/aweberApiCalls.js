@@ -44,8 +44,8 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
         customer_portal: subscriptionInfo.customerPortal,
         product_amount: subscriptionInfo.productAmount,
       },
-      email: "jonathankendrick697@gmail.com",
-      name: "jonathan uchiha",
+      email: subscriptionInfo.customerEmail,
+      name: subscriptionInfo.customerName,
       tags: ["welcome series"],
     });
 
