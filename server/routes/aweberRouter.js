@@ -1,16 +1,19 @@
+import dotenv from "dotenv";
 import { Router } from "express";
 import simpleOauth2 from "simple-oauth2";
 import { saveAccessTokenToDb, retriveAccessTokenFromDb } from "../db.js";
 
+dotenv.config();
 // initialize the process of accessing aweber acount using the libery simple-oauth2
 const oAuth2FlowAweberRouter = Router();
 
 //get authorization code
 const config = {
   client: {
-    id: "Gif4lbYzIaVaODRomKFdfuJNOHwIHNb7",
-    secret: "B9Rcyb07389XECDOBiJdUwkuX3Xayxja",
+    id: process.env.Aweber_client_id,
+    secret: process.env.Aweber_secret,
   },
+
   auth: {
     tokenHost: "https://auth.aweber.com",
     authorizePath: "/oauth2/authorize",
@@ -31,9 +34,6 @@ oAuth2FlowAweberRouter.get("/", (req, res) => {
       "email.read",
       "subscriber.write",
     ],
-    state: "e3f97c2d-b8c9-4e3a-a123-4567abcdef89",
-
-    // non-standard oauth params may be passed as well
   });
 
   res.redirect(authorizationUri);
@@ -52,17 +52,16 @@ oAuth2FlowAweberRouter.get("/authorize", async (req, res) => {
   try {
     const accessToken = await client.getToken(tokenParams, {
       headers: {
-        Authorization:
-          "Basic R2lmNGxiWXpJYVZhT0RSb21LRmRmdUpOT0h3SUhOYjc6QjlSY3liMDczODlYRUNET0JpSmRVd2t1WDNYYXl4amE=",
+        Authorization: process.env.Aweber_Basic_Authorization,
       },
     });
-    res.sendStatus(200);
+
+    res.send("we are in my boy!!");
     await saveAccessTokenToDb(accessToken);
   } catch (error) {
     console.log("Access Token Error", error.message);
   }
 });
-
 
 //handle the refreshing of the access token
 async function refreshAccessToken() {
@@ -84,7 +83,7 @@ async function refreshAccessToken() {
       accessToken = await accessToken.refresh(refreshParams);
       //save new access token to DB
       await saveAccessTokenToDb(accessToken);
-      console.log('access token has been refreshed!!')
+      console.log("access token has been refreshed!!");
     } catch (error) {
       console.log("Error refreshing access token: ", error.message);
     }
@@ -92,9 +91,7 @@ async function refreshAccessToken() {
 }
 
 //check every 15 mins if access code has expire and refresh it
-const REFRESH_INTERVAL =15 * 60 * 1000; // 15 minutes in milliseconds
+const REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes in milliseconds
 setInterval(refreshAccessToken, REFRESH_INTERVAL);
 
-
-
-export { oAuth2FlowAweberRouter};
+export { oAuth2FlowAweberRouter };

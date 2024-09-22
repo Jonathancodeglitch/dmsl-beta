@@ -1,14 +1,33 @@
 import { retriveAccessTokenFromDb } from "./db.js";
 
+//Get all subscribers
+async function getSubscribers() {
+  const Token = await retriveAccessTokenFromDb();
+  try {
+    const headers = {
+      Accept: "application/json",
+      "User-Agent": "AWeber-Node-code-sample/1.0",
+      Authorization: `Bearer ${Token.access_token}`,
+    };
+
+    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
+    return fetch(url, { headers: headers })
+      .then((response) => response.json())
+      .then((data) => {
+        return data.entries;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //handle adding new subscribers to aweber
-async function handleAddingNewSubscribersToAweber(
-  subscriber,
-  subscriptionName,
-  subscriptionRenewalDate
-) {
+async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
   try {
     const Token = await retriveAccessTokenFromDb();
-    //console.log(subscriber);
 
     const headers = {
       Accept: "application/json",
@@ -19,11 +38,14 @@ async function handleAddingNewSubscribersToAweber(
 
     const body = JSON.stringify({
       custom_fields: {
-        product: subscriptionName,
-        renewal_date: subscriptionRenewalDate,
+        product: subscriptionInfo.productName,
+        product_renewal_date: subscriptionInfo.productRenewalDate,
+        product_billing_date: subscriptionInfo.productBillingDate,
+        customer_portal: subscriptionInfo.customerPortal,
+        product_amount: subscriptionInfo.productAmount,
       },
-      email: subscriber.email,
-      name: subscriber.name,
+      email: "jonathankendrick697@gmail.com",
+      name: "jonathan uchiha",
       tags: ["welcome series"],
     });
 
@@ -62,28 +84,6 @@ async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.status);
-      });
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-async function getSubscribers() {
-  const Token = await retriveAccessTokenFromDb();
-  try {
-    const headers = {
-      Accept: "application/json",
-      "User-Agent": "AWeber-Node-code-sample/1.0",
-      Authorization: `Bearer ${Token.access_token}`,
-    };
-    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
-    return fetch(url, { headers: headers })
-      .then((response) => response.json())
-      .then((data) => {
-        return data.entries;
-      })
-      .catch((err) => {
-        console.log(err);
       });
   } catch (err) {
     console.log(err);
@@ -142,7 +142,50 @@ async function handleNotifyingCustomersOnFailedPayment(
   }
 }
 
-//subscription canceled
+//notify customers that their payment was a success
+async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
+  try {
+    //Retrive subcriber from aweber so we can get the previous custom field and add our modification
+    const Token = await retriveAccessTokenFromDb();
+
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "AWeber-Node-code-sample/1.0",
+      Authorization: `Bearer ${Token.access_token}`,
+    };
+
+    const subcribers = await getSubscribers();
+
+    //find the subscriber that needs an update
+    const [subcriber] = subcribers.filter((subcriber) => {
+      return subcriber.email === subscriptionInfo.customerEmail;
+    });
+
+    //get custom field from the subscriber
+    const previousCustomField = subcriber.custom_fields;
+
+    const body = JSON.stringify({
+      custom_fields: {
+        ...previousCustomField,
+        product_renewal_date: subscriptionInfo.productRenewalDate,
+        product_billing_date: subscriptionInfo.productBillingDate,
+      },
+      tags: {
+        add: ["payment succeeded"],
+      },
+    });
+
+    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=jonathankendrick697@gmail.com`;
+    fetch(url, { headers: headers, method: "PATCH", body: body })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.custom_fields);
+      });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 /* ========><======= */
 
@@ -150,4 +193,5 @@ export {
   handleAddingNewSubscribersToAweber,
   handleNotifyingSubscribersOnUpcomingPayment,
   handleNotifyingCustomersOnFailedPayment,
+  handleNotifyingCustomerOnSucceededPayment,
 };

@@ -8,9 +8,9 @@ const stripeCheckOutRouter = express.Router();
 //stripe checkout initilizition
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 const lookupKeys = [
-  "starter_plan-f377473",
-  "standard_plan-f377473",
-  "premium_plan-f377473",
+  "starter_plan-k377473",
+  "standard_plan-k377473",
+  "premium_plan-k377473",
 ];
 
 stripeCheckOutRouter.post("/", express.json(), async (req, res) => {

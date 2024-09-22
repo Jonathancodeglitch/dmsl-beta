@@ -1,11 +1,11 @@
 import pg from "pg";
 
-const db = new pg.Client({
+const db = new pg.Pool({
   connectionString: process.env.POSTGRES_URL,
 });
 
 //connect to database
-db.connect().catch((err) => console.error("Connection error:", err));
+//db.connect().catch((err) => console.error("Connection error:", err));
 
 async function saveAccessTokenToDb(accessToken) {
   const accessTokenJSONString = JSON.stringify(accessToken);

@@ -5,20 +5,21 @@ import {
   handleAddingNewSubscribersToAweber,
   handleNotifyingSubscribersOnUpcomingPayment,
   handleNotifyingCustomersOnFailedPayment,
+  handleNotifyingCustomerOnSucceededPayment,
 } from "../aweberApiCalls.js";
 
 dotenv.config();
 
 const stripeWebhookRouter = express.Router();
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
-//customer should be able to cancel their subscription ==> pending
-// when customer choose to cancel their sub display a page first that makes the subscription entizing and a cancel sub button if they still insist on cancelling ==> pending
-// when sub is canceled send a mail telling them their sub has been canceled' ==> pending
-// when  payment fails retry 6 times the 6th time should send a diffrent email about how their subscription would be canceledd ==> pending
-// when payment is recieved send a mail about payment success ==> pending
+// send a link to manage your subscription when a welcome email,payment failed, cancel subscription is sent
+//customer should be able to manage their subscription like cancel their subscription ==> pending
+// when  payment fails retry 6 times the 6th time should send a diffrent email about how their subscription would be canceledd  using dashboard==> pending
+// when payment is recieved send a mail about payment success use the dashboard ==> pending
 // when subscription is canceled due to no payment  send a subscription cancel mail ==> pending
 //work on the frontend ==> check
 //use an online database ==> check
+//free trial
 
 // stripe webhook logic
 
@@ -27,19 +28,32 @@ function formatDate(date) {
   return formatedDate;
 }
 
+function retrieveAmountForSubscription(subscription) {
+  const subscriptionItem = subscription.items.data[0]; // Get the first (and only) subscription item
+  const price = subscriptionItem.price;
+  const currency = price.currency.toUpperCase();
+  const symbol = currency == "NGN" ? "#" : "£";
+  const amount = `${symbol}${price.unit_amount / 100}`;
+  return amount;
+}
+
 //when a new subscription is created
 async function handleNewSubscriptionCreated(subscription) {
   try {
-    const subscriptionName = subscription.plan.name;
-    const subscriptionRenewalDate = formatDate(subscription.current_period_end);
     // get the email and name from the customer
     const customerId = subscription.customer;
     const customer = await stripe.customers.retrieve(customerId);
-    await handleAddingNewSubscribersToAweber(
-      customer,
-      subscriptionName,
-      subscriptionRenewalDate
-    );
+    const subscriptionInfo = {
+      productName: subscription.plan.name,
+      customerName: customer.name,
+      customerEmail: customer.email,
+      productRenewalDate: formatDate(subscription.current_period_end),
+      productBillingDate: formatDate(subscription.current_period_start),
+      productAmount: retrieveAmountForSubscription(subscription),
+      customerPortal: process.env.customer_portal,
+    };
+
+    await handleAddingNewSubscribersToAweber(subscriptionInfo);
   } catch (err) {
     console.log(err);
   }
@@ -86,6 +100,47 @@ async function handleFailedPayment(subscription) {
   }
 }
 
+async function handleSucceededPayment(subscription) {
+  let subscriptionInfo = {
+    productRenewalDate: "no renewal date",
+    productBillingDate: "no billing date",
+  };
+  // Step 1: Retrieve the PaymentIntent
+  const paymentIntent = await stripe.paymentIntents.retrieve(subscription.id);
+  const customer = await stripe.customers.retrieve(subscription.customer);
+
+  // Check if there's an invoice associated with the PaymentIntent
+  if (paymentIntent.invoice) {
+    // Step 2: Retrieve the Invoice
+    const invoice = await stripe.invoices.retrieve(paymentIntent.invoice);
+
+    // Check if the invoice is linked to a subscription
+    if (invoice.subscription) {
+      // Step 3: Retrieve the Subscription
+      const subscription = await stripe.subscriptions.retrieve(
+        invoice.subscription
+      );
+
+      await handleNotifyingCustomerOnSucceededPayment({
+        productRenewalDate: formatDate(subscription.current_period_end),
+        productBillingDate: formatDate(subscription.current_period_start),
+        customerEmail: customer.email,
+      });
+    } else {
+      console.log("No subscription associated with this invoice.");
+    }
+  } else {
+    await handleNotifyingCustomerOnSucceededPayment({
+      productRenewalDate: "no renewal date",
+      productBillingDate: "no billing date",
+      customerEmail: customer.email,
+    });
+    console.log("No invoice associated with this PaymentIntent.");
+  }
+
+  console.log(subscription);
+}
+
 //get events on payment
 stripeWebhookRouter.post(
   "/",
@@ -121,20 +176,13 @@ stripeWebhookRouter.post(
         subscription = event.data.object;
         status = subscription.status;
         console.log(`Subscription status is ${status}.`);
-
+        handleSucceededPayment(subscription);
         break;
       case "invoice.payment_failed":
         subscription = event.data.object;
         status = subscription.status;
         console.log(`Subscription status is ${status}.`);
         handleFailedPayment(subscription);
-        break;
-      case "customer.subscription.created":
-        subscription = event.data.object;
-        status = subscription.status;
-        console.log(`a new subscrition was created ${status}.`);
-        // Then define and call a method to handle the subscription trial ending.
-        handleNewSubscriptionCreated(subscription);
         break;
       case "customer.subscription.created":
         subscription = event.data.object;
