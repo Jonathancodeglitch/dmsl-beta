@@ -116,6 +116,7 @@ async function handleFailedPayment(subscription) {
 
 async function handleSucceededPayment(subscription) {
   // Step 1: Retrieve the PaymentIntent
+  console.log(subscription);
   // const paymentIntent = await stripe.paymentIntents.retrieve(subscription.id);
   const customer = await stripe.customers.retrieve(subscription.customer);
 
@@ -168,7 +169,7 @@ async function handleSubscriptionCancelled(subscription) {
 stripeWebhookRouter.post(
   "/",
   express.raw({ type: "application/json" }),
-  (request, response) => {
+  async (request, response) => {
     let event = request.body;
     // Replace this endpoint secret with your endpoint's unique secret
     // If you are testing with the CLI, find the secret by running 'stripe listen'
@@ -199,7 +200,7 @@ stripeWebhookRouter.post(
         const invoice = event.data.object;
         status = invoice.status;
         const subscriptionId = invoice.subscription;
-        subscription = retrieveSubscription(subscriptionId);
+        subscription = await retrieveSubscription(subscriptionId);
 
         if (invoice.billing_reason == "subscription_create") {
           //welcome new subscribers to the plan
