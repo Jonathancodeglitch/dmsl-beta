@@ -116,11 +116,25 @@ async function handleFailedPayment(subscription) {
 
 async function handleSucceededPayment(subscription) {
   // Step 1: Retrieve the PaymentIntent
-  const paymentIntent = await stripe.paymentIntents.retrieve(subscription.id);
+  // const paymentIntent = await stripe.paymentIntents.retrieve(subscription.id);
   const customer = await stripe.customers.retrieve(subscription.customer);
 
+  if (subscription) {
+    handleNotifyingCustomerOnSucceededPayment({
+      productRenewalDate: formatDate(subscription.current_period_end),
+      productBillingDate: formatDate(subscription.current_period_start),
+      customerEmail: customer.email,
+    });
+  } else {
+    handleNotifyingCustomerOnSucceededPayment({
+      productRenewalDate: "no renewal date",
+      productBillingDate: "no billing date",
+      customerEmail: "Nill",
+    });
+  }
+
   // Check if there's an invoice associated with the PaymentIntent
-  if (paymentIntent.invoice) {
+  /* if (paymentIntent.invoice) {
     // Step 2: Retrieve the Invoice
     const invoice = await stripe.invoices.retrieve(paymentIntent.invoice);
 
@@ -140,13 +154,8 @@ async function handleSucceededPayment(subscription) {
       console.log("No subscription associated with this invoice.");
     }
   } else {
-    handleNotifyingCustomerOnSucceededPayment({
-      productRenewalDate: "no renewal date",
-      productBillingDate: "no billing date",
-      customerEmail: customer.email,
-    });
     console.log("No invoice associated with this PaymentIntent.");
-  }
+  } */
 }
 
 async function handleSubscriptionCancelled(subscription) {

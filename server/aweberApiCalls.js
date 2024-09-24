@@ -150,8 +150,7 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
     //find the subscriber that needs an update
     const [subcriber] = subcribers.filter((subcriber) => {
       return (
-        subcriber.email === subscriptionInfo.customerEmail ||
-        "jonathankendrices17@gmail.com"
+        subcriber.email === subscriptionInfo.customerEmail
       );
     });
 
