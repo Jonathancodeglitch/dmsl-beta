@@ -67,6 +67,7 @@ async function updateSubscriberByEmail(customField, tags, email) {
 }
 //handle adding new subscribers to aweber
 async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
+  console.log("oya nowsss");
   try {
     const Token = await retriveAccessTokenFromDb();
 
@@ -85,8 +86,8 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
         customer_portal: subscriptionInfo.customerPortal,
         product_amount: subscriptionInfo.productAmount,
       },
-      email: subscriptionInfo.customerEmail,
-      name: subscriptionInfo.customerName,
+      email: subscriptionInfo.customerEmail || "jonathankendrick697@gmail.com",
+      name: subscriptionInfo.customerName || "fefefe",
       tags: ["welcome series"],
     });
 
@@ -95,6 +96,7 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
       .then((response) => response)
       .then((data) => {
         console.log(data.status);
+        console.log("i worked");
       });
   } catch (err) {
     console.log(err);
@@ -149,13 +151,13 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
 
     //find the subscriber that needs an update
     const [subcriber] = subcribers.filter((subcriber) => {
-      return (
-        subcriber.email === subscriptionInfo.customerEmail
-      );
+      return subcriber.email === subscriptionInfo.customerEmail;
     });
 
     //get custom field from the subscriber
     const previousCustomField = subcriber.custom_fields;
+
+    console.log(previousCustomField);
 
     const body = JSON.stringify({
       custom_fields: {

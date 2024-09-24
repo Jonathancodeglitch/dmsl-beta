@@ -201,17 +201,10 @@ stripeWebhookRouter.post(
         status = invoice.status;
         const subscriptionId = invoice.subscription;
         subscription = await retrieveSubscription(subscriptionId);
-
-        if (invoice.billing_reason == "subscription_create") {
-          //welcome new subscribers to the plan
-          handleNewSubscriptionCreated(subscription);
-          //send receipt to subscriber
-          handleSucceededPayment(subscription);
-        } else {
-          //just send receipt(old subscriber)
-          handleSucceededPayment(subscription);
-        }
-
+        //welcome new subscribers to the plan
+        handleNewSubscriptionCreated(subscription);
+        //send receipt to subscriber
+        handleSucceededPayment(subscription);
         break;
       case "invoice.payment_failed":
         subscription = event.data.object;
