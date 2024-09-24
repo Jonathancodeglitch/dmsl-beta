@@ -194,7 +194,7 @@ stripeWebhookRouter.post(
 
         if (invoice.billing_reason == "subscription_create") {
           //welcome new subscribers to the plan
-          handleAddingNewSubscribersToAweber(subscription);
+          handleNewSubscriptionCreated(subscription);
           //send receipt to subscriber
           handleSucceededPayment(subscription);
         } else {
