@@ -110,36 +110,6 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
   }
 }
 
-//remeber to schedule when the notification is made on the dashboard
-async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
-  //  get all subscribers from my emailList
-  const Token = await retriveAccessTokenFromDb();
-
-  try {
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "User-Agent": "AWeber-Node-code-sample/1.0",
-      Authorization: `Bearer ${Token.access_token}`,
-    };
-    const body = JSON.stringify({
-      tags: {
-        add: ["invoice upcoming"],
-        //remove: ["worked", "invoice upcoming"],
-      },
-    });
-
-    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=${subscriber.email}`;
-    fetch(url, { headers: headers, method: "PATCH", body: body })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.status);
-      });
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 //notify customers that their payment was a success
 async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   const subcriber = await getSubscriber(subscriptionInfo.customerEmail);
@@ -175,6 +145,36 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   //remove previous trigger tag from subscriber
 }
 
+
+//remeber to schedule when the notification is made on the dashboard
+async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
+  //  get all subscribers from my emailList
+  const Token = await retriveAccessTokenFromDb();
+
+  try {
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "AWeber-Node-code-sample/1.0",
+      Authorization: `Bearer ${Token.access_token}`,
+    };
+    const body = JSON.stringify({
+      tags: {
+        add: ["invoice upcoming"],
+        //remove: ["worked", "invoice upcoming"],
+      },
+    });
+
+    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=${subscriber.email}`;
+    fetch(url, { headers: headers, method: "PATCH", body: body })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.status);
+      });
+  } catch (err) {
+    console.log(err);
+  }
+}
 //notify customers that their subscription has been cancelled
 async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   /* console.log("i was called from canceled payment");
