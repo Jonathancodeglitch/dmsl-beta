@@ -123,19 +123,11 @@ async function handleSucceededPayment(subscription) {
   // const paymentIntent = await stripe.paymentIntents.retrieve(subscription.id);
   const customer = await stripe.customers.retrieve(subscription.customer);
   console.log("second function called");
-  if (subscription) {
-    handleNotifyingCustomerOnSucceededPayment({
-      productRenewalDate: formatDate(subscription.current_period_end),
-      productBillingDate: formatDate(subscription.current_period_start),
-      customerEmail: customer.email,
-    });
-  } else {
-    handleNotifyingCustomerOnSucceededPayment({
-      productRenewalDate: "no renewal date",
-      productBillingDate: "no billing date",
-      customerEmail: "jonathankendrick697@gmail.com",
-    });
-  }
+  handleNotifyingCustomerOnSucceededPayment({
+    productRenewalDate: formatDate(subscription.current_period_end),
+    productBillingDate: formatDate(subscription.current_period_start),
+    customerEmail: customer.email,
+  });
 
   // Check if there's an invoice associated with the PaymentIntent
   /* if (paymentIntent.invoice) {
