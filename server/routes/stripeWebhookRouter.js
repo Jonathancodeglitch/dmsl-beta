@@ -54,7 +54,6 @@ async function retrieveSubscription(subscriptionId) {
 //when a new subscription is created
 async function handleNewSubscriptionCreated(subscription) {
   try {
-    console.log("im the add new sub function i was just called");
     // get the email and name from the customer
     const customerId = subscription.customer;
     const productId = subscription.items.data[0].plan.product;
@@ -123,7 +122,7 @@ async function handleSucceededPayment(subscription) {
   // Step 1: Retrieve the PaymentIntent
   // const paymentIntent = await stripe.paymentIntents.retrieve(subscription.id);
   const customer = await stripe.customers.retrieve(subscription.customer);
-  console.log("im the notify payment function i was just called");
+
   if (subscription) {
     handleNotifyingCustomerOnSucceededPayment({
       productRenewalDate: formatDate(subscription.current_period_end),

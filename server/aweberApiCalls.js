@@ -71,6 +71,7 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
 
   if (!hasSubscriber) {
     try {
+      console.log("adding subscriber");
       const Token = await retriveAccessTokenFromDb();
 
       const headers = {
@@ -113,7 +114,7 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
 //notify customers that their payment was a success
 async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   const subcriber = await getSubscriber(subscriptionInfo.customerEmail);
-  console.log(subcriber)
+  console.log(subcriber);
   const previousCustomField = subcriber.custom_fields;
   const previousTags = subcriber.tags;
   let requestBody = {
@@ -145,13 +146,13 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   //remove previous trigger tag from subscriber
 }
 
-
 //remeber to schedule when the notification is made on the dashboard
 async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
   //  get all subscribers from my emailList
   const Token = await retriveAccessTokenFromDb();
 
   try {
+    console.log("adding payments");
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
