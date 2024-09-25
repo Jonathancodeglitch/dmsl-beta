@@ -56,8 +56,9 @@ oAuth2FlowAweberRouter.get("/authorize", async (req, res) => {
       },
     });
 
-    res.send("we are in my boy!!");
     await saveAccessTokenToDb(accessToken);
+    res.send("we've got the code boys!!!");
+  
   } catch (error) {
     console.log("Access Token Error", error.message);
   }
@@ -83,7 +84,6 @@ async function refreshAccessToken() {
       accessToken = await accessToken.refresh(refreshParams);
       //save new access token to DB
       await saveAccessTokenToDb(accessToken);
-      console.log("access token has been refreshed!!");
     } catch (error) {
       console.log("Error refreshing access token: ", error.message);
     }

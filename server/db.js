@@ -20,6 +20,7 @@ async function saveAccessTokenToDb(accessToken) {
       await db.query("INSERT INTO aweber_auth (access_token) VALUES ($1)", [
         accessTokenJSONString,
       ]);
+      console.log("access token has been saved!!");
     } else {
       //If it does exist then update the current access token there
       db.query("UPDATE aweber_auth SET access_token = $1", [
