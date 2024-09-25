@@ -195,11 +195,13 @@ stripeWebhookRouter.post(
         return response.sendStatus(400);
       }
     }
+    console.log(endpointSecret);
     let subscription;
     let status;
     // Handle the event
     switch (event.type) {
       case "invoice.paid":
+        console.log("the invoice.paid was called");
         const invoice = event.data.object;
         status = invoice.status;
         const subscriptionId = invoice.subscription;

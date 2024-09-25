@@ -143,6 +143,7 @@ async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
 //notify customers that their payment was a success
 async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   const subcriber = await getSubscriber(subscriptionInfo.customerEmail);
+  console.log(subcriber)
   const previousCustomField = subcriber.custom_fields;
   const previousTags = subcriber.tags;
   let requestBody = {
