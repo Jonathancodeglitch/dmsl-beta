@@ -60,7 +60,7 @@ async function handleNewSubscriptionCreated(subscription) {
     const customer = await stripe.customers.retrieve(customerId);
     const product = await stripe.products.retrieve(productId);
 
-    console.log(product);
+    console.log("first function called");
     const subscriptionInfo = {
       productName: product.name,
       customerName: customer.name,
@@ -122,7 +122,7 @@ async function handleSucceededPayment(subscription) {
   // Step 1: Retrieve the PaymentIntent
   // const paymentIntent = await stripe.paymentIntents.retrieve(subscription.id);
   const customer = await stripe.customers.retrieve(subscription.customer);
-
+  console.log("second function called");
   if (subscription) {
     handleNotifyingCustomerOnSucceededPayment({
       productRenewalDate: formatDate(subscription.current_period_end),
@@ -204,10 +204,11 @@ stripeWebhookRouter.post(
         status = invoice.status;
         const subscriptionId = invoice.subscription;
         subscription = await retrieveSubscription(subscriptionId);
+        console.log("main function called");
         //welcome new subscribers to the plan
-        handleNewSubscriptionCreated(subscription);
+        await handleNewSubscriptionCreated(subscription);
         //send receipt to subscriber
-        handleSucceededPayment(subscription);
+        await handleSucceededPayment(subscription);
         break;
       case "invoice.payment_failed":
         subscription = event.data.object;
