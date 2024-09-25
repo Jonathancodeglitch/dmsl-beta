@@ -26,7 +26,7 @@ const client = new AuthorizationCode(config);
 
 oAuth2FlowAweberRouter.get("/", (req, res) => {
   const authorizationUri = client.authorizeURL({
-    redirect_uri: "http://localhost:8000/oauth2/authorize",
+    redirect_uri: "https://dmsl-beta-xrq6.vercel.app/oauth2/authorize",
     scope: [
       "account.read",
       "list.read",
@@ -46,7 +46,7 @@ oAuth2FlowAweberRouter.get("/authorize", async (req, res) => {
   // Log the code or use it in your application logic
   const tokenParams = {
     code: authorizationCode,
-    redirect_uri: "http://localhost:8000/oauth2/authorize",
+    redirect_uri: "https://dmsl-beta-xrq6.vercel.app/oauth2/authorize",
   };
 
   try {

@@ -195,7 +195,7 @@ stripeWebhookRouter.post(
         return response.sendStatus(400);
       }
     }
-    console.log(endpointSecret);
+    console.log(event.type);
     let subscription;
     let status;
     // Handle the event
