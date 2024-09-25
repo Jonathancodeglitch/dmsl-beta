@@ -24,21 +24,19 @@ async function getSubscribers() {
   }
 }
 
-async function getSubscriberCustomField(subcriberEmail) {
+//get a particular subscriber
+async function getSubscriber(subcriberEmail) {
   const subcribers = await getSubscribers();
   //find the subscriber that needs an update
   const [subcriber] = subcribers.filter((subcriber) => {
     return subcriber.email === subcriberEmail;
   });
 
-  //get custom field from the subscriber
-  const previousCustomField = subcriber.custom_fields;
-
-  return previousCustomField;
+  return subcriber;
 }
 
 // update a subscriber
-async function updateSubscriberByEmail(customField, tags, email) {
+async function modifySubscribers(requestBody, email) {
   try {
     //Retrive subcriber from aweber so we can get the previous custom field and add our modification
     const Token = await retriveAccessTokenFromDb();
@@ -50,10 +48,7 @@ async function updateSubscriberByEmail(customField, tags, email) {
       Authorization: `Bearer ${Token.access_token}`,
     };
 
-    const body = JSON.stringify({
-      custom_fields: customField,
-      tags: tags,
-    });
+    const body = JSON.stringify(requestBody);
 
     const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=${email}`;
     fetch(url, { headers: headers, method: "PATCH", body: body })
@@ -65,41 +60,53 @@ async function updateSubscriberByEmail(customField, tags, email) {
     console.log(err);
   }
 }
+
 //handle adding new subscribers to aweber
 async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
-  console.log("oya nowsss");
-  try {
-    const Token = await retriveAccessTokenFromDb();
+  //check if subscriber already exist
+  const subscribers = await getSubscribers();
+  const hasSubscriber = subscribers.some((subscriber) => {
+    return subscriber.email === subscriptionInfo.customerEmail;
+  });
 
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "User-Agent": "AWeber-Node-code-sample/1.0",
-      Authorization: `Bearer ${Token.access_token}`,
-    };
+  if (!hasSubscriber) {
+    try {
+      const Token = await retriveAccessTokenFromDb();
 
-    const body = JSON.stringify({
-      custom_fields: {
-        product: subscriptionInfo.productName,
-        product_renewal_date: subscriptionInfo.productRenewalDate,
-        product_billing_date: subscriptionInfo.productBillingDate,
-        customer_portal: subscriptionInfo.customerPortal,
-        product_amount: subscriptionInfo.productAmount,
-      },
-      email: subscriptionInfo.customerEmail || "jonathankendrick697@gmail.com",
-      name: subscriptionInfo.customerName || "fefefe",
-      tags: ["welcome series"],
-    });
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "AWeber-Node-code-sample/1.0",
+        Authorization: `Bearer ${Token.access_token}`,
+      };
 
-    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
-    fetch(url, { headers: headers, method: "POST", body: body })
-      .then((response) => response)
-      .then((data) => {
-        console.log(data.status);
-        console.log("i worked");
+      const body = JSON.stringify({
+        custom_fields: {
+          product: subscriptionInfo.productName,
+          product_renewal_date: subscriptionInfo.productRenewalDate,
+          product_billing_date: subscriptionInfo.productBillingDate,
+          customer_portal: subscriptionInfo.customerPortal,
+          product_amount: subscriptionInfo.productAmount,
+        },
+        email:
+          subscriptionInfo.customerEmail || "jonathankendrick697@gmail.com",
+        name: subscriptionInfo.customerName || "fefefe",
+        tags: ["welcome series"],
       });
-  } catch (err) {
-    console.log(err);
+
+      const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
+      fetch(url, { headers: headers, method: "POST", body: body })
+        .then((response) => response)
+        .then((data) => {
+          console.log(data.status);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    console.log(
+      "the subscrber already exist and we have sent them a welcome mail"
+    );
   }
 }
 
@@ -135,56 +142,41 @@ async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
 
 //notify customers that their payment was a success
 async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
-  console.log("i was called from succeeded payment");
-  try {
-    //Retrive subcriber from aweber so we can get the previous custom field and add our modification
-    const Token = await retriveAccessTokenFromDb();
+  const subcriber = await getSubscriber(subscriptionInfo.customerEmail);
+  const previousCustomField = subcriber.custom_fields;
+  const previousTags = subcriber.tags;
+  let requestBody = {
+    custom_fields: {
+      ...previousCustomField,
+      product_renewal_date: subscriptionInfo.productRenewalDate,
+      product_billing_date: subscriptionInfo.productBillingDate,
+    },
+    tags: {
+      add: ["payment succeeded"],
+    },
+  };
 
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "User-Agent": "AWeber-Node-code-sample/1.0",
-      Authorization: `Bearer ${Token.access_token}`,
-    };
-
-    const subcribers = await getSubscribers();
-
-    //find the subscriber that needs an update
-    const [subcriber] = subcribers.filter((subcriber) => {
-      return subcriber.email === subscriptionInfo.customerEmail;
-    });
-
-    //get custom field from the subscriber
-    const previousCustomField = subcriber.custom_fields;
-
-    console.log(previousCustomField);
-
-    const body = JSON.stringify({
-      custom_fields: {
-        ...previousCustomField,
-        product_renewal_date: subscriptionInfo.productRenewalDate,
-        product_billing_date: subscriptionInfo.productBillingDate,
-      },
+  //check if the subscriber already has a tag trigger
+  if (previousTags.includes("payment succeeded")) {
+    requestBody = {
       tags: {
-        add: ["payment succeeded"],
+        remove: ["payment succeeded"],
       },
-    });
-
-    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=jonathankendrick697@gmail.com`;
-    fetch(url, { headers: headers, method: "PATCH", body: body })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.custom_fields);
-      });
-  } catch (err) {
-    console.log(err);
+    };
+    await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
+    console.log("remove tag");
   }
+
+  //add tag to trigger the email
+  await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
+  console.log("add tag");
+
+  //remove previous trigger tag from subscriber
 }
 
 //notify customers that their subscription has been cancelled
 async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
-  console.log("i was called from canceled payment");
-  //add tag to trigger the email
+  /* console.log("i was called from canceled payment");
   const tags = {
     add: ["cancel subscription"],
   };
@@ -197,7 +189,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
     { ...customField },
     tags,
     "jonathankendrick697@gmail.com"
-  );
+  ); */
 }
 
 //handleNotifyingCustomersOnCanceledSubscription();

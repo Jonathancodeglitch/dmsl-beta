@@ -56,9 +56,13 @@ async function handleNewSubscriptionCreated(subscription) {
   try {
     // get the email and name from the customer
     const customerId = subscription.customer;
+    const productId = subscription.items.data[0].plan.product;
     const customer = await stripe.customers.retrieve(customerId);
+    const product = await stripe.products.retrieve(productId);
+
+    console.log(product);
     const subscriptionInfo = {
-      productName: subscription.plan.name,
+      productName: product.name,
       customerName: customer.name,
       customerEmail: customer.email,
       productRenewalDate: formatDate(subscription.current_period_end),
@@ -116,7 +120,6 @@ async function handleFailedPayment(subscription) {
 
 async function handleSucceededPayment(subscription) {
   // Step 1: Retrieve the PaymentIntent
-  console.log(subscription);
   // const paymentIntent = await stripe.paymentIntents.retrieve(subscription.id);
   const customer = await stripe.customers.retrieve(subscription.customer);
 
@@ -130,7 +133,7 @@ async function handleSucceededPayment(subscription) {
     handleNotifyingCustomerOnSucceededPayment({
       productRenewalDate: "no renewal date",
       productBillingDate: "no billing date",
-      customerEmail: "Nill",
+      customerEmail: "jonathankendrick697@gmail.com",
     });
   }
 
