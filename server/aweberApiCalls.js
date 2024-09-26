@@ -14,6 +14,7 @@ async function getSubscribers() {
     return fetch(url, { headers: headers })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         return data.entries;
       })
       .catch((err) => {
@@ -23,6 +24,8 @@ async function getSubscribers() {
     console.log(err);
   }
 }
+
+console.log(await getSubscribers())
 
 //get a particular subscriber
 async function getSubscriber(subcriberEmail) {

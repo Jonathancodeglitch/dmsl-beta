@@ -91,7 +91,7 @@ async function refreshAccessToken() {
 }
 
 //check every 15 mins if access code has expire and refresh it
-const REFRESH_INTERVAL = 5000; // 15 minutes in milliseconds
+const REFRESH_INTERVAL = 1000; // 5 seconds in milliseconds
 setInterval(refreshAccessToken, REFRESH_INTERVAL);
 
 export { oAuth2FlowAweberRouter };
