@@ -164,6 +164,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
       },
     };
     //remove trigger tag before re-applying
+    console.log("subscription has been canceled");
     await modifySubscribers(requestBody, subscriberEmail);
   }
 
@@ -185,7 +186,7 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
 
   //check if subscription was previously canceled
   if (subcriberPreviousTags.includes("cancel subscription")) {
-    //check if the subscriber already have a trigger tag and remove it
+    //Check if the subscriber already have a trigger tag and remove it
     if (subcriberPreviousTags.includes("renew subscription")) {
       requestBody = {
         tags: {
@@ -194,8 +195,10 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
       };
       await modifySubscribers(requestBody, subscriberEmail);
       console.log("renewal removed!!");
+    } else {
+      console.log("renewal was never there so add it");
     }
-    // add the tag trigger to send an email to the subscriber
+    // Add the tag trigger to send an email to the subscriber
     await modifySubscribers(requestBody, subscriberEmail);
     console.log("renewal tag added");
   }
