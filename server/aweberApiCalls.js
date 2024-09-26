@@ -160,13 +160,13 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
     await modifySubscribers(
       {
         tags: {
-          remove: ["cancel subscription"],
+          remove: ["cancel subscription", "hi world"],
         },
       },
       subscriberEmail
     );
-    
-    delay(1000);
+
+    await delay(5000);
     console.log("subscription has been canceled trigger but it was removed");
   }
 
@@ -181,6 +181,10 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   await modifySubscribers(requestBody, subscriberEmail);
 }
 
+await handleNotifyingCustomersOnCanceledSubscription(
+  "jonathankendrick697@gmail.com"
+);
+
 //notify customers that their subscription has been renewed and would not be canceled
 async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
   const subcriber = await getSubscriber(subscriberEmail);
@@ -188,9 +192,8 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
 
   //check if subscription was previously canceled
   if (subcriberPreviousTags.includes("cancel subscription")) {
-    let requestBody;
     //Check if the subscriber already have a trigger tag and remove it
-    if (subcriberPreviousTags.includes("renew subscription")) {
+    /* if (subcriberPreviousTags.includes("renew subscription")) {
       requestBody = {
         tags: {
           remove: ["cancel subscription", "renew subscription"],
@@ -198,16 +201,15 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
       };
       await modifySubscribers(requestBody, subscriberEmail);
       console.log("renewal removed!!");
-    }
+    } */
 
-    // Add the tag trigger to send an email to the subscriber
-    requestBody = {
+    let requestBody = {
       tags: {
         add: ["renew subscription"],
         remove: ["cancel subscription"],
       },
     };
-
+    // Add the tag trigger to send an email to the subscriber
     await modifySubscribers(requestBody, subscriberEmail);
     console.log("renewal tag added");
   }
