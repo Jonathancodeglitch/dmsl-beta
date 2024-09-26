@@ -166,7 +166,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
       subscriberEmail
     );
 
-    await delay(20000);
+    await delay(5000);
     console.log("subscription has been canceled trigger but it was removed");
   }
 
