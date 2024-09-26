@@ -156,25 +156,28 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
 
   //check if this subscriber already has the trigger tag
   if (subcriberPreviousTags.includes("cancel subscription")) {
-    let requestBody = {
-      tags: {
-        remove: ["cancel subscription"],
-      },
-    };
     //remove trigger tag before re-applying
-    await modifySubscribers(requestBody, subscriberEmail);
+    await modifySubscribers(
+      {
+        tags: {
+          remove: ["cancel subscription"],
+        },
+      },
+      subscriberEmail
+    );
+
     console.log("subscription has been canceled trigger but it was removed");
   }
 
   let requestBody = {
     tags: {
-      add: ["cancel subscription", "hello"],
+      add: ["cancel subscription", "hello world"],
     },
   };
 
   //add trigger tag to send cancel notification
   await modifySubscribers(requestBody, subscriberEmail);
-  console.log("subscription has been canceled!!!!!!");
+  console.log("subscription has been canceled 454");
 }
 
 //notify customers that their subscription has been renewed and would not be canceled
