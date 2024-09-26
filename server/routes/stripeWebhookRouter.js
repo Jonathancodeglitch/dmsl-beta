@@ -105,7 +105,7 @@ async function handleFailedPayment(subscription) {
 
     console.log(charge.outcome.reason);
 
-    if (
+    /* if (
       paymentIntent.status === "requires_payment_method" &&
       paymentIntent.last_payment_error
     ) {
@@ -117,7 +117,7 @@ async function handleFailedPayment(subscription) {
       handleNotifyingCustomersOnFailedPayment(failureReason, customer.email);
     } else {
       console.log("Payment did not fail or no error found.");
-    }
+    } */
   } catch (err) {
     console.log(err);
   }
