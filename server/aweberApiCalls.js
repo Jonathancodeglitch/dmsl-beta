@@ -114,9 +114,9 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
 //notify customers that their payment was a success
 async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   const subcriber = await getSubscriber(subscriptionInfo.customerEmail);
-  console.log(subcriber);
   const previousCustomField = subcriber.custom_fields;
   const previousTags = subcriber.tags;
+
   let requestBody = {
     custom_fields: {
       ...previousCustomField,
@@ -146,55 +146,60 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   //remove previous trigger tag from subscriber
 }
 
-//remeber to schedule when the notification is made on the dashboard
-async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
-  //  get all subscribers from my emailList
-  const Token = await retriveAccessTokenFromDb();
-
-  try {
-    console.log("adding payments");
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "User-Agent": "AWeber-Node-code-sample/1.0",
-      Authorization: `Bearer ${Token.access_token}`,
-    };
-    const body = JSON.stringify({
-      tags: {
-        add: ["invoice upcoming"],
-        //remove: ["worked", "invoice upcoming"],
-      },
-    });
-
-    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=${subscriber.email}`;
-    fetch(url, { headers: headers, method: "PATCH", body: body })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.status);
-      });
-  } catch (err) {
-    console.log(err);
-  }
-}
 //notify customers that their subscription has been cancelled
 async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
-  /* console.log("i was called from canceled payment");
-  const tags = {
-    add: ["cancel subscription"],
+  const subcriber = await getSubscriber(subscriberEmail);
+  const subcriberPreviousTags = subcriber.tags;
+
+  let requestBody = {
+    tags: {
+      add: ["cancel subscription"],
+    },
   };
+  //check if this subscriber already has the trigger tag
+  if (subcriberPreviousTags.includes("cancel subscription")) {
+    requestBody = {
+      tags: {
+        remove: ["cancel subscription"],
+      },
+    };
+    //remove trigger tag before re-applying
+    await modifySubscribers(requestBody, subscriberEmail);
+  }
 
-  const customField = await getSubscriberCustomField(
-    "jonathankendrick697@gmail.com"
-  );
-
-  updateSubscriberByEmail(
-    { ...customField },
-    tags,
-    "jonathankendrick697@gmail.com"
-  ); */
+  //add trigger tag to send cancel notification
+  await modifySubscribers(requestBody, subscriberEmail);
 }
 
-//handleNotifyingCustomersOnCanceledSubscription();
+//notify customers that their subscription has been renewed and would not be canceled
+async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
+  const subcriber = await getSubscriber(subscriberEmail);
+  const subcriberPreviousTags = subcriber.tags;
+
+  let requestBody = {
+    tags: {
+      add: ["renew subscription"],
+      remove: ["cancel subscription"],
+    },
+  };
+
+  //check if subscription was previously canceled
+  if (subcriberPreviousTags.includes("cancel subscription")) {
+    //check if the subscriber already have a trigger tag and remove it
+    if (subcriberPreviousTags.includes("renew subscription")) {
+      requestBody = {
+        tags: {
+          remove: ["cancel subscription", "renew subscription"],
+        },
+      };
+      await modifySubscribers(requestBody, subscriberEmail);
+      console.log("renewal removed!!");
+    }
+    // add the tag trigger to send an email to the subscriber
+    await modifySubscribers(requestBody, subscriberEmail);
+    console.log("renewal tag added");
+  }
+}
 
 // deal with failed payment
 // set how many times we send notification to the client through the dashboard
@@ -247,6 +252,37 @@ async function handleNotifyingCustomersOnFailedPayment(
     console.log(err);
   }
 }
+
+//remeber to schedule when the notification is made on the dashboard
+async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
+  //  get all subscribers from my emailList
+  const Token = await retriveAccessTokenFromDb();
+
+  try {
+    console.log("adding payments");
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "AWeber-Node-code-sample/1.0",
+      Authorization: `Bearer ${Token.access_token}`,
+    };
+    const body = JSON.stringify({
+      tags: {
+        add: ["invoice upcoming"],
+        //remove: ["worked", "invoice upcoming"],
+      },
+    });
+
+    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=${subscriber.email}`;
+    fetch(url, { headers: headers, method: "PATCH", body: body })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.status);
+      });
+  } catch (err) {
+    console.log(err);
+  }
+}
 /* ========><======= */
 
 export {
@@ -255,4 +291,5 @@ export {
   handleNotifyingCustomersOnFailedPayment,
   handleNotifyingCustomerOnSucceededPayment,
   handleNotifyingCustomersOnCanceledSubscription,
+  handleNotifyingCustomersOnRenewedSubscription,
 };
