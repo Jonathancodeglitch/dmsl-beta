@@ -119,11 +119,9 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   const previousCustomField = subcriber.custom_fields;
   const previousTags = subcriber.tags;
 
-  let requestBody;
-
   //check if the subscriber already has a tag trigger
   if (previousTags.includes("payment succeeded")) {
-    requestBody = {
+    let requestBody = {
       tags: {
         remove: ["payment succeeded"],
       },
@@ -134,7 +132,7 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   }
 
   //add tag to trigger the email
-  requestBody = {
+  let requestBody = {
     custom_fields: {
       ...previousCustomField,
       product_renewal_date: subscriptionInfo.productRenewalDate,
@@ -154,35 +152,17 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   const subcriber = await getSubscriber(subscriberEmail);
   const subcriberPreviousTags = subcriber.tags;
 
-  //check if this subscriber already has the trigger tag
-  if (subcriberPreviousTags.includes("cancel subscription")) {
-    //remove trigger tag before re-applying
-    await modifySubscribers(
-      {
-        tags: {
-          remove: ["cancel subscription", "hi world"],
-        },
-      },
-      subscriberEmail
-    );
-
-    console.log("subscription has been canceled trigger but it was removed");
-  }
-
   let requestBody = {
     tags: {
       add: ["cancel subscription", "hello world"],
+      remove: ["renew subscription"],
     },
   };
 
   //add trigger tag to send cancel notification
-  console.log("subscription has been canceled 454");
+  console.log("subscription has been canceled");
   await modifySubscribers(requestBody, subscriberEmail);
 }
-
-await handleNotifyingCustomersOnCanceledSubscription(
-  "jonathankendrick697@gmail.com"
-);
 
 //notify customers that their subscription has been renewed and would not be canceled
 async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
@@ -192,17 +172,6 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
   //check if subscription was previously canceled
   if (subcriberPreviousTags.includes("cancel subscription")) {
     //Check if the subscriber already have a trigger tag and remove it
-    if (subcriberPreviousTags.includes("renew subscription")) {
-      let requestBody = {
-        tags: {
-          remove: ["cancel subscription", "renew subscription"],
-        },
-      };
-      
-      await modifySubscribers(requestBody, subscriberEmail);
-      console.log("renewal removed!!");
-    }
-
     let requestBody = {
       tags: {
         add: ["renew subscription"],
