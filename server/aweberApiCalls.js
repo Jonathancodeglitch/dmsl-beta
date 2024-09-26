@@ -62,7 +62,7 @@ async function modifySubscribers(requestBody, email) {
 }
 
 // Helper function to create a delay
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+//const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 //handle adding new subscribers to aweber
 async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
@@ -120,7 +120,22 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   const previousCustomField = subcriber.custom_fields;
   const previousTags = subcriber.tags;
 
-  let requestBody = {
+  let requestBody;
+
+  //check if the subscriber already has a tag trigger
+  if (previousTags.includes("payment succeeded")) {
+    requestBody = {
+      tags: {
+        remove: ["payment succeeded"],
+      },
+    };
+
+    await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
+    console.log("remove tag");
+  }
+
+  //add tag to trigger the email
+  requestBody = {
     custom_fields: {
       ...previousCustomField,
       product_renewal_date: subscriptionInfo.productRenewalDate,
@@ -131,22 +146,8 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
     },
   };
 
-  //check if the subscriber already has a tag trigger
-  if (previousTags.includes("payment succeeded")) {
-    requestBody = {
-      tags: {
-        remove: ["payment succeeded"],
-      },
-    };
-    await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
-    console.log("remove tag");
-  }
-
-  //add tag to trigger the email
   await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
   console.log("add tag");
-
-  //remove previous trigger tag from subscriber
 }
 
 //notify customers that their subscription has been cancelled
@@ -154,11 +155,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   const subcriber = await getSubscriber(subscriberEmail);
   const subcriberPreviousTags = subcriber.tags;
 
-  let requestBody = {
-    tags: {
-      add: ["cancel subscription"],
-    },
-  };
+  let requestBody;
   //check if this subscriber already has the trigger tag
   if (subcriberPreviousTags.includes("cancel subscription")) {
     requestBody = {
@@ -168,10 +165,14 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
     };
     //remove trigger tag before re-applying
     await modifySubscribers(requestBody, subscriberEmail);
-    // Delay between removal and addition, e.g., 1 second (1000 milliseconds)
-    // await delay(1000);
     console.log("subscription has been canceled trigger but it was removed");
   }
+
+  requestBody = {
+    tags: {
+      add: ["cancel subscription"],
+    },
+  };
 
   //add trigger tag to send cancel notification
   await modifySubscribers(requestBody, subscriberEmail);
@@ -183,12 +184,7 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
   const subcriber = await getSubscriber(subscriberEmail);
   const subcriberPreviousTags = subcriber.tags;
 
-  let requestBody = {
-    tags: {
-      add: ["renew subscription"],
-      remove: ["cancel subscription"],
-    },
-  };
+  let requestBody;
 
   //check if subscription was previously canceled
   if (subcriberPreviousTags.includes("cancel subscription")) {
@@ -204,10 +200,15 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
     } else {
       console.log("renewal was never there so add it");
     }
+
+    requestBody = {
+      tags: {
+        add: ["renew subscription"],
+        remove: ["cancel subscription"],
+      },
+    };
     // Add the tag trigger to send an email to the subscriber
     await modifySubscribers(requestBody, subscriberEmail);
-    // Delay between removal and addition, e.g., 1 second (1000 milliseconds)
-    await delay(1000);
     console.log("renewal tag added");
   }
 }
