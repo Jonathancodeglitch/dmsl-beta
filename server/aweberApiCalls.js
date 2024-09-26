@@ -170,11 +170,12 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
     await modifySubscribers(requestBody, subscriberEmail);
     // Delay between removal and addition, e.g., 1 second (1000 milliseconds)
     await delay(1000);
-    console.log("subscription has been canceled");
+    console.log("subscription has been canceled trigger but it was removed");
   }
 
   //add trigger tag to send cancel notification
   await modifySubscribers(requestBody, subscriberEmail);
+   console.log("subscription has been canceled oooo!!");
 }
 
 //notify customers that their subscription has been renewed and would not be canceled
