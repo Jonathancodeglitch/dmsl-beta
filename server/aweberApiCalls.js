@@ -40,7 +40,6 @@ async function modifySubscribers(requestBody, email) {
   try {
     //Retrive subcriber from aweber so we can get the previous custom field and add our modification
     const Token = await retriveAccessTokenFromDb();
-    console.log("subscriber was updated..");
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -176,7 +175,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
 
   //add trigger tag to send cancel notification
   await modifySubscribers(requestBody, subscriberEmail);
-  console.log("subscription has been canceled oooo!!");
+  console.log("subscription has been canceled!!");
 }
 
 //notify customers that their subscription has been renewed and would not be canceled
@@ -184,10 +183,9 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
   const subcriber = await getSubscriber(subscriberEmail);
   const subcriberPreviousTags = subcriber.tags;
 
-  let requestBody;
-
   //check if subscription was previously canceled
   if (subcriberPreviousTags.includes("cancel subscription")) {
+    let requestBody;
     //Check if the subscriber already have a trigger tag and remove it
     if (subcriberPreviousTags.includes("renew subscription")) {
       requestBody = {
@@ -197,17 +195,16 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
       };
       await modifySubscribers(requestBody, subscriberEmail);
       console.log("renewal removed!!");
-    } else {
-      console.log("renewal was never there so add it");
     }
 
+    // Add the tag trigger to send an email to the subscriber
     requestBody = {
       tags: {
         add: ["renew subscription"],
         remove: ["cancel subscription"],
       },
     };
-    // Add the tag trigger to send an email to the subscriber
+
     await modifySubscribers(requestBody, subscriberEmail);
     console.log("renewal tag added");
   }
