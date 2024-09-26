@@ -132,10 +132,10 @@ async function handleSucceededPayment(subscription) {
 async function handleSubscriptionCancelled(subscription) {
   const customerId = subscription.customer;
   const customer = await stripe.customers.retrieve(customerId);
-  if (subscription.data.cancel_at_period_end) {
+  if (subscription.cancel_at_period_end) {
     // Then define and call a method to handle the subscription updated.
     await handleNotifyingCustomersOnCanceledSubscription(customer.email);
-  } else if (!subscription.data.cancel_at_period_end) {
+  } else if (!subscription.cancel_at_period_end) {
     await handleNotifyingCustomersOnRenewedSubscription(customer.email);
   }
 }
@@ -192,7 +192,7 @@ stripeWebhookRouter.post(
         status = subscription.status;
         console.log(`subscrition was canceled ${status}.`);
         // Then define and call a method to handle the subscription canceled.
-        await handleSubscriptionCancelled(subscription);
+        //await handleSubscriptionCancelled(subscription);
         break;
       case "customer.subscription.updated":
         subscription = event.data.object;
