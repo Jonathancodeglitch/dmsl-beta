@@ -14,7 +14,6 @@ async function getSubscribers() {
     return fetch(url, { headers: headers })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         return data.entries;
       })
       .catch((err) => {
@@ -25,7 +24,6 @@ async function getSubscribers() {
   }
 }
 
-console.log(await getSubscribers())
 
 //get a particular subscriber
 async function getSubscriber(subcriberEmail) {
@@ -153,11 +151,9 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
 //notify customers that their subscription has been cancelled
 async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   const subcriber = await getSubscriber(subscriberEmail);
-  const subcriberPreviousTags = subcriber.tags;
-
   let requestBody = {
     tags: {
-      add: ["cancel subscription", "hello world"],
+      add: ["cancel subscription"],
       remove: ["renew subscription"],
     },
   };
