@@ -196,7 +196,6 @@ stripeWebhookRouter.post(
         status = invoice.status;
         const subscriptionId = invoice.subscription;
         subscription = await retrieveSubscription(subscriptionId);
-        console.log("main function called");
         //welcome new subscribers to the plan
         await handleNewSubscriptionCreated(subscription);
         //send receipt to subscriber
@@ -207,20 +206,19 @@ stripeWebhookRouter.post(
         status = subscription.status;
         console.log(`Subscription status is ${status}.`);
         handleFailedPayment(subscription);
-        break;
-      /* case "customer.subscription.created":
-        subscription = event.data.object;
-        status = subscription.status;
-        console.log(`a new subscrition was created ${status}.`);
-        // Then define and call a method to handle the subscription trial ending.
-        handleNewSubscriptionCreated(subscription);
-        console.log(subscription);
-        break; */
-      case "customer.subscription.canceled":
+      case "customer.subscription.deleted":
         subscription = event.data.object;
         status = subscription.status;
         console.log(`subscrition was canceled ${status}.`);
-        // Then define and call a method to handle the subscription trial ending.
+        // Then define and call a method to handle the subscription canceled.
+        await handleSubscriptionCancelled(subscription);
+        break;
+      case "customer.subscription.updated":
+        subscription = event.data.object;
+        status = subscription.status;
+        console.log(`subscrition was canceled ${status}.`);
+        console.log("the update was called!!");
+        // Then define and call a method to handle the subscription updated.
         handleSubscriptionCancelled(subscription);
         break;
       case "invoice.upcoming":
