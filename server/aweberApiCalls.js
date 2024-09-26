@@ -169,7 +169,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
     //remove trigger tag before re-applying
     await modifySubscribers(requestBody, subscriberEmail);
     // Delay between removal and addition, e.g., 1 second (1000 milliseconds)
-    await delay(1000);
+   // await delay(1000);
     console.log("subscription has been canceled trigger but it was removed");
   }
 
