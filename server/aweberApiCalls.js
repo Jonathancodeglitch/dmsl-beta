@@ -168,7 +168,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
 
   let requestBody = {
     tags: {
-      add: ["cancel subscription"],
+      add: ["cancel subscription", "hello"],
     },
   };
 
