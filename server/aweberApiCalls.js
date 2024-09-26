@@ -61,6 +61,9 @@ async function modifySubscribers(requestBody, email) {
   }
 }
 
+// Helper function to create a delay
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 //handle adding new subscribers to aweber
 async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
   //check if subscriber already exist
@@ -164,8 +167,10 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
       },
     };
     //remove trigger tag before re-applying
-    console.log("subscription has been canceled");
     await modifySubscribers(requestBody, subscriberEmail);
+    // Delay between removal and addition, e.g., 1 second (1000 milliseconds)
+    await delay(1000);
+    console.log("subscription has been canceled");
   }
 
   //add trigger tag to send cancel notification
@@ -200,6 +205,8 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
     }
     // Add the tag trigger to send an email to the subscriber
     await modifySubscribers(requestBody, subscriberEmail);
+    // Delay between removal and addition, e.g., 1 second (1000 milliseconds)
+    await delay(1000);
     console.log("renewal tag added");
   }
 }
