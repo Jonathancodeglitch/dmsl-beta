@@ -24,7 +24,6 @@ async function getSubscribers() {
   }
 }
 
-
 //get a particular subscriber
 async function getSubscriber(subcriberEmail) {
   const subcribers = await getSubscribers();
@@ -150,7 +149,6 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
 
 //notify customers that their subscription has been cancelled
 async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
-  const subcriber = await getSubscriber(subscriberEmail);
   let requestBody = {
     tags: {
       add: ["cancel subscription"],
@@ -186,54 +184,32 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
 // deal with failed payment
 // set how many times we send notification to the client through the dashboard
 // Manage payments that require confirmation
-
 async function handleNotifyingCustomersOnFailedPayment(
   paymentFailureReason,
   customerEmail
 ) {
-  try {
-    //Retrive subcriber from aweber so we can get the previous custom field and add our modification
-    const Token = await retriveAccessTokenFromDb();
+  const subcriber = await getSubscriber(customerEmail);
+  //get custom field from the subscriber
+  const subcriberPreviousCustomField = subcriber.custom_fields;
 
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "User-Agent": "AWeber-Node-code-sample/1.0",
-      Authorization: `Bearer ${Token.access_token}`,
-    };
+  const requestBody = {
+    custom_fields: {
+      ...subcriberPreviousCustomField,
+      payment_failure_reason: paymentFailureReason,
+    },
+    tags: {
+      add: ["payment failed"],
+    },
+  };
 
-    const subcribers = await getSubscribers();
-
-    //console.log(subcribers);
-
-    const [subcriber] = subcribers.filter((subcriber) => {
-      return subcriber.email === "jonathankendrick697@gmail.com";
-    });
-
-    //get custom field from the subscriber
-    const previousCustomField = subcriber.custom_fields;
-
-    const body = JSON.stringify({
-      custom_fields: {
-        ...previousCustomField,
-        payment_failure_reason: paymentFailureReason,
-      },
-      tags: {
-        add: ["payment failed"],
-        //remove: ["payment failed", "worked"],
-      },
-    });
-
-    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=jonathankendrick697@gmail.com`;
-    fetch(url, { headers: headers, method: "PATCH", body: body })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  } catch (err) {
-    console.log(err);
-  }
+  //add trigger
+  await modifySubscribers(requestBody, customerEmail);
 }
+
+/* await handleNotifyingCustomersOnFailedPayment(
+  "insufficient funds",
+  "jonathankendrick697@gmail.com"
+); */
 
 //remeber to schedule when the notification is made on the dashboard
 async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
