@@ -195,7 +195,9 @@ async function handleNotifyingCustomersOnFailedPayment(
   const requestBody = {
     custom_fields: {
       ...subcriberPreviousCustomField,
-      payment_failure_reason: paymentFailureReason,
+      payment_failure_reason: paymentFailureReason
+        ? `PAYMENT FAILURE REASON: ${paymentFailureReason}`
+        : "",
     },
     tags: {
       add: ["payment failed"],

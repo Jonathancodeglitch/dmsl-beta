@@ -94,30 +94,11 @@ async function handleFailedPayment(subscription) {
     //Retrive  customer so we can get personal info on the name ,email
     const customerId = subscription.customer;
     const chargeId = subscription.charge;
-    const paymentIntentId = subscription.payment_intent;
     const customer = await stripe.customers.retrieve(customerId);
     const charge = await stripe.charges.retrieve(chargeId);
-    // Retrieve the PaymentIntent by its ID so we can get why payment failed
-    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-    //Retrive the payment invoice so we can get how many times we made made the payment
-    // const invoice = await stripe.invoices.retrieve(subscription.invoices);
-    // get the payment attempt from the invoices
-
-    console.log(charge.outcome.reason);
-
-    /* if (
-      paymentIntent.status === "requires_payment_method" &&
-      paymentIntent.last_payment_error
-    ) {
-      const error = paymentIntent.last_payment_error;
-      // Extract the failure reason
-      const failureReason =
-        error.message || "Payment failed for an unknown reason";
-      console.log(subscription);
-      handleNotifyingCustomersOnFailedPayment(failureReason, customer.email);
-    } else {
-      console.log("Payment did not fail or no error found.");
-    } */
+     
+    const failureReason = charge.outcome.reason;
+    await handleNotifyingCustomersOnFailedPayment(failureReason, customer.email);
   } catch (err) {
     console.log(err);
   }
