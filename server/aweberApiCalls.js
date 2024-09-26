@@ -61,7 +61,7 @@ async function modifySubscribers(requestBody, email) {
 }
 
 // Helper function to create a delay
-//const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 //handle adding new subscribers to aweber
 async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
@@ -165,7 +165,8 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
       },
       subscriberEmail
     );
-
+    
+    delay(1000);
     console.log("subscription has been canceled trigger but it was removed");
   }
 
@@ -178,7 +179,6 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   //add trigger tag to send cancel notification
   console.log("subscription has been canceled 454");
   await modifySubscribers(requestBody, subscriberEmail);
- 
 }
 
 //notify customers that their subscription has been renewed and would not be canceled
