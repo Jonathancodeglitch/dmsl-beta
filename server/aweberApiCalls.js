@@ -40,7 +40,7 @@ async function modifySubscribers(requestBody, email) {
   try {
     //Retrive subcriber from aweber so we can get the previous custom field and add our modification
     const Token = await retriveAccessTokenFromDb();
-
+    console.log("subscriber was updated..");
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -169,13 +169,13 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
     //remove trigger tag before re-applying
     await modifySubscribers(requestBody, subscriberEmail);
     // Delay between removal and addition, e.g., 1 second (1000 milliseconds)
-   // await delay(1000);
+    // await delay(1000);
     console.log("subscription has been canceled trigger but it was removed");
   }
 
   //add trigger tag to send cancel notification
   await modifySubscribers(requestBody, subscriberEmail);
-   console.log("subscription has been canceled oooo!!");
+  console.log("subscription has been canceled oooo!!");
 }
 
 //notify customers that their subscription has been renewed and would not be canceled
