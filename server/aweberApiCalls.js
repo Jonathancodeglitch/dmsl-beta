@@ -154,7 +154,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   let requestBody = {
     tags: {
       add: ["cancel subscription"],
-      remove: ["renew subscription"],
+      remove: ["renewal subscription"],
     },
   };
 
@@ -173,7 +173,7 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
     //Check if the subscriber already have a trigger tag and remove it
     let requestBody = {
       tags: {
-        add: ["renew subscription"],
+        add: ["renewal subscription"],
         remove: ["cancel subscription"],
       },
     };
