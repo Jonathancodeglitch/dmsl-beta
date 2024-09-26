@@ -176,8 +176,9 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   };
 
   //add trigger tag to send cancel notification
-  await modifySubscribers(requestBody, subscriberEmail);
   console.log("subscription has been canceled 454");
+  await modifySubscribers(requestBody, subscriberEmail);
+ 
 }
 
 //notify customers that their subscription has been renewed and would not be canceled
