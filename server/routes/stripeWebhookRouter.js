@@ -15,14 +15,14 @@ dotenv.config();
 const stripeWebhookRouter = express.Router();
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 // send a link to manage your subscription when a welcome email,payment failed, cancel subscription is sent
-//customer should be able to manage their subscription like cancel their subscription ==> pending
+//customer should be able to manage their subscription like cancel their subscription ==> checked
 // when  payment fails retry 6 times the 6th time should send a diffrent email about how their subscription would be canceledd  using dashboard==> pending
 // when payment is recieved send a mail about payment success use the dashboard ==> checked
 // when subscription is canceled due to no payment  send a subscription cancel mail ==> pending
 //work on the frontend ==> check
 //use an online database ==> check
 //free trial
-
+//give subscriber a coupon when he wants to leave the subscription
 // stripe webhook logic
 
 function formatDate(date) {
@@ -96,9 +96,12 @@ async function handleFailedPayment(subscription) {
     const chargeId = subscription.charge;
     const customer = await stripe.customers.retrieve(customerId);
     const charge = await stripe.charges.retrieve(chargeId);
-     
+
     const failureReason = charge.outcome.reason;
-    await handleNotifyingCustomersOnFailedPayment(failureReason, customer.email);
+    await handleNotifyingCustomersOnFailedPayment(
+      failureReason,
+      customer.email
+    );
   } catch (err) {
     console.log(err);
   }
@@ -118,11 +121,19 @@ async function handleSucceededPayment(subscription) {
 async function handleSubscriptionCancelled(subscription) {
   const customerId = subscription.customer;
   const customer = await stripe.customers.retrieve(customerId);
+  const cancellationReason = subscription.cancellation_details;
+
   if (subscription.cancel_at_period_end === true) {
     // Then define and call a method to handle the subscription updated.
-    await handleNotifyingCustomersOnCanceledSubscription(customer.email);
+    await handleNotifyingCustomersOnCanceledSubscription(
+      customer.email,
+      cancellationReason
+    );
   } else if (subscription.cancel_at_period_end === false) {
-    await handleNotifyingCustomersOnRenewedSubscription(customer.email);
+    await handleNotifyingCustomersOnRenewedSubscription(
+      customer.email,
+      cancellationReason
+    );
   }
 }
 

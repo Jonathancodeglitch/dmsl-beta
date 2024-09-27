@@ -60,17 +60,14 @@ async function modifySubscribers(requestBody, email) {
   }
 }
 
-// Helper function to create a delay
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 //handle adding new subscribers to aweber
 async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
-  //check if subscriber already exist
   const subscribers = await getSubscribers();
   const hasSubscriber = subscribers.some((subscriber) => {
     return subscriber.email === subscriptionInfo.customerEmail;
   });
 
+  //check if subscriber already exist
   if (!hasSubscriber) {
     try {
       console.log("adding subscriber");
@@ -147,8 +144,69 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   console.log("add tag");
 }
 
+//
+async function addDmslTeamToAweber(requestBody) {
+  try {
+    console.log("adding dmsl team to emailList");
+    const Token = await retriveAccessTokenFromDb();
+
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "AWeber-Node-code-sample/1.0",
+      Authorization: `Bearer ${Token.access_token}`,
+    };
+
+    const body = JSON.stringify(requestBody);
+
+    const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
+    fetch(url, { headers: headers, method: "POST", body: body })
+      .then((response) => response)
+      .then((data) => {
+        console.log(data.status);
+      });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //notify customers that their subscription has been cancelled
-async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
+async function notifyDmslTeamOnWhySubscriptionWasCanceled(
+  cancelSubscriberEmail,
+  cancellationReason
+) {
+  const dmslTeamEmail = "kendrickjonathan900@gmail.com";
+  const dmslTeam = await getSubscriber(dmslTeamEmail);
+  const canceledSubscriber = await getSubscriber(cancelSubscriberEmail);
+  const previousCustomField = canceledSubscriber.custom_fields;
+
+  let requestBody = {
+    custom_fields: {
+      ...previousCustomField,
+      cancellation_comment: cancellationReason.comment,
+      cancellation_feedback: cancellationReason.feedback,
+      cancelled_subscriber_email: cancelSubscriberEmail,
+    },
+    email: dmslTeamEmail,
+    name: "soji fagade",
+    tags: ["send_cancellation_reason"],
+  };
+
+  if (cancellationReason.comment !== null) {
+    //Check if dmsl team is already on the emailList
+    if (!dmslTeam) {
+      await addDmslTeamToAweber(requestBody);
+    } else {
+      //update the dmsl by adding a trigger to the cancel reason message
+      await modifySubscribers(requestBody, dmslTeamEmail);
+    }
+  }
+}
+
+async function handleNotifyingCustomersOnCanceledSubscription(
+  subscriberEmail,
+  cancellationReason
+) {
   let requestBody = {
     tags: {
       add: ["cancel subscription"],
@@ -159,6 +217,11 @@ async function handleNotifyingCustomersOnCanceledSubscription(subscriberEmail) {
   //add trigger tag to send cancel notification
   console.log("subscription has been canceled");
   await modifySubscribers(requestBody, subscriberEmail);
+  //send an email to dmsl team on why this subscription was cancelled
+  await notifyDmslTeamOnWhySubscriptionWasCanceled(
+    subscriberEmail,
+    cancellationReason
+  );
 }
 
 //notify customers that their subscription has been renewed and would not be canceled
@@ -207,11 +270,6 @@ async function handleNotifyingCustomersOnFailedPayment(
   //add trigger
   await modifySubscribers(requestBody, customerEmail);
 }
-
-/* await handleNotifyingCustomersOnFailedPayment(
-  "insufficient funds",
-  "jonathankendrick697@gmail.com"
-); */
 
 //remeber to schedule when the notification is made on the dashboard
 async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
