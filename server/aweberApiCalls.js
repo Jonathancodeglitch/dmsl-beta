@@ -26,13 +26,17 @@ async function getSubscribers() {
 
 //get a particular subscriber
 async function getSubscriber(subcriberEmail) {
-  const subcribers = await getSubscribers();
-  //find the subscriber that needs an update
-  const [subcriber] = subcribers.filter((subcriber) => {
-    return subcriber.email === subcriberEmail;
-  });
+  try {
+    const subcribers = await getSubscribers();
+    //find the subscriber that needs an update
+    const [subcriber] = subcribers.filter((subcriber) => {
+      return subcriber.email === subcriberEmail;
+    });
 
-  return subcriber;
+    return subcriber;
+  } catch (err) {
+    console.log(`an error while trying to get a subscriber ${err}`);
+  }
 }
 
 // update a subscriber
@@ -244,6 +248,7 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
   try {
     const subcriber = await getSubscriber(subscriberEmail);
     const subcriberPreviousTags = subcriber.tags;
+    console.log(subcriber, subcriberPreviousTags);
 
     //check if subscription was previously canceled
     if (subcriberPreviousTags.includes("cancel subscription")) {
