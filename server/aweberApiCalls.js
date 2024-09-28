@@ -14,6 +14,7 @@ async function getSubscribers() {
     return fetch(url, { headers: headers })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         return data.entries;
       })
       .catch((err) => {
@@ -38,6 +39,8 @@ async function getSubscriber(subcriberEmail) {
     console.log(`an error while trying to get a subscriber ${err}`);
   }
 }
+
+console.log(await getSubscribers())
 
 // update a subscriber
 async function modifySubscribers(requestBody, email) {
@@ -245,6 +248,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(
 
 //notify customers that their subscription has been renewed and would not be canceled
 async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
+  console.log(subscriberEmail);
   try {
     const subcriber = await getSubscriber(subscriberEmail);
     const subcriberPreviousTags = subcriber.tags;

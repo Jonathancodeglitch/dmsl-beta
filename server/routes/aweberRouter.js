@@ -25,6 +25,7 @@ const { AuthorizationCode } = simpleOauth2;
 const client = new AuthorizationCode(config);
 
 oAuth2FlowAweberRouter.get("/", (req, res) => {
+
   const authorizationUri = client.authorizeURL({
     redirect_uri: "https://dmsl-beta-xrq6.vercel.app/oauth2/authorize",
     scope: [
@@ -58,7 +59,6 @@ oAuth2FlowAweberRouter.get("/authorize", async (req, res) => {
 
     await saveAccessTokenToDb(accessToken);
     res.send("we've got the code boys!!!");
-  
   } catch (error) {
     console.log("Access Token Error", error.message);
   }
@@ -66,11 +66,12 @@ oAuth2FlowAweberRouter.get("/authorize", async (req, res) => {
 
 //handle the refreshing of the access token
 async function refreshAccessToken() {
-  let accessToken = client.createToken(await retriveAccessTokenFromDb());
-  const EXPIRATION_WINDOW_IN_SECONDS = 300;
-  if (accessToken.expired(EXPIRATION_WINDOW_IN_SECONDS)) {
-    console.log("access token key has expired");
-    try {
+  try {
+    let accessToken = client.createToken(await retriveAccessTokenFromDb());
+    const EXPIRATION_WINDOW_IN_SECONDS = 300;
+    if (accessToken.expired(EXPIRATION_WINDOW_IN_SECONDS)) {
+      console.log("access token key has expired");
+
       const refreshParams = {
         scope: [
           "account.read",
@@ -84,14 +85,21 @@ async function refreshAccessToken() {
       accessToken = await accessToken.refresh(refreshParams);
       //save new access token to DB
       await saveAccessTokenToDb(accessToken);
-    } catch (error) {
-      console.log("Error refreshing access token: ", error.message);
     }
+  } catch (error) {
+    console.log("Error saving access token: ", error.message);
   }
 }
 
 //check every 15 mins if access code has expire and refresh it
 const REFRESH_INTERVAL = 1000; // 5 seconds in milliseconds
-setInterval(refreshAccessToken, REFRESH_INTERVAL);
+//setInterval(refreshAccessToken, REFRESH_INTERVAL);
+setInterval(async () => {
+  try {
+    await refreshAccessToken();
+  } catch (error) {
+    console.error('Error refreshing access token:', error);
+  }
+}, REFRESH_INTERVAL);
 
 export { oAuth2FlowAweberRouter };
