@@ -20,7 +20,7 @@ async function getSubscribers() {
         console.log(err);
       });
   } catch (err) {
-    console.log(err);
+    console.log(`an error occur while getting all subscribers ${err}`);
   }
 }
 
@@ -56,21 +56,21 @@ async function modifySubscribers(requestBody, email) {
         console.log(data.custom_fields);
       });
   } catch (err) {
-    console.log(err);
+    console.log(`an error occur while trying to update a subscriber ${err}`);
   }
 }
 
 //handle adding new subscribers to aweber
 async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
-  const subscribers = await getSubscribers();
-  const hasSubscriber = subscribers.some((subscriber) => {
-    return subscriber.email === subscriptionInfo.customerEmail;
-  });
+  try {
+    const subscribers = await getSubscribers();
+    const hasSubscriber = subscribers.some((subscriber) => {
+      return subscriber.email === subscriptionInfo.customerEmail;
+    });
 
-  //check if subscriber already exist
-  if (!hasSubscriber) {
-    try {
-      console.log("adding subscriber");
+    //check if subscriber already exist
+    if (!hasSubscriber) {
+      console.log("adding new subscriber");
       const Token = await retriveAccessTokenFromDb();
 
       const headers = {
@@ -88,9 +88,8 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
           customer_portal: subscriptionInfo.customerPortal,
           product_amount: subscriptionInfo.productAmount,
         },
-        email:
-          subscriptionInfo.customerEmail || "jonathankendrick697@gmail.com",
-        name: subscriptionInfo.customerName || "fefefe",
+        email: subscriptionInfo.customerEmail,
+        name: subscriptionInfo.customerName,
         tags: ["welcome series"],
       });
 
@@ -100,13 +99,13 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
         .then((data) => {
           console.log(data.status);
         });
-    } catch (err) {
-      console.log(err);
+    } else {
+      console.log(
+        "the subscrber already exist and we have sent them a welcome mail"
+      );
     }
-  } else {
-    console.log(
-      "the subscrber already exist and we have sent them a welcome mail"
-    );
+  } catch (err) {
+    console.log(`an err occured while adding a new subscriber ${err}`);
   }
 }
 
@@ -125,7 +124,7 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
     };
 
     await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
-    console.log("remove tag");
+    console.log("tag was removed");
   }
 
   //add tag to trigger the email
@@ -141,7 +140,7 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   };
 
   await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
-  console.log("add tag");
+  console.log("tag was added");
 }
 
 //
@@ -166,7 +165,9 @@ async function addDmslTeamToAweber(requestBody) {
         console.log(data.status);
       });
   } catch (err) {
-    console.log(err);
+    console.log(
+      `an error occured while trying to addDmslTeam to aweber ${err}`
+    );
   }
 }
 
@@ -192,6 +193,7 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
     tags: ["send_cancellation_reason"],
   };
 
+  //check if the subscriber dropped a feeedback!!
   if (cancellationReason.comment !== null) {
     //Check if dmsl team is already on the emailList
     if (!dmslTeam) {
@@ -200,6 +202,8 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
       //update the dmsl by adding a trigger to the cancel reason message
       await modifySubscribers(requestBody, dmslTeamEmail);
     }
+  } else {
+    console.log("this user did not give a feedback about cancellation!!");
   }
 }
 
@@ -210,18 +214,17 @@ async function handleNotifyingCustomersOnCanceledSubscription(
   let requestBody = {
     tags: {
       add: ["cancel subscription"],
-      remove: ["renewal subscription"],
     },
   };
-
   //add trigger tag to send cancel notification
-  console.log("subscription has been canceled");
   await modifySubscribers(requestBody, subscriberEmail);
   //send an email to dmsl team on why this subscription was cancelled
   await notifyDmslTeamOnWhySubscriptionWasCanceled(
     subscriberEmail,
     cancellationReason
   );
+
+  console.log("subscription has been canceled");
 }
 
 //notify customers that their subscription has been renewed and would not be canceled

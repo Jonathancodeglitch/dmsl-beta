@@ -48,8 +48,12 @@ function retrieveAmountForSubscription(subscription) {
 }
 
 async function retrieveSubscription(subscriptionId) {
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-  return subscription;
+  try {
+    const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+    return subscription;
+  } catch (err) {
+    console.log(`an err occur while trying to get subscription ${err}`);
+  }
 }
 
 //when a new subscription is created
@@ -73,7 +77,7 @@ async function handleNewSubscriptionCreated(subscription) {
 
     await handleAddingNewSubscribersToAweber(subscriptionInfo);
   } catch (err) {
-    console.log(err);
+    console.log(`an err occur while handling new subscription created ${err}`);
   }
 }
 
@@ -103,37 +107,45 @@ async function handleFailedPayment(subscription) {
       customer.email
     );
   } catch (err) {
-    console.log(err);
+    console.log(`an error ocurred while handling failed payment ${err}`);
   }
 }
 
 async function handleSucceededPayment(subscription) {
   // Step 1: Retrieve the PaymentIntent
-  const customer = await stripe.customers.retrieve(subscription.customer);
-  console.log("second function called");
-  await handleNotifyingCustomerOnSucceededPayment({
-    productRenewalDate: formatDate(subscription.current_period_end),
-    productBillingDate: formatDate(subscription.current_period_start),
-    customerEmail: customer.email,
-  });
+  try {
+    const customer = await stripe.customers.retrieve(subscription.customer);
+    console.log("second function called");
+    await handleNotifyingCustomerOnSucceededPayment({
+      productRenewalDate: formatDate(subscription.current_period_end),
+      productBillingDate: formatDate(subscription.current_period_start),
+      customerEmail: customer.email,
+    });
+  } catch (err) {
+    console.log(`an error occured while handling succceeded payment ${err}`);
+  }
 }
 
 async function handleSubscriptionCancelled(subscription) {
-  const customerId = subscription.customer;
-  const customer = await stripe.customers.retrieve(customerId);
-  const cancellationReason = subscription.cancellation_details;
+  try {
+    const customerId = subscription.customer;
+    const customer = await stripe.customers.retrieve(customerId);
+    const cancellationReason = subscription.cancellation_details;
 
-  if (subscription.cancel_at_period_end === true) {
-    // Then define and call a method to handle the subscription updated.
-    await handleNotifyingCustomersOnCanceledSubscription(
-      customer.email,
-      cancellationReason
-    );
-  } else if (subscription.cancel_at_period_end === false) {
-    await handleNotifyingCustomersOnRenewedSubscription(
-      customer.email,
-      cancellationReason
-    );
+    if (subscription.cancel_at_period_end === true) {
+      // Then define and call a method to handle the subscription updated.
+      await handleNotifyingCustomersOnCanceledSubscription(
+        customer.email,
+        cancellationReason
+      );
+    } else if (subscription.cancel_at_period_end === false) {
+      await handleNotifyingCustomersOnRenewedSubscription(
+        customer.email,
+        cancellationReason
+      );
+    }
+  } catch (err) {
+      console.log(`an error occured while handling cancelled subscription ${err}`)
   }
 }
 
