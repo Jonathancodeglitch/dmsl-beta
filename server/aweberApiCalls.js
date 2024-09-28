@@ -176,34 +176,40 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
   cancelSubscriberEmail,
   cancellationReason
 ) {
-  const dmslTeamEmail = "kendrickjonathan900@gmail.com";
-  const dmslTeam = await getSubscriber(dmslTeamEmail);
-  const canceledSubscriber = await getSubscriber(cancelSubscriberEmail);
-  const previousCustomField = canceledSubscriber.custom_fields;
+  try {
+    const dmslTeamEmail = "kendrickjonathan900@gmail.com";
+    const dmslTeam = await getSubscriber(dmslTeamEmail);
+    const canceledSubscriber = await getSubscriber(cancelSubscriberEmail);
+    const previousCustomField = canceledSubscriber.custom_fields;
 
-  let requestBody = {
-    custom_fields: {
-      ...previousCustomField,
-      cancellation_comment: cancellationReason.comment,
-      cancellation_feedback: cancellationReason.feedback,
-      cancelled_subscriber_email: cancelSubscriberEmail,
-    },
-    email: dmslTeamEmail,
-    name: "soji fagade",
-    tags: ["send_cancellation_reason"],
-  };
+    let requestBody = {
+      custom_fields: {
+        ...previousCustomField,
+        cancellation_comment: cancellationReason.comment,
+        cancellation_feedback: cancellationReason.feedback,
+        cancelled_subscriber_email: cancelSubscriberEmail,
+      },
+      email: dmslTeamEmail,
+      name: "soji fagade",
+      tags: ["send_cancellation_reason"],
+    };
 
-  //check if the subscriber dropped a feeedback!!
-  if (cancellationReason.comment !== null) {
-    //Check if dmsl team is already on the emailList
-    if (!dmslTeam) {
-      await addDmslTeamToAweber(requestBody);
+    //check if the subscriber dropped a feeedback!!
+    if (cancellationReason.comment !== null) {
+      //Check if dmsl team is already on the emailList
+      if (!dmslTeam) {
+        await addDmslTeamToAweber(requestBody);
+      } else {
+        //update the dmsl by adding a trigger to the cancel reason message
+        await modifySubscribers(requestBody, dmslTeamEmail);
+      }
     } else {
-      //update the dmsl by adding a trigger to the cancel reason message
-      await modifySubscribers(requestBody, dmslTeamEmail);
+      console.log("this user did not give a feedback about cancellation!!");
     }
-  } else {
-    console.log("this user did not give a feedback about cancellation!!");
+  } catch (err) {
+    console.log(
+      `an error occurs while notifying dmsl team about subscriber cancellation ${err}`
+    );
   }
 }
 
@@ -211,39 +217,51 @@ async function handleNotifyingCustomersOnCanceledSubscription(
   subscriberEmail,
   cancellationReason
 ) {
-  let requestBody = {
-    tags: {
-      add: ["cancel subscription"],
-    },
-  };
-  //add trigger tag to send cancel notification
-  await modifySubscribers(requestBody, subscriberEmail);
-  //send an email to dmsl team on why this subscription was cancelled
-  await notifyDmslTeamOnWhySubscriptionWasCanceled(
-    subscriberEmail,
-    cancellationReason
-  );
+  try {
+    let requestBody = {
+      tags: {
+        add: ["cancel subscription"],
+      },
+    };
+    //add trigger tag to send cancel notification
+    await modifySubscribers(requestBody, subscriberEmail);
+    //send an email to dmsl team on why this subscription was cancelled
+    await notifyDmslTeamOnWhySubscriptionWasCanceled(
+      subscriberEmail,
+      cancellationReason
+    );
 
-  console.log("subscription has been canceled");
+    console.log("subscription has been canceled");
+  } catch (err) {
+    console.log(
+      `error while notifying customer about their cancellation ${err}`
+    );
+  }
 }
 
 //notify customers that their subscription has been renewed and would not be canceled
 async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
-  const subcriber = await getSubscriber(subscriberEmail);
-  const subcriberPreviousTags = subcriber.tags;
+  try {
+    const subcriber = await getSubscriber(subscriberEmail);
+    const subcriberPreviousTags = subcriber.tags;
 
-  //check if subscription was previously canceled
-  if (subcriberPreviousTags.includes("cancel subscription")) {
-    //Check if the subscriber already have a trigger tag and remove it
-    let requestBody = {
-      tags: {
-        add: ["renewal subscription"],
-        remove: ["cancel subscription"],
-      },
-    };
-    // Add the tag trigger to send an email to the subscriber
-    await modifySubscribers(requestBody, subscriberEmail);
-    console.log("renewal tag added");
+    //check if subscription was previously canceled
+    if (subcriberPreviousTags.includes("cancel subscription")) {
+      //Check if the subscriber already have a trigger tag and remove it
+      let requestBody = {
+        tags: {
+          add: ["renewal subscription"],
+          remove: ["cancel subscription"],
+        },
+      };
+      // Add the tag trigger to send an email to the subscriber
+      await modifySubscribers(requestBody, subscriberEmail);
+      console.log("renewal tag added");
+    }
+  } catch (err) {
+    console.log(
+      `error occured while notifying customer about them renewing their plan ${err}`
+    );
   }
 }
 
