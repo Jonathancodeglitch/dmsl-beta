@@ -91,11 +91,12 @@ async function refreshAccessToken() {
   }
 }
 
-//check every 15 mins if access code has expire and refresh it
-const REFRESH_INTERVAL = 1000; // 5 seconds in milliseconds
+//Check every 1 sec if access code has expire and refresh it
+const REFRESH_INTERVAL = 1000; // 1 seconds in milliseconds
 //setInterval(refreshAccessToken, REFRESH_INTERVAL);
 setInterval(async () => {
   try {
+    console.log('checking for access token to be refreshed...')
     await refreshAccessToken();
   } catch (error) {
     console.error('Error refreshing access token:', error);
