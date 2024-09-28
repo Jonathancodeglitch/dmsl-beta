@@ -139,13 +139,12 @@ async function handleSubscriptionCancelled(subscription) {
         cancellationReason
       );
     } else if (subscription.cancel_at_period_end === false) {
-      await handleNotifyingCustomersOnRenewedSubscription(
-        customer.email,
-        cancellationReason
-      );
+      await handleNotifyingCustomersOnRenewedSubscription(customer.email);
     }
   } catch (err) {
-      console.log(`an error occured while handling cancelled subscription ${err}`)
+    console.log(
+      `an error occured while handling cancelled subscription ${err}`
+    );
   }
 }
 
