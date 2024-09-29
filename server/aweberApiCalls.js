@@ -11,14 +11,18 @@ async function getSubscribers() {
     };
 
     const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
-    return fetch(url, { headers: headers })
+    const response = await fetch(url, { headers: headers });
+    const data = await response.json();
+    return data.entries;
+
+    /*  return fetch(url, { headers: headers })
       .then((response) => response.json())
       .then((data) => {
         return data.entries;
       })
       .catch((err) => {
         console.log(err);
-      });
+      }); */
   } catch (err) {
     console.log(`an error occur while getting all subscribers ${err}`);
   }
@@ -54,11 +58,18 @@ async function modifySubscribers(requestBody, email) {
     const body = JSON.stringify(requestBody);
 
     const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers?subscriber_email=${email}`;
-    fetch(url, { headers: headers, method: "PATCH", body: body })
+    const response = await fetch(url, {
+      headers: headers,
+      method: "PATCH",
+      body: body,
+    });
+    const data = await response.data;
+    console.log(data);
+    /* fetch(url, { headers: headers, method: "PATCH", body: body })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-      });
+      }); */
   } catch (err) {
     console.log(`an error occur while trying to update a subscriber ${err}`);
   }
@@ -74,7 +85,6 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
 
     //check if subscriber already exist
     if (!hasSubscriber) {
-      console.log("adding new subscriber");
       const Token = await retriveAccessTokenFromDb();
 
       const headers = {
@@ -98,11 +108,20 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
       });
 
       const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
-      fetch(url, { headers: headers, method: "POST", body: body })
+      const response = await fetch(url, {
+        headers: headers,
+        method: "POST",
+        body: body,
+      });
+
+      console.log(response);
+
+     /*  fetch(url, { headers: headers, method: "POST", body: body })
         .then((response) => response)
         .then((data) => {
           console.log(data.status);
-        });
+        }); */
+      console.log("adding new subscriber");
     } else {
       console.log(
         "the subscrber already exist and we have sent them a welcome mail"
@@ -150,7 +169,6 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
 //
 async function addDmslTeamToAweber(requestBody) {
   try {
-    console.log("adding dmsl team to emailList");
     const Token = await retriveAccessTokenFromDb();
 
     const headers = {
@@ -163,11 +181,24 @@ async function addDmslTeamToAweber(requestBody) {
     const body = JSON.stringify(requestBody);
 
     const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
-    fetch(url, { headers: headers, method: "POST", body: body })
+    const response = await fetch(url, {
+      headers: headers,
+      method: "POST",
+      body: body,
+    });
+
+    console.log(response.status);
+
+    /*  fetch(url, { headers: headers, method: "POST", body: body })
       .then((response) => response)
       .then((data) => {
         console.log(data.status);
-      });
+      })
+      .catch((err) => {
+        console.log(
+          `An error occured while trying to addDmslTeam to aweber ${err}`
+        );
+      }); */
   } catch (err) {
     console.log(
       `an error occured while trying to addDmslTeam to aweber ${err}`
