@@ -245,7 +245,6 @@ async function handleNotifyingCustomersOnCanceledSubscription(
       {
         tags: {
           remove: ["cancel subscription"],
-          remove: ["renewal subscription"],
         },
       },
       subscriberEmail
