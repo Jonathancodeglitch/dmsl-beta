@@ -168,6 +168,7 @@ async function addDmslTeamToAweber(requestBody) {
     });
 
     console.log(response.status);
+    console.log("added dmsl team to aweber");
   } catch (err) {
     console.log(
       `an error occured while trying to addDmslTeam to aweber ${err}`
@@ -202,7 +203,7 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
     };
 
     //check if the subscriber dropped a feeedback!!
-    if (cancellationReason.comment !== null) {
+    if (cancellationReason.feedback !== null) {
       //Check if dmsl team is already on the emailList
       if (!dmslTeam) {
         await addDmslTeamToAweber(requestBody);
@@ -229,6 +230,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(
     let requestBody = {
       tags: {
         add: ["cancel subscription"],
+        remove: ["renewal subscription"],
       },
     };
 
@@ -237,7 +239,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(
       subscriberEmail,
       cancellationReason
     );
-     console.log('----------------')
+
     //add trigger tag to send cancel notification
     await modifySubscribers(requestBody, subscriberEmail);
     console.log("subscription has been canceled");
@@ -260,6 +262,7 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
       let requestBody = {
         tags: {
           add: ["renewal subscription"],
+          remove: ["cancel subscription"],
         },
       };
       // Add the tag trigger to send an email to the subscriber
