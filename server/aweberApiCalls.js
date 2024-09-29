@@ -13,20 +13,13 @@ async function getSubscribers() {
     const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
     const response = await fetch(url, { headers: headers });
     const data = await response.json();
+    console.log(data);
     return data.entries;
-
-    /*  return fetch(url, { headers: headers })
-      .then((response) => response.json())
-      .then((data) => {
-        return data.entries;
-      })
-      .catch((err) => {
-        console.log(err);
-      }); */
   } catch (err) {
     console.log(`an error occur while getting all subscribers ${err}`);
   }
 }
+
 
 //get a particular subscriber
 async function getSubscriber(subcriberEmail) {
@@ -63,13 +56,8 @@ async function modifySubscribers(requestBody, email) {
       method: "PATCH",
       body: body,
     });
-    const data = await response.data;
+    const data = await response.json();
     console.log(data);
-    /* fetch(url, { headers: headers, method: "PATCH", body: body })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      }); */
   } catch (err) {
     console.log(`an error occur while trying to update a subscriber ${err}`);
   }
@@ -115,12 +103,6 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
       });
 
       console.log(response);
-
-     /*  fetch(url, { headers: headers, method: "POST", body: body })
-        .then((response) => response)
-        .then((data) => {
-          console.log(data.status);
-        }); */
       console.log("adding new subscriber");
     } else {
       console.log(
@@ -188,17 +170,6 @@ async function addDmslTeamToAweber(requestBody) {
     });
 
     console.log(response.status);
-
-    /*  fetch(url, { headers: headers, method: "POST", body: body })
-      .then((response) => response)
-      .then((data) => {
-        console.log(data.status);
-      })
-      .catch((err) => {
-        console.log(
-          `An error occured while trying to addDmslTeam to aweber ${err}`
-        );
-      }); */
   } catch (err) {
     console.log(
       `an error occured while trying to addDmslTeam to aweber ${err}`
@@ -217,6 +188,7 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
     const canceledSubscriber = await getSubscriber(cancelSubscriberEmail);
     const previousCustomField = canceledSubscriber.custom_fields;
 
+    console.log(cancelSubscriberEmail, cancellationReason);
     let requestBody = {
       custom_fields: {
         ...previousCustomField,
@@ -237,6 +209,7 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
       } else {
         //update the dmsl by adding a trigger to the cancel reason message
         await modifySubscribers(requestBody, dmslTeamEmail);
+        console.log("sending feedback");
       }
     } else {
       console.log("this user did not give a feedback about cancellation!!");
@@ -254,19 +227,16 @@ async function handleNotifyingCustomersOnCanceledSubscription(
 ) {
   try {
     let requestBody = {
-      tags: {
-        add: ["cancel subscription"],
-        remove: ["renewal subscription"],
-      },
+      tags: ["cancel subscription"],
     };
-    //add trigger tag to send cancel notification
-    await modifySubscribers(requestBody, subscriberEmail);
+
     //send an email to dmsl team on why this subscription was cancelled
     await notifyDmslTeamOnWhySubscriptionWasCanceled(
       subscriberEmail,
       cancellationReason
     );
-
+    //add trigger tag to send cancel notification
+    await modifySubscribers(requestBody, subscriberEmail);
     console.log("subscription has been canceled");
   } catch (err) {
     console.log(
@@ -287,10 +257,7 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
     if (subcriberPreviousTags.includes("cancel subscription")) {
       //Check if the subscriber already have a trigger tag and remove it
       let requestBody = {
-        tags: {
-          add: ["renewal subscription"],
-          remove: ["cancel subscription"],
-        },
+        tags: ["renewal subscription"],
       };
       // Add the tag trigger to send an email to the subscriber
       await modifySubscribers(requestBody, subscriberEmail);
