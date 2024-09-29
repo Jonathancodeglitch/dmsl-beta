@@ -14,7 +14,6 @@ async function getSubscribers() {
     return fetch(url, { headers: headers })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         return data.entries;
       })
       .catch((err) => {
@@ -40,8 +39,6 @@ async function getSubscriber(subcriberEmail) {
   }
 }
 
-console.log(await getSubscribers())
-
 // update a subscriber
 async function modifySubscribers(requestBody, email) {
   try {
@@ -60,7 +57,7 @@ async function modifySubscribers(requestBody, email) {
     fetch(url, { headers: headers, method: "PATCH", body: body })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.custom_fields);
+        console.log(data);
       });
   } catch (err) {
     console.log(`an error occur while trying to update a subscriber ${err}`);
@@ -228,6 +225,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(
     let requestBody = {
       tags: {
         add: ["cancel subscription"],
+        remove: ["renewal subscription"],
       },
     };
     //add trigger tag to send cancel notification
