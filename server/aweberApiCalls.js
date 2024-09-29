@@ -13,13 +13,11 @@ async function getSubscribers() {
     const url = `https://api.aweber.com/1.0/accounts/1225608/lists/6803252/subscribers`;
     const response = await fetch(url, { headers: headers });
     const data = await response.json();
-    console.log(data);
     return data.entries;
   } catch (err) {
     console.log(`an error occur while getting all subscribers ${err}`);
   }
 }
-
 
 //get a particular subscriber
 async function getSubscriber(subcriberEmail) {
@@ -198,7 +196,9 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
       },
       email: dmslTeamEmail,
       name: "soji fagade",
-      tags: ["send_cancellation_reason"],
+      tags: {
+        add: ["send_cancellation_reason"],
+      },
     };
 
     //check if the subscriber dropped a feeedback!!
@@ -227,7 +227,9 @@ async function handleNotifyingCustomersOnCanceledSubscription(
 ) {
   try {
     let requestBody = {
-      tags: ["cancel subscription"],
+      tags: {
+        add: ["cancel subscription"],
+      },
     };
 
     //send an email to dmsl team on why this subscription was cancelled
@@ -247,17 +249,17 @@ async function handleNotifyingCustomersOnCanceledSubscription(
 
 //notify customers that their subscription has been renewed and would not be canceled
 async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
-  console.log(subscriberEmail);
   try {
     const subcriber = await getSubscriber(subscriberEmail);
     const subcriberPreviousTags = subcriber.tags;
-    console.log(subcriber, subcriberPreviousTags);
 
     //check if subscription was previously canceled
     if (subcriberPreviousTags.includes("cancel subscription")) {
       //Check if the subscriber already have a trigger tag and remove it
       let requestBody = {
-        tags: ["renewal subscription"],
+        tags: {
+          add: ["renewal subscription"],
+        },
       };
       // Add the tag trigger to send an email to the subscriber
       await modifySubscribers(requestBody, subscriberEmail);
