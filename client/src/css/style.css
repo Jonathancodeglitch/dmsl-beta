@@ -59,6 +59,10 @@ body {
   cursor: pointer;
 }
 
+.btn:hover {
+  background-color: #2d5a8b;
+}
+
 /* header */
 
 .menu-btn {
@@ -1050,6 +1054,14 @@ header .row {
   border: none;
   display: inline-block;
   padding: 22px 33px;
+  transition: border-color 0.3s ease;
+}
+input:focus,
+textarea:focus {
+  outline: none; /* Remove the default outline */
+
+  border: 1px solid rgba(0, 0, 0, 0.3); /* Change border color to a green shade */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional: Add a glowing effect */
 }
 
 .contact-us input::placeholder,
@@ -1065,14 +1077,20 @@ header .row {
   align-items: center;
 }
 
-.text-inputs input {
+.contact-us__input,
+.contact-us__textarea {
   width: 100%;
-  border-radius: 38px;
-  height: 76px;
+  position: relative;
 }
 
-.text-inputs input + input {
+.contact-us__input + .contact-us__input {
   margin-left: 15px;
+}
+
+.text-inputs input {
+  width: 100%;
+  border-radius: 20px;
+  height: 76px;
 }
 
 .contact-us textarea {
@@ -1083,8 +1101,41 @@ header .row {
 }
 
 .contact-us .btn {
-  margin-top: 22px;
   display: inline-block;
+}
+
+.contact-us-status-message {
+  font-weight: 600;
+  color: green;
+  line-height: 2;
+}
+
+.contact-us-status-message[aria-invalid="false"] {
+  font-weight: 600;
+  color: red;
+}
+
+.contact-form__btn-container {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.contact-us__errmsg {
+  color: red;
+  font-weight: 400;
+  font-size: 15px;
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  display: block;
+}
+
+.contact-us__input input[aria-invalid="true"],
+.contact-us__textarea textarea[aria-invalid="true"] {
+  border: 1px solid red;
 }
 
 /* footer */
@@ -1990,7 +2041,7 @@ header.project-overview .nav_link {
     display: block;
   }
 
-  .text-inputs input + input {
+  .contact-us__input + .contact-us__input {
     margin-left: 0px;
     margin-top: 21px;
   }
@@ -2004,6 +2055,12 @@ header.project-overview .nav_link {
   }
   .contact-us form {
     width: 100%;
+  }
+
+  .contact-us__errmsg {
+    position: relative;
+    bottom: 0;
+    text-align: right;
   }
 
   /* about us page */
@@ -2393,7 +2450,7 @@ header.project-overview .nav_link {
     margin-top: 24px;
   }
 
-  .text-inputs input + input {
+  .contact-us__input + .contact-us__input {
     margin-top: 8px;
   }
 

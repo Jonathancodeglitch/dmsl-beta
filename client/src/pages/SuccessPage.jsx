@@ -22,26 +22,7 @@ export default function SuccessPage() {
           and a member of our team will be in touch with you shortly to get you
           started.
         </p>
-        {/*  success-page__order-details*/}
-        {/* <div className="success-page__order-details">
-          <h3 className="success-page__order-details-title title">
-            Order Details
-          </h3>
-          <ul className="success-page__order-details-content">
-            <li className="success-page__order-details-item">
-              <span className="sm-title">Order Number: </span> [Your Order
-              Number]
-            </li>
-            <li className="success-page__order-details-item">
-              <span className="sm-title">Total: </span> [Order Total]
-            </li>
-            <li className="success-page__order-details-item">
-              <span className="sm-title">Items Ordered:</span> [List of Items]
-            </li>
-          </ul>
-        </div> */}
-        {/* What's Next?
-         */}
+
         <div className="success-page__next">
           <h3 className="success-page__next-title title">What's Next?</h3>
           <p className="success-page__next-desc description">
@@ -55,14 +36,6 @@ export default function SuccessPage() {
           <span className="sm-title">Support: </span> If you have any questions,
           feel free to reach out to our support team at xxxx@emial.com or call
           us at xxx-xxx-xxx.
-        </p>
-
-        {/* special offer */}
-
-        <p className="success-page__special-offer-desc description">
-          <span className="sm-title">Special Offer: </span>As a token of
-          appreciation, enjoy a 10% discount on your next purchase with the code
-          THANKYOU10.
         </p>
 
         {/* socials */}

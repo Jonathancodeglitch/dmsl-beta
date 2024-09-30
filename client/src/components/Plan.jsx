@@ -43,7 +43,9 @@ function PlanCards({ packages }) {
   useEffect(() => {
     const fetchIpAddress = async () => {
       try {
-        const response = await fetch("https://dmsl-beta-xrq6.vercel.app/getUserLocation");
+        const response = await fetch(
+          "https://dmsl-beta-xrq6.vercel.app/getUserLocation"
+        );
         if (response.ok) {
           const data = await response.json();
           setUserLocation(data.location);
@@ -148,11 +150,13 @@ function CheckOutButton({ id }) {
       }),
     })
       .then((res) => {
-        if (res.ok) return res.json();
-        //ELSE
-        return res.json().then((json) => {
-          Promise.reject(json);
-        });
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((json) => {
+            Promise.reject(json);
+          });
+        }
       })
       .then(({ url }) => {
         window.location = url;
