@@ -19,10 +19,10 @@ app.use(
 
 //get user location
 app.use(userLocation);
-app.use(express.json());
+
 
 //get data from contact us form
-app.post("/contact-us", (req, res) => {
+app.post("/contact-us",express.json(), (req, res) => {
   try {
     const { email, subject, message } = req.body;
     console.log(email, subject, message);
