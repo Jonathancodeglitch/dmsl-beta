@@ -5,6 +5,7 @@ import userLocation from "./middlewares/location.js";
 import stripeCheckOutRouter from "./routes/stripeCheckOutRouter.js";
 import stripeWebhookRouter from "./routes/stripeWebhookRouter.js";
 import { oAuth2FlowAweberRouter } from "./routes/aweberRouter.js";
+import { sendMessageFromContactUsFormToDmslTeam } from "./aweberApiCalls.js";
 
 dotenv.config();
 
@@ -18,6 +19,20 @@ app.use(
 
 //get user location
 app.use(userLocation);
+app.use(express.json());
+
+//get data from contact us form
+app.post("/contact-us", (req, res) => {
+  try {
+    const { email, subject, message } = req.body;
+    console.log(email, subject, message);
+    //sendMessageFromContactUsFormToDmslTeam(email, subject, message);
+    res.send("message received!!");
+  } catch (error) {
+    console.log("while get contact us form data", error);
+    res.send("message not received!!");
+  }
+});
 
 //send user location to the client side
 app.get("/getUserLocation", express.json(), async (req, res) => {

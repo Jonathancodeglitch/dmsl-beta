@@ -197,9 +197,8 @@ stripeWebhookRouter.post(
       case "customer.subscription.deleted":
         subscription = event.data.object;
         status = subscription.status;
-        console.log(`subscrition was canceled ${status}.`);
-        // Then define and call a method to handle the subscription canceled.
-        //await handleSubscriptionCancelled(subscription);
+        console.log(`subscrition was deleted ${status}.`);
+        // do something here.
         break;
       case "customer.subscription.updated":
         subscription = event.data.object;

@@ -1,3 +1,4 @@
+import { request } from "express";
 import { retriveAccessTokenFromDb } from "./db.js";
 
 //Get all subscribers
@@ -241,15 +242,6 @@ async function handleNotifyingCustomersOnCanceledSubscription(
     );
 
     //add trigger tag to send cancel notification to subscribers
-    await modifySubscribers(
-      {
-        tags: {
-          remove: ["cancel subscription"],
-        },
-      },
-      subscriberEmail
-    );
-    console.log("next.....................");
     await modifySubscribers(requestBody, subscriberEmail);
     console.log("subscription has been canceled");
   } catch (err) {
@@ -311,6 +303,62 @@ async function handleNotifyingCustomersOnFailedPayment(
   await modifySubscribers(requestBody, customerEmail);
 }
 
+// send the message entered on contact form to  mr soji
+async function sendMessageFromContactUsFormToDmslTeam(
+  senderEmail,
+  subject,
+  message
+) {
+  //check if the email already exist
+  const dmslTeamEmail = "jonathankendrick697@gmail.com";
+  const subcriber = await getSubscriber(dmslTeamEmail);
+  const previousCustomField = subcriber.custom_fields;
+  let requestBody;
+
+  if (subcriber) {
+    requestBody = {
+      custom_fields: {
+        ...previousCustomField,
+        contact_us_subject: subject,
+        contact_us_message: message,
+      },
+      tags: {
+        add: ["send_contact_message", "hi"],
+      },
+    };
+    //add trigger
+    await modifySubscribers(requestBody, dmslTeamEmail);
+    //remove trigger
+    await modifySubscribers(
+      {
+        custom_fields: {
+          ...previousCustomField,
+          contact_us_subject: subject,
+          contact_us_message: message,
+        },
+        tags: {
+          remove: ["send_contact_message", "renewal subscription"],
+        },
+      },
+      dmslTeamEmail
+    );
+  } else {
+    requestBody = {
+      custom_fields: {
+        contact_us_subject: subject,
+        contact_us_message: message,
+      },
+      email: dmslTeamEmail,
+      tags: {
+        add: ["send_contact_message"],
+      },
+    };
+
+    await addDmslTeamToAweber(requestBody);
+  }
+  //add the sender email as a subscriber
+}
+
 //remeber to schedule when the notification is made on the dashboard
 async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
   //  get all subscribers from my emailList
@@ -350,4 +398,5 @@ export {
   handleNotifyingCustomerOnSucceededPayment,
   handleNotifyingCustomersOnCanceledSubscription,
   handleNotifyingCustomersOnRenewedSubscription,
+  sendMessageFromContactUsFormToDmslTeam,
 };
