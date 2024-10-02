@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import Stripe from "stripe";
 import {
   handleAddingNewSubscribersToAweber,
-  handleNotifyingSubscribersOnUpcomingPayment,
   handleNotifyingCustomersOnFailedPayment,
   handleNotifyingCustomerOnSucceededPayment,
   handleNotifyingCustomersOnCanceledSubscription,
@@ -82,7 +81,7 @@ async function handleNewSubscriptionCreated(subscription) {
 }
 
 //notify subscribers when their subscription would soon expire
-async function handleUpcomingInvoice(subscription) {
+/* async function handleUpcomingInvoice(subscription) {
   try {
     const customerId = subscription.customer;
     const customer = await stripe.customers.retrieve(customerId);
@@ -90,7 +89,7 @@ async function handleUpcomingInvoice(subscription) {
   } catch (err) {
     console.log(err);
   }
-}
+} */
 
 //handle failed payment
 async function handleFailedPayment(subscription) {
@@ -205,13 +204,13 @@ stripeWebhookRouter.post(
         status = subscription.status;
         await handleSubscriptionCancelled(subscription);
         break;
-      case "invoice.upcoming":
+      /* case "invoice.upcoming":
         subscription = event.data.object;
         status = subscription.status;
         console.log(`invoice upcoming ${status}.`);
         // Then define and call a method to handle upcoming invoices.
-        handleUpcomingInvoice(subscription);
-        break;
+          handleUpcomingInvoice(subscription);
+        break; */
 
       default:
         // Unexpected event type

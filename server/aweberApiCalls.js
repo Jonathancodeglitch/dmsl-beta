@@ -105,7 +105,7 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
       console.log("adding new subscriber");
     } else {
       console.log(
-        "the subscrber already exist and we have sent them a welcome mail"
+        "the subscrber already exist and we have sent them a welcome mail already"
       );
     }
   } catch (err) {
@@ -117,21 +117,7 @@ async function handleAddingNewSubscribersToAweber(subscriptionInfo) {
 async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   const subcriber = await getSubscriber(subscriptionInfo.customerEmail);
   const previousCustomField = subcriber.custom_fields;
-  const previousTags = subcriber.tags;
 
-  //check if the subscriber already has a tag trigger
-  if (previousTags.includes("payment succeeded")) {
-    let requestBody = {
-      tags: {
-        remove: ["payment succeeded"],
-      },
-    };
-
-    await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
-    console.log("tag was removed");
-  }
-
-  //add tag to trigger the email
   let requestBody = {
     custom_fields: {
       ...previousCustomField,
@@ -143,11 +129,23 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
     },
   };
 
+  //add tag to trigger the email
   await modifySubscribers(requestBody, subscriptionInfo.customerEmail);
-  console.log("tag was added");
+  console.log("payment succeeded tag was removed");
+
+  // remove trigger tag
+  await modifySubscribers(
+    {
+      tags: {
+        remove: ["payment succeeded"],
+      },
+    },
+    subscriptionInfo.customerEmail
+  );
+  console.log("payment succeeded tag was removed");
 }
 
-//
+//add the admin email to the dmsl emailList
 async function addDmslTeamToAweber(requestBody) {
   try {
     const Token = await retriveAccessTokenFromDb();
@@ -169,7 +167,7 @@ async function addDmslTeamToAweber(requestBody) {
     });
 
     console.log(response.status);
-    console.log("added dmsl team to aweber");
+    console.log("Dmsl team was added to aweber");
   } catch (err) {
     console.log(
       `an error occured while trying to addDmslTeam to aweber ${err}`
@@ -177,7 +175,6 @@ async function addDmslTeamToAweber(requestBody) {
   }
 }
 
-//notify customers that their subscription has been cancelled
 async function notifyDmslTeamOnWhySubscriptionWasCanceled(
   cancelSubscriberEmail,
   cancellationReason
@@ -185,13 +182,11 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
   try {
     const dmslTeamEmail = "kendrickjonathan900@gmail.com";
     const dmslTeam = await getSubscriber(dmslTeamEmail);
-    const canceledSubscriber = await getSubscriber(cancelSubscriberEmail);
-    const previousCustomField = canceledSubscriber.custom_fields;
-
-    console.log(cancelSubscriberEmail, cancellationReason);
+    /*  const canceledSubscriber = await getSubscriber(cancelSubscriberEmail);
+    const previousCustomField = canceledSubscriber.custom_fields; */
     let requestBody = {
       custom_fields: {
-        ...previousCustomField,
+        /* ...previousCustomField, */
         cancellation_comment: cancellationReason.comment,
         cancellation_feedback: cancellationReason.feedback,
         cancelled_subscriber_email: cancelSubscriberEmail,
@@ -205,13 +200,23 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
 
     //check if the subscriber dropped a feeedback!!
     if (cancellationReason.feedback !== null) {
-      //Check if dmsl team is already on the emailList
+      //If dmsl team is not on the email list add them
       if (!dmslTeam) {
         await addDmslTeamToAweber(requestBody);
       } else {
         //update the dmsl by adding a trigger to the cancel reason message
         await modifySubscribers(requestBody, dmslTeamEmail);
         console.log("sending feedback");
+
+        //remove trigger
+        await modifySubscribers(
+          {
+            tags: {
+              add: ["send_cancellation_reason"],
+            },
+          },
+          dmslTeamEmail
+        );
       }
     } else {
       console.log("this user did not give a feedback about cancellation!!");
@@ -223,6 +228,7 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
   }
 }
 
+//notify customers that their subscription has been cancelled
 async function handleNotifyingCustomersOnCanceledSubscription(
   subscriberEmail,
   cancellationReason
@@ -235,14 +241,15 @@ async function handleNotifyingCustomersOnCanceledSubscription(
       },
     };
 
+    //add trigger tag to send cancel notification to subscribers
+    await modifySubscribers(requestBody, subscriberEmail);
+
     //send an email to dmsl team on why this subscription was cancelled
     await notifyDmslTeamOnWhySubscriptionWasCanceled(
       subscriberEmail,
       cancellationReason
     );
 
-    //add trigger tag to send cancel notification to subscribers
-    await modifySubscribers(requestBody, subscriberEmail);
     console.log("subscription has been canceled");
   } catch (err) {
     console.log(
@@ -251,7 +258,7 @@ async function handleNotifyingCustomersOnCanceledSubscription(
   }
 }
 
-//notify customers that their subscription has been renewed and would not be canceled
+// notify customers that their subscription has been renewed and would not be canceled
 async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
   try {
     const subcriber = await getSubscriber(subscriberEmail);
@@ -265,9 +272,22 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
           remove: ["cancel subscription"],
         },
       };
+
       // Add the tag trigger to send an email to the subscriber
       await modifySubscribers(requestBody, subscriberEmail);
       console.log("renewal tag added");
+
+      //remove trigger tag
+      await modifySubscribers(
+        {
+          tags: {
+            remove: ["cancel subscription", "renewal subscription"],
+          },
+        },
+        subscriberEmail
+      );
+
+      console.log("renewal tag removed!!");
     }
   } catch (err) {
     console.log(
@@ -292,15 +312,25 @@ async function handleNotifyingCustomersOnFailedPayment(
       ...subcriberPreviousCustomField,
       payment_failure_reason: paymentFailureReason
         ? `PAYMENT FAILURE REASON: ${paymentFailureReason}`
-        : "",
+        : "UNKNOWN",
     },
     tags: {
       add: ["payment failed"],
     },
   };
 
-  //add trigger
+  //add trigger tag
   await modifySubscribers(requestBody, customerEmail);
+
+  //remove trigger tag
+  await modifySubscribers(
+    {
+      tags: {
+        add: ["payment failed"],
+      },
+    },
+    customerEmail
+  );
 }
 
 // send the message entered on contact form to  mr soji
@@ -323,21 +353,18 @@ async function sendMessageFromContactUsFormToDmslTeam(
         contact_us_message: message,
       },
       tags: {
-        add: ["send_contact_message", "hi"],
+        add: ["send_contact_message"],
       },
     };
+
     //add trigger
     await modifySubscribers(requestBody, dmslTeamEmail);
+
     //remove trigger
     await modifySubscribers(
       {
-        custom_fields: {
-          ...previousCustomField,
-          contact_us_subject: subject,
-          contact_us_message: message,
-        },
         tags: {
-          remove: ["send_contact_message", "renewal subscription"],
+          remove: ["send_contact_message"],
         },
       },
       dmslTeamEmail
@@ -359,8 +386,9 @@ async function sendMessageFromContactUsFormToDmslTeam(
   //add the sender email as a subscriber
 }
 
+
 //remeber to schedule when the notification is made on the dashboard
-async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
+/* async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
   //  get all subscribers from my emailList
   const Token = await retriveAccessTokenFromDb();
 
@@ -388,12 +416,11 @@ async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
   } catch (err) {
     console.log(err);
   }
-}
+} */
 /* ========><======= */
 
 export {
   handleAddingNewSubscribersToAweber,
-  handleNotifyingSubscribersOnUpcomingPayment,
   handleNotifyingCustomersOnFailedPayment,
   handleNotifyingCustomerOnSucceededPayment,
   handleNotifyingCustomersOnCanceledSubscription,
