@@ -934,7 +934,7 @@ header .row {
 }
 
 /* testimonial */
-
+/* continue working on this big man */
 .testimonials {
   padding: 240px 0px 180px 0px;
   text-align: center;
@@ -958,21 +958,22 @@ header .row {
   justify-content: space-around;
   padding: 96px 0px 20px 0px;
   overflow-x: auto;
+  flex-wrap: nowrap;
 }
 
 .testimonials .card {
+  flex: 1;
   border-radius: 16px;
   background-color: #fff;
   box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.1), 0 -1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.testimonials .card + .card {
-  margin-left: 20px;
+.testimonials .card .testimonial {
+  height: 320px;
 }
 
-.testimonial {
-  width: 500px;
-  height: 500px;
+.testimonials .card + .card {
+  margin-left: 20px;
 }
 
 .card__testimonial-text .fa-quote-left {
@@ -1009,11 +1010,12 @@ header .row {
 .testimonials .client-info {
   background-color: #00376e;
   display: flex;
-  align-items: center;
-  padding: 39px 43px;
+  align-items: start;
+  padding: 39px 30px 39px 43px;
   text-align: left;
   font-size: var(--font-xl);
   color: #fff;
+  gap: 30px;
 }
 
 .testimonials .profile {
@@ -1021,7 +1023,7 @@ header .row {
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  margin-right: 31px;
+  flex-shrink: 0;
 }
 
 .testimonials .client-name {
@@ -1661,18 +1663,17 @@ header.project-overview .nav_link {
     text-align: center;
   }
 
-  .testimonial {
-    width: 350px;
-    height: 350px;
+  .testimonials .card .testimonial {
+    height: 300px;
   }
 
   .testimonials .profile {
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
   }
 
   .testimonials .client-info {
-    padding: 29px 23px;
+    padding: 29px 20px 29px 23px;
   }
 
   /* meet us */
@@ -1837,6 +1838,17 @@ header.project-overview .nav_link {
     width: 70%;
   }
 
+  /* testimonials */
+
+  .testimonials .card {
+    min-width: 320px;
+  }
+
+  .testimonials .profile {
+    height: 80px;
+    width: 80px;
+  }
+
   /* contact us */
   .contact-us form {
     width: 55%;
@@ -1851,6 +1863,7 @@ header.project-overview .nav_link {
     justify-content: start;
     gap: 40px;
   }
+
   /* project overview */
 
   .about-project_content .left,
@@ -2050,8 +2063,7 @@ header.project-overview .nav_link {
   }
 
   /* testimonial */
-  .testimonial {
-    width: 320px;
+  .testimonials .card .testimonial {
     height: 320px;
   }
 
@@ -2464,8 +2476,7 @@ header.project-overview .nav_link {
     text-align: center;
   }
 
-  .testimonial {
-    width: 320px;
+  .testimonials .card .testimonial {
     height: 270px;
   }
 
@@ -2650,6 +2661,10 @@ header.project-overview .nav_link {
     gap: 100px;
   }
 
+  .hero .hero_content-big {
+    font-size: 30px;
+  }
+
   /* secondary hero section */
 
   .secondary-hero .hero_content-big {
@@ -2717,6 +2732,11 @@ header.project-overview .nav_link {
 
   .meet-us__card {
     padding: 30px 0px 0px 0px;
+  }
+
+  /* testimonial */
+  .testimonials .card {
+    min-width: 300px;
   }
   /* overview-hero */
 

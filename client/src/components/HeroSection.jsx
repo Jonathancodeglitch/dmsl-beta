@@ -48,9 +48,8 @@ function HeroContentSecondary() {
     <div className="hero_content-secondary">
       <h1 className="hero_content-secondary-title">PREVIOUS CLIENTS</h1>
       <p>
-        We recently designed and developed a cloud-based mobile app for
-        BetaTravel agency. BetaTravel agency has greatly improved customer base
-        since its launch.
+        Here are some of our successful projects, and businesses like yours that
+        we’ve helped achieve their goals.
       </p>
       <div className="slider">
         <Slider {...settings} ref={sliderRef} className="previous-clients">
@@ -102,12 +101,13 @@ export default function HeroSection() {
             Digital and Media Services Limited
           </h1>
           <h1 className="hero_content-big">
-            Scale your business With our complete <span>Digital</span> Program
+            Grow Your Business with Our Comprehensive <span>Digital </span>
+             Solutions
           </h1>
           <p>
-            We're on top of the trends and we know the best tools to help you
-            navigate the digital space with ease to achieve targeted outcomes
-            and deliver real results.
+            We stay up to date with digital trends and know the best tools to
+            help you navigate the digital space effectively. We focus on
+            achieving your goals and delivering tangible results.
           </p>
           <FontAwesomeIcon icon={faDiamond} className="diamond" />
         </div>

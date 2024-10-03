@@ -6,15 +6,11 @@ export default function SuccessProject() {
         <ul className="success-project_lists">
           <li>
             <span>Project type:</span>
-            <span>Digital marketing</span>
+            <span>End- to-end digital and media services.</span>
           </li>
           <li>
-            <span>For company:</span>
-            <span>YWIIT</span>
-          </li>
-          <li>
-            <span>Time Estimation:</span>
-            <span>6 months</span>
+            <span>Client:</span>
+            <span>YWIIT (Young Women In IT)</span>
           </li>
         </ul>
       </div>
