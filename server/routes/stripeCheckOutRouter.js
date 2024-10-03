@@ -9,7 +9,7 @@ const stripeCheckOutRouter = express.Router();
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 const lookupKeys = [
   "starter_plan-k377473",
-  "standard_plan-k377473",
+  "standard_plan-k376473",
   "premium_plan-k377473",
 ];
 
