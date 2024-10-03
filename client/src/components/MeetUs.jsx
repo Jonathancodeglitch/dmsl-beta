@@ -7,15 +7,13 @@ export default function MeetUs() {
         <div className="meet-us__content">
           <h1 className="meet-us__title">Our Team</h1>
           <p className="meet-us__desc">
-            Our team combines a wide range of expertise to tackle your unique
-            business challenges. Whether you're looking to elevate your social
-            media presence, craft compelling website content, or boost sales
-            through targeted digital marketing, we’ve got the right talent for
-            the job. From skilled copywriters and web designers to social media
-            managers, video editors, and content strategists, we collaborate
-            seamlessly to deliver results. Plus, with a dedicated account
-            manager, you'll have one point of contact managing everything to
-            ensure your campaign drives success.
+            Our team brings diverse expertise to solve your business challenges.
+            Whether you need to enhance your social media, create engaging
+            website content, or boost sales with targeted digital marketing, we
+            have the right talent. From copywriters and designers to social
+            media managers and video editors, we work together to deliver
+            results. With a dedicated account manager, you'll have a single
+            point of contact to ensure your campaign's success.
           </p>
         </div>
         <img className="meet-us__img" src={meetUsImg} alt="our team image" />
