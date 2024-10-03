@@ -1378,6 +1378,7 @@ header.project-overview .nav_link {
   font-size: var(--font-xxl);
   font-weight: 700;
   background-color: #27bdf3;
+  color: inherit;
   padding: 0.8em 1.5em;
   cursor: pointer;
   transition: transform 300ms ease-in-out;
@@ -1699,6 +1700,10 @@ header.project-overview .nav_link {
 
   .about-project_content .right {
     padding: 150px 40px 150px 50px;
+  }
+
+  .about-project_content .right ul li > span:first-child {
+    display: block;
   }
 
   .project-gallery .project-asset {

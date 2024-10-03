@@ -14,7 +14,7 @@ export default function ProjectOverview() {
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745327/DMSL-BETA/Jaye-hero-img_jjvxqa.jpg",
       projectName: "Jaye<br/>Foods",
       aboutUs:
-        "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
+        "For Jaye Foods, and FMCG brand based in Nigeria, we created the company's brand identity, including their logo, typography, and color scheme. We also developed their website to establish a cohesive and impactful online presence.",
       company: "Jaye Foods",
       projectType: "Digital branding",
       timeEstimation: "2 months",
@@ -75,7 +75,7 @@ export default function ProjectOverview() {
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745308/DMSL-BETA/bookyard-hero_sxodza.png",
       projectName: "Book Yard<br/>Podcast",
       aboutUs:
-        "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
+        "For The Book Yard Podcast, we designed the logo, created branding assets and social media templates, and produced an announcement motion video for digital publicity and engagement",
       company: "Book Yard Podcast",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
@@ -172,12 +172,8 @@ export default function ProjectOverview() {
                   <span>{requestedPage.projectType}</span>
                 </li>
                 <li>
-                  <span>For company:</span>
+                  <span>Client:</span>
                   <span>{requestedPage.company}</span>
-                </li>
-                <li>
-                  <span>Time estimation:</span>
-                  <span>{requestedPage.timeEstimation}</span>
                 </li>
               </ul>
             </div>
@@ -212,14 +208,15 @@ export default function ProjectOverview() {
           </div>
           {/* project gallery ends*/}
           <div className="enquiry">
-            <h1>What’s Next?</h1>
+            <h1>Did you like this?</h1>
             <p>
-              Short text goes here, something that will work with the call to
-              action.Short text goes here, something that will work with the
-              call to action. Short text goes here, something that will work
-              with the call to action.
+              We can achieve similar results with your business.
+              <br />
+              Let's make your brand the next success story
             </p>
-            <a className="enquiry-btn">Let’s Work Together!</a>
+            <Link to="/#packages" className="enquiry-btn">
+              Get Started!
+            </Link>
           </div>
         </div>
       </div>
