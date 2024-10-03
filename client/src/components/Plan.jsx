@@ -169,6 +169,7 @@ function CheckOutButton({ id }) {
   async function handleClick(itemId) {
     try {
       // Post a request to the server
+      setLoading(true);
       const res = await fetch(
         "https://dmsl-beta-xrq6.vercel.app/create-checkout-session",
         {
@@ -182,22 +183,21 @@ function CheckOutButton({ id }) {
         }
       );
 
-      setLoading(true);
-
       // Check if the response is OK
       if (res.ok) {
         const { url } = await res.json();
-        setIsSuccessful(true); // Set success state if the call was successful
+        //setIsSuccessful(true); // Set success state if the call was successful
         window.location = url; // Redirect to the URL
       } else {
-        setLoading(false);
         const errorData = await res.json();
         throw new Error(errorData.error);
       }
     } catch (e) {
-      setLoading(false);
       console.error("Error:", e.message);
-      setErrorMessage(e.message); // Set error message if the request fails
+      //setErrorMessage(e.message); // Set error message if the request fails
+    } finally {
+      // Stop loading when the request is completed, regardless of success or failure
+      setLoading(false);
     }
   }
 
@@ -208,10 +208,10 @@ function CheckOutButton({ id }) {
       }}
       className="btn"
     >
-      {!loading ? (
-        "SELECT PACKAGE"
-      ) : (
+      {loading ? (
         <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
+      ) : (
+        "SELECT PACKAGE"
       )}
     </button>
   );
