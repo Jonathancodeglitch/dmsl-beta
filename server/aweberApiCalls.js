@@ -134,7 +134,7 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   console.log("payment succeeded tag was removed");
 
   // remove trigger tag
-/*   await modifySubscribers(
+   /*  await modifySubscribers(
     {
       tags: {
         remove: ["payment succeeded"],
@@ -209,14 +209,14 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
         console.log("sending feedback");
 
         //remove trigger
-        await modifySubscribers(
+       /*  await modifySubscribers(
           {
             tags: {
               add: ["send_cancellation_reason"],
             },
           },
           dmslTeamEmail
-        );
+        ); */
       }
     } else {
       console.log("this user did not give a feedback about cancellation!!");
@@ -278,14 +278,14 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
       console.log("renewal tag added");
 
       //remove trigger tag
-      await modifySubscribers(
+     /*  await modifySubscribers(
         {
           tags: {
             remove: ["cancel subscription", "renewal subscription"],
           },
         },
         subscriberEmail
-      );
+      ); */
 
       console.log("renewal tag removed!!");
     }
@@ -323,14 +323,14 @@ async function handleNotifyingCustomersOnFailedPayment(
   await modifySubscribers(requestBody, customerEmail);
 
   //remove trigger tag
-  await modifySubscribers(
+ /*  await modifySubscribers(
     {
       tags: {
         add: ["payment failed"],
       },
     },
     customerEmail
-  );
+  ); */
 }
 
 // send the message entered on contact form to  mr soji
@@ -385,7 +385,6 @@ async function sendMessageFromContactUsFormToDmslTeam(
   }
   //add the sender email as a subscriber
 }
-
 
 //remeber to schedule when the notification is made on the dashboard
 /* async function handleNotifyingSubscribersOnUpcomingPayment(subscriber) {
