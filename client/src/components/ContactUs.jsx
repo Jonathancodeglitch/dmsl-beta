@@ -49,7 +49,7 @@ export default function ContactUs() {
       <div className="container row">
         <div className="contact-us_content">
           <h2>LET’S TALK</h2>
-          <h1>Write For Us Here</h1>
+          <h1>Write Us</h1>
           <p>Feel free to reach out with whatever question you might have.</p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>

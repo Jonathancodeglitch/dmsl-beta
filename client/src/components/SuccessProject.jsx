@@ -2,7 +2,7 @@ export default function SuccessProject() {
   return (
     <section className="Success-project">
       <div className="container secondary-container">
-        <h1 className="success-project_title">SUCCESS PROJECT</h1>
+        <h1 className="success-project_title">COMPLETED PROJECT</h1>
         <ul className="success-project_lists">
           <li>
             <span>Project type:</span>

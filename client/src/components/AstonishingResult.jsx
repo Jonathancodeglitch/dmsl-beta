@@ -3,22 +3,9 @@ export default function AstonishingResult() {
     <section className="astonishing-result">
       <div className="container">
         <h1 className="astonishing-result_title">
-          Unlock Astonishing Results in just 3 Simple Steps!
+          Unlock Astonishing Results!
         </h1>
         <div className="row">
-          <div className="result">
-            <div className="icons">
-              <img
-                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745379/DMSL-BETA/voice-chat_vykhvz.svg"
-                alt="icon"
-              />
-            </div>
-            <div className="result-header">Free Consultation</div>
-            <p>
-              Let’s discuss your goals, challenges, and how we can turn your
-              vision into reality.
-            </p>
-          </div>
           <div className="result">
             <div className="icons">
               <img

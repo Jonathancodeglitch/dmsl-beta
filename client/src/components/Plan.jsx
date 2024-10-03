@@ -135,9 +135,9 @@ function ServiceListing({ serviceName, serviceListing }) {
 }
 
 function CheckOutButton({ id }) {
-  const [cardClick, setCardClick] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function handleClick(itemId) {
+  /* async function handleClick(itemId) {
     setCardClick(true);
     //post a request to the server https://dmsl-beta-xrq6.vercel.app
     fetch("https://dmsl-beta-xrq6.vercel.app/create-checkout-session", {
@@ -164,6 +164,41 @@ function CheckOutButton({ id }) {
       .catch((e) => {
         console.error(e.error);
       });
+  } */
+
+  async function handleClick(itemId) {
+    try {
+      // Post a request to the server
+      const res = await fetch(
+        "https://dmsl-beta-xrq6.vercel.app/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: itemId,
+          }),
+        }
+      );
+
+      setLoading(true);
+
+      // Check if the response is OK
+      if (res.ok) {
+        const { url } = await res.json();
+        setIsSuccessful(true); // Set success state if the call was successful
+        window.location = url; // Redirect to the URL
+      } else {
+        setLoading(false);
+        const errorData = await res.json();
+        throw new Error(errorData.error);
+      }
+    } catch (e) {
+      setLoading(false);
+      console.error("Error:", e.message);
+      setErrorMessage(e.message); // Set error message if the request fails
+    }
   }
 
   return (

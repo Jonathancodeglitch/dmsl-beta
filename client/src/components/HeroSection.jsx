@@ -79,11 +79,6 @@ function HeroContentSecondary() {
             src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745308/DMSL-BETA/bookyard-hero_sxodza.png"
             alt="previous clients logos"
           />
-          <img
-            className="previous-clients__logo"
-            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745337/DMSL-BETA/olby-hero_yvku0h.png"
-            alt="previous clients logos"
-          />
         </Slider>
         <div className="slider__btns">
           <div className="slider__btn" onClick={previousSlide}>

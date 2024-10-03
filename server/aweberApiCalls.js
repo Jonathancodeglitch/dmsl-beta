@@ -134,14 +134,14 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   console.log("payment succeeded tag was removed");
 
   // remove trigger tag
-  await modifySubscribers(
+/*   await modifySubscribers(
     {
       tags: {
         remove: ["payment succeeded"],
       },
     },
     subscriptionInfo.customerEmail
-  );
+  ); */
   console.log("payment succeeded tag was removed");
 }
 

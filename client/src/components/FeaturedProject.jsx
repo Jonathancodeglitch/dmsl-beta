@@ -8,7 +8,7 @@ export default function Projects({ home = true }) {
       category: "BRANDING",
       projectName: "Jaye Foods",
       img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745326/DMSL-BETA/jaye-img_vzgxvv.png",
-      client: "Ajaye Crowther",
+      client: "Jaye Foods",
       location: "Nigeria",
       Date: "03-jun-23",
       Budget: "$12,000",
@@ -19,7 +19,7 @@ export default function Projects({ home = true }) {
       category: "DIGITAL MARKETING",
       projectName: "Book Yard Podcast",
       img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745305/DMSL-BETA/bookyard-img_fli0d8.png",
-      client: "AT Sonola",
+      client: "Book Yard Podcast",
       location: "United Kingdom",
       Date: "12–May-23",
       Budget: "$5,000",
@@ -30,7 +30,7 @@ export default function Projects({ home = true }) {
       category: "DIGITAL STRATEGY",
       projectName: "Townsend Rail",
       img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745366/DMSL-BETA/townsend-img_qbhxjs.png",
-      client: "Ajaye Crowther",
+      client: "Townsend Rail",
       location: "Nigeria",
       Date: "03-jun-23",
       Budget: "$12,000",
@@ -41,7 +41,7 @@ export default function Projects({ home = true }) {
       category: "DIGITAL MARKETING",
       projectName: "Young Women In IT",
       img: "https://res.cloudinary.com/dv6uz0bks/image/upload/c_crop,w_531,h_380/v1719751822/DMSL-BETA/ywiit-img_axvipz.png",
-      client: "Ajaye Crowther",
+      client: "Young Women In IT",
       location: "Nigeria",
       Date: "03-jun-23",
       Budget: "$12,000",
@@ -52,21 +52,10 @@ export default function Projects({ home = true }) {
       category: "DIGITAL MARKETING",
       projectName: "Shea Origin",
       img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719751822/DMSL-BETA/shea-origin-img_yhsjqi.png",
-      client: "AT Sonola",
+      client: "Shea Origin",
       location: "Nigeria",
       Date: "03-jun-23",
       Budget: "$12,000",
-    },
-    {
-      id: 6,
-      linkTo: "olby",
-      category: "DIGITAL CONSULTANCY",
-      projectName: "Olby",
-      img: "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719751820/DMSL-BETA/olby-img_ukirx5.png",
-      client: "Ajaye Crowther",
-      location: "Nigeria",
-      Date: "03-jun-23",
-      Budget: "$3,000",
     },
   ];
 
@@ -81,7 +70,7 @@ export default function Projects({ home = true }) {
       <div className="container">
         <h1 className="featured-project_title">Other Featured Projects</h1>
         <div className="feature-project_cards">
-          {projects.map((project, index) => {
+          {projects.map((project) => {
             return (
               <Link to={`/${project.linkTo}`} className="card" key={project.id}>
                 <div className="category">{project.category}</div>
@@ -95,20 +84,6 @@ export default function Projects({ home = true }) {
                   <p>
                     Client
                     <span>{project.client}</span>
-                  </p>
-                  <p>
-                    Date
-                    <span>{project.Date}</span>
-                  </p>
-                </div>
-                <div className="row">
-                  <p>
-                    Location
-                    <span>{project.location}</span>
-                  </p>
-                  <p>
-                    Budget
-                    <span>{project.Budget}</span>
                   </p>
                 </div>
               </Link>
