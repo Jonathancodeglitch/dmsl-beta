@@ -162,7 +162,7 @@ export default function ProjectOverview() {
           {/* project details starts */}
           <div className="about-project_content">
             <div className="left">
-              <h1>About Project</h1>
+              <h1>ABOUT THIS PROJECT</h1>
               <p>{requestedPage.aboutUs}</p>
             </div>
             <div className="right">

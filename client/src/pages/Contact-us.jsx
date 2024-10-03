@@ -8,13 +8,13 @@ export default function ContactUsPage() {
     <>
       <SecondaryHeroSection pageName="contact-us-hero">
         <div className="hero_content project-hero">
-          <h1 className="hero_content-header">TELL US EVERYTHING</h1>
+          <h1 className="hero_content-header">TALK TO US</h1>
           <h1 className="hero_content-big">
-            Experience the Magic Of <span>DMSL</span>
+            How Can We Serve <span>You </span>Today?
           </h1>
           <p>
-            Questions? Comments? Concerns? We are here for your everyday Digital
-            needs. Send us a message, We’d love to hear from you.
+            Got questions? Comments? Concerns? Send us a message.
+            <br /> We’d love to hear from you!
           </p>
           <FontAwesomeIcon icon={faDiamond} className="diamond" />
           <img

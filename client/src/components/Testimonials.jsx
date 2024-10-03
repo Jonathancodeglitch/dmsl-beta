@@ -17,10 +17,13 @@ export default function Testimonial() {
             </video>
           </div>
           <div className="client-info">
-            <div className="profile"></div>
+            <img
+              className="profile"
+              src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1727992124/DMSL-BETA/kids_interiors_iithip.png"
+            />
             <div className="col">
-              <div className="client-name">Madine Kind Business</div>
-              <div className="business-name">MKKids Interiors</div>
+              <div className="client-name">Madina King</div>
+              <div className="business-name">MK Kids Interiors</div>
             </div>
           </div>
         </div>
@@ -37,7 +40,10 @@ export default function Testimonial() {
             </div>
           </div>
           <div className="client-info">
-            <div className="profile"></div>
+            <img
+              className="profile"
+              src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1727992124/DMSL-BETA/eloquent_event_t2uoee.jpg"
+            />
             <div className="col">
               <div className="client-name">Dupe Awosika</div>
               <div className="business-name">Eloquent Events Management</div>
@@ -54,10 +60,13 @@ export default function Testimonial() {
             </video>
           </div>
           <div className="client-info">
-            <div className="profile"></div>
+            <img
+              className="profile"
+              src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1727992124/DMSL-BETA/print_haven_img_sbvawh.png"
+            />
             <div className="col">
-              <div className="client-name">Client Name</div>
-              <div className="business-name">The Print Haven By KFA nothing</div>
+              <div className="client-name">Dr. Femi Adekoya</div>
+              <div className="business-name">The Print Haven By KFA</div>
             </div>
           </div>
         </div>

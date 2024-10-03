@@ -48,7 +48,7 @@ function HeroContentSecondary() {
     <div className="hero_content-secondary">
       <h1 className="hero_content-secondary-title">PREVIOUS CLIENTS</h1>
       <p>
-        Here are some of our successful projects, and businesses like yours that
+        Here are some successful projects, and businesses like yours that
         we’ve helped achieve their goals.
       </p>
       <div className="slider">
