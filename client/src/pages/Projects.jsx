@@ -11,14 +11,15 @@ export default function ProjectPage() {
         <div className="hero_content project-hero">
           <h1 className="hero_content-header">FEATURED PROJECTS</h1>
           <h1 className="hero_content-big">
-            Your Success Story Begins With <span>DMSL</span>
+            Let <span>Us</span> Elevate Your Brand Together
           </h1>
           <p>
-            Supporting the dreams and aspirations of our clients lies at the
-            foundation of the services we provide. We go to great lengths to
-            understand your needs, do our utmost to address them and leave you
-            with a smile and more money in your pocket…. That’s our aim…! Thank
-            you for choosing us to support you on your journey.
+            We’ve worked on a variety of projects that showcase our digital and
+            marketing expertise. From content creation, to website design and
+            social media management.
+            <br />
+            See how we've helped businesses like yours achieve their digital
+            goals.
           </p>
           <FontAwesomeIcon icon={faDiamond} className="diamond" />
           <img

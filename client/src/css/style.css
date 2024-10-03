@@ -234,9 +234,9 @@ header .row {
   flex-shrink: 0;
 }
 
-.slick-slide {
+/* .slick-slide {
   margin-right: 20px;
-}
+} */
 
 .previous-clients__logo {
   height: 200px;
