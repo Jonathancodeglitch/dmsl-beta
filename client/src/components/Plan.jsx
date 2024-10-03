@@ -208,7 +208,7 @@ function CheckOutButton({ id }) {
       }}
       className="btn"
     >
-      {!cardClick ? (
+      {!loading ? (
         "SELECT PACKAGE"
       ) : (
         <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
