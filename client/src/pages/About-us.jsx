@@ -8,20 +8,19 @@ export default function AboutUsPage() {
     <>
       <SecondaryHeroSection pageName="about-us">
         <div className="hero_content about-us">
-          <h1 className="hero_content-header">GET TO KNOW US</h1>
+          <h1 className="hero_content-header">Who we are</h1>
           <h1 className="hero_content-big">
-            DMSL, Where <span>Creativity </span>Meets Technology
+            DMSL: Maximizing <span>Creativity </span> and technology
           </h1>
           <p>
-            We are your strategic partner in navigating the ever-evolving
-            digital world. Our methods are largely data-driven, using insights
-            gained, we leverage cutting-edge AI to craft digital solutions that
-            make real positive impact,whether it's crafting compelling content,
-            managing effective social media campaigns, or optimizing email
-            marketing, we help you connect with your target audience and support
-            you in achieving your business goals, with experience spanning
-            successful projects across the globe, we are your trusted guide to
-            achieving digital excellence, targeted exposure and quality results.
+            We can help you achieve your business goals with data-driven digital
+            solutions.
+            <br />
+            Be it creating authentic engaging content and managing social media
+            or optimizing email marketing, we can help you find and connect with
+            your target audience to serve them.
+            <br />
+            Our experience and successful projects speak for us.
           </p>
           <FontAwesomeIcon icon={faDiamond} className="diamond" />
           <img
