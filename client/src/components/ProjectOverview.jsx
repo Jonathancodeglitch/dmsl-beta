@@ -55,7 +55,7 @@ export default function ProjectOverview() {
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745391/DMSL-BETA/ywiit_zfxw9q.png",
       projectName: "ywiit",
       aboutUs:
-        "We branded The company, designed their logo, defined their typography and colors, also went ahead to develop their website",
+        "We branded th company, designed their logo, defined their typography and colors, also went ahead to develop their website",
       company: "YWIIT",
       projectType: "Digital Strategy",
       timeEstimation: "4 months",
@@ -75,7 +75,7 @@ export default function ProjectOverview() {
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745308/DMSL-BETA/bookyard-hero_sxodza.png",
       projectName: "Book Yard<br/>Podcast",
       aboutUs:
-        "For The Book Yard Podcast, we designed the logo, created branding assets and social media templates, and produced an announcement motion video for digital publicity and engagement",
+        "For the Book Yard Podcast, we designed the logo, created branding assets and social media templates, and produced an announcement motion video for digital publicity and engagement",
       company: "Book Yard Podcast",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
@@ -95,7 +95,7 @@ export default function ProjectOverview() {
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745378/DMSL-BETA/townsend-hero-img_vvnxdm.png",
       projectName: "Townsend<br/>Rail",
       aboutUs:
-        "We branded The company, designed their logo, defined their typography and colors, also went ahead to develop their website.",
+        "We branded the company, designed their logo, defined their typography and colors, also went ahead to develop their website.",
       company: "Townsend Rail",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
