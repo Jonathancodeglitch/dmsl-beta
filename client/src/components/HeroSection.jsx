@@ -97,9 +97,9 @@ export default function HeroSection() {
     <section className="hero">
       <div className="container secondary-container">
         <div className="hero_content">
-          <h1 className="hero_content-header">
+         {/*  <h1 className="hero_content-header">
             Digital and Media Services Limited
-          </h1>
+          </h1> */}
           <h1 className="hero_content-big">
             Grow Your Business with Our Comprehensive <span>Digital </span>
              Solutions

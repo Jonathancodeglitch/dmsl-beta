@@ -1,7 +1,7 @@
-import Logo from "../img/logo-white.svg";
-import twitter from "../img/twitter.svg";
-import instagram from "../img/instagram.svg";
-import linkedin from "../img/linkedin.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
@@ -21,18 +21,21 @@ export default function Footer() {
               services.
             </p>
             <div className="footer-social-icon">
-              <img
-                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745378/DMSL-BETA/twitter_rp9tgu.svg"
-                alt="twitter"
-              />
-              <img
-                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745313/DMSL-BETA/instagram_axsel9.svg"
-                alt="twitter"
-              />
-              <img
-                src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745323/DMSL-BETA/linkedin_gzaozh.svg"
-                alt="twitter"
-              />
+              <a href="https://x.com/digitalandmedi1">
+                <FontAwesomeIcon icon={faTwitter} beat />
+              </a>
+              <a
+                href="https://www.instagram.com/digitalandmediaservices/"
+                target="_blank"
+              >
+                <FontAwesomeIcon icon={faInstagram} beat />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100063786091313"
+                target="_blank"
+              >
+                <FontAwesomeIcon icon={faSquareFacebook} beat />
+              </a>
             </div>
           </div>
           <ul className="footer-links">
@@ -41,17 +44,11 @@ export default function Footer() {
             <li>Digital and Media products</li>
             <li>Copy Writing and Content Creation Services</li>
           </ul>
-          <ul className="footer-links">
+          {/*  <ul className="footer-links">
             <li className="title">SUPPORT</li>
             <li>Help center</li>
             <li>FAQ</li>
-          </ul>
-          <ul className="footer-links">
-            <li className="title">DMSL</li>
-            <li>About Us</li>
-            <li>Projects</li>
-            <li>Contact Us</li>
-          </ul>
+          </ul> */}
         </div>
         <p className="copyright">Copyright &copy; Developed by DMSL</p>
       </div>

@@ -158,7 +158,7 @@ header .row {
 
 .hero {
   background-color: #27bdf3;
-  padding: 250px 0px 100px 0px;
+  padding: 200px 0px 100px 0px;
   text-align: center;
 }
 
@@ -177,10 +177,9 @@ header .row {
   color: #363636;
   width: 80%;
   margin: 0 auto;
-  border-top: 1px solid #fff;
-  margin-top: 45px;
+  border-bottom: 1px solid #fff;
   line-height: 1.1;
-  padding-top: 19px;
+  padding-bottom: 20px;
 }
 
 .hero .hero_content-big > span {
@@ -1204,14 +1203,18 @@ textarea:focus {
   margin-top: 40px;
 }
 
-.footer-social-icon img {
-  display: inline-block;
-  width: 35px;
-  height: 35px;
+.footer-social-icon a {
+  color: white;
+  cursor: pointer;
+  font-size: 35px;
+}
+
+.footer-social-icon a:hover {
+  color: #27bdf3;
 }
 
 .footer-social-icon > * + * {
-  margin-left: 17px;
+  margin-left: 30px;
 }
 
 .footer-links .title {
@@ -1495,7 +1498,7 @@ header.project-overview .nav_link {
 
   /* hero */
   .hero {
-    padding: 200px 0px 100px 0px;
+    padding: 160px 0px 100px 0px;
   }
 
   .hero .hero_content-big {
@@ -2235,7 +2238,7 @@ header.project-overview .nav_link {
   /* hero */
 
   .hero {
-    padding: 152px 0px 106px 0px;
+    padding: 115px 0px 100px 0px;
   }
 
   .slider__btns {
@@ -2536,10 +2539,8 @@ header.project-overview .nav_link {
     font-weight: 500;
   }
 
-  .footer-social-icon img {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
+  .footer-social-icon a {
+    font-size: 22px;
   }
 
   .footer .row {
@@ -2666,10 +2667,6 @@ header.project-overview .nav_link {
   }
 
   /* secondary hero section */
-
-  .secondary-hero .hero_content-big {
-    margin-top: 17px;
-  }
 
   .secondary-hero .hero_content {
     padding-bottom: 60px;

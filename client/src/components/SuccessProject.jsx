@@ -27,10 +27,9 @@ function TheChallenge() {
         <div className="the-challenge_content">
           <h1 className="the-challenge_title">THE CHALLENGE</h1>
           <p>
-            The challenge was to increase the traffic for the known company as
-            their turn up for events has been consistent in the level of low
-            turn out of individuals and people who might find their program
-            helpful.
+            The challenge was to increase traffic to the organisation's website,
+            as the turnout for their training events had been consistent low
+            within their target audience.
           </p>
         </div>
         <div className="challenge-images">

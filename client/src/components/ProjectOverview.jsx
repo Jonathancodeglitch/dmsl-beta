@@ -35,7 +35,7 @@ export default function ProjectOverview() {
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745377/DMSL-BETA/shea-origin-hero_hz1boz.png",
       projectName: "Shea<br/>Origin",
       aboutUs:
-        "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
+        "We designed their products brochure using branded typography and colours",
       company: "Shea Origin",
       projectType: "Digital branding",
       timeEstimation: "2 months",
@@ -55,7 +55,7 @@ export default function ProjectOverview() {
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745391/DMSL-BETA/ywiit_zfxw9q.png",
       projectName: "ywiit",
       aboutUs:
-        "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
+        "We branded The company, designed their logo, defined their typography and colors, also went ahead to develop their website",
       company: "YWIIT",
       projectType: "Digital Strategy",
       timeEstimation: "4 months",
@@ -90,12 +90,12 @@ export default function ProjectOverview() {
     },
     {
       url: "townsend-rail",
-      nextProjectUrl: "olby",
+      nextProjectUrl: "jaye-food",
       HeroImg:
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745378/DMSL-BETA/townsend-hero-img_vvnxdm.png",
       projectName: "Townsend<br/>Rail",
       aboutUs:
-        "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
+        "We branded The company, designed their logo, defined their typography and colors, also went ahead to develop their website.",
       company: "Townsend Rail",
       projectType: "Digital Strategy",
       timeEstimation: "3 months",
@@ -106,29 +106,7 @@ export default function ProjectOverview() {
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745369/DMSL-BETA/townsend-img-4_ha6wcp.jpg",
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745379/DMSL-BETA/townsend-img-5_njfaju.jpg",
       ],
-      nextProjectName: "Olby",
-      nextProjectImage:
-        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745337/DMSL-BETA/olby-hero_yvku0h.png",
-    },
-    {
-      url: "olby",
-      nextProjectUrl: "jaye-food",
-      HeroImg:
-        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745337/DMSL-BETA/olby-hero_yvku0h.png",
-      projectName: "Olby",
-      aboutUs:
-        "Short description about the project goes here, we branded The company, designed their logo, defined their typography And colors. Also went ahead to develop their website",
-      company: "Olby",
-      projectType: "Digital Strategy",
-      timeEstimation: "3 months",
-      asset: [
-        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745344/DMSL-BETA/olby-img-1_nobnzp.jpg",
-        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745348/DMSL-BETA/olby-img-2_eeznuj.jpg",
-        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745350/DMSL-BETA/olby-img-3_zdjilk.jpg",
-        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745348/DMSL-BETA/olby-img-4_hshcc7.jpg",
-        "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745349/DMSL-BETA/olby-img-5_gp6pjz.jpg",
-      ],
-      nextProjectName: "jaye-food",
+      nextProjectName: "jaye-foods",
       nextProjectImage:
         "https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745327/DMSL-BETA/Jaye-hero-img_jjvxqa.jpg",
     },
