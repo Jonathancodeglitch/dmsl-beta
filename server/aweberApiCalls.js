@@ -377,14 +377,14 @@ async function sendMessageFromContactUsFormToDmslTeam(
       };
 
       //remove trigger tag
-      await modifySubscribers(
+      /* await modifySubscribers(
         {
           tags: {
             remove: ["send_contact_message"],
           },
         },
         dmslTeamEmail
-      );
+      ); */
       
       // add dmsl support emal to subscriber List
       await addDmslTeamToAweber(requestBody);
