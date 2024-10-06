@@ -10,7 +10,7 @@
 
 .success-page {
   background-color: #27bdf3;
-  padding: 50px 0px 30px 0px;
+  padding: 20px 0px;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -21,48 +21,47 @@
   max-width: 600px;
   width: 90%;
   background-color: white;
-  padding: 20px;
-  font-weight: 400;
+  padding: 20px 20px 40px 20px;
+  border-radius: 15px;
 }
 
 .success-page__content > * + * {
   margin-top: 8px;
 }
 
-.success-page__title,
-.success-page__next-title,
-.success-page__order-details-title {
+.success-page__title {
   text-align: center;
   font-size: 1.3rem;
   color: #363636;
 }
 
-.success-page__socials-icons,
-.success-page__footer {
+.success-page__desc {
   text-align: center;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
-.success-page__socials-icons {
-  margin-top: 8px;
-}
-
-.success-page__socials-icons > * {
+.success-page__desc--contact {
+  color: #007bff;
   cursor: pointer;
-  font-size: 2rem;
-  color: #00376e;
 }
 
-.success-page__socials-icons > * + * {
-  margin-left: 20px;
+.success-page__desc > * + * {
+  margin-top: 10px;
 }
 
 .success-page__btn {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
+  font-weight: 800;
 }
 
 @media (max-width: 500px) {
   .success-page__content {
-    padding: 15px;
+    padding: 16px;
+  }
+
+  .success-page__desc--contact {
+    word-break: break-all;
   }
 }

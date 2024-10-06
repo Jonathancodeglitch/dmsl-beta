@@ -26,7 +26,7 @@ app.post("/contact-us",express.json(), (req, res) => {
   try {
     const { email, subject, message } = req.body;
     console.log(email, subject, message);
-    //sendMessageFromContactUsFormToDmslTeam(email, subject, message);
+    sendMessageFromContactUsFormToDmslTeam(email, subject, message);
     res.send("message received!!");
   } catch (error) {
     console.log("while get contact us form data", error);

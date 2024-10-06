@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import Stripe from "stripe";
 
+//send email about support or cancellation to
+
 dotenv.config();
 
 const stripeCheckOutRouter = express.Router();

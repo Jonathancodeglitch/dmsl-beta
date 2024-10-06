@@ -134,7 +134,7 @@ async function handleNotifyingCustomerOnSucceededPayment(subscriptionInfo) {
   console.log("payment succeeded tag was removed");
 
   // remove trigger tag
-   /*  await modifySubscribers(
+  /*  await modifySubscribers(
     {
       tags: {
         remove: ["payment succeeded"],
@@ -166,8 +166,12 @@ async function addDmslTeamToAweber(requestBody) {
       body: body,
     });
 
-    console.log(response.status);
-    console.log("Dmsl team was added to aweber");
+    if (response.ok) {
+      console.log("Dmsl team was added to AWeber successfully!");
+    } else {
+      const errorData = await response.json();
+      console.log(errorData);
+    }
   } catch (err) {
     console.log(
       `an error occured while trying to addDmslTeam to aweber ${err}`
@@ -209,7 +213,7 @@ async function notifyDmslTeamOnWhySubscriptionWasCanceled(
         console.log("sending feedback");
 
         //remove trigger
-       /*  await modifySubscribers(
+        /*  await modifySubscribers(
           {
             tags: {
               add: ["send_cancellation_reason"],
@@ -278,7 +282,7 @@ async function handleNotifyingCustomersOnRenewedSubscription(subscriberEmail) {
       console.log("renewal tag added");
 
       //remove trigger tag
-     /*  await modifySubscribers(
+      /*  await modifySubscribers(
         {
           tags: {
             remove: ["cancel subscription", "renewal subscription"],
@@ -323,7 +327,7 @@ async function handleNotifyingCustomersOnFailedPayment(
   await modifySubscribers(requestBody, customerEmail);
 
   //remove trigger tag
- /*  await modifySubscribers(
+  /*  await modifySubscribers(
     {
       tags: {
         add: ["payment failed"],
@@ -339,51 +343,54 @@ async function sendMessageFromContactUsFormToDmslTeam(
   subject,
   message
 ) {
-  //check if the email already exist
-  const dmslTeamEmail = "jonathankendrick697@gmail.com";
-  const subcriber = await getSubscriber(dmslTeamEmail);
-  const previousCustomField = subcriber.custom_fields;
-  let requestBody;
+  try {
+    const dmslTeamEmail = "jonathankendrick697@gmail.com";
+    const subcriber = await getSubscriber(dmslTeamEmail);
+    if (subcriber) {
+      const previousCustomField = subcriber.custom_fields;
+      //If it already exist then add the trigger tag
+      const requestBody = {
+        custom_fields: {
+          ...previousCustomField,
+          sender_email: senderEmail,
+          contact_us_subject: subject,
+          contact_us_message: message,
+        },
+        tags: {
+          add: ["send_contact_message"],
+        },
+      };
 
-  if (subcriber) {
-    requestBody = {
-      custom_fields: {
-        ...previousCustomField,
-        contact_us_subject: subject,
-        contact_us_message: message,
-      },
-      tags: {
-        add: ["send_contact_message"],
-      },
-    };
+      //add trigger tag
+      await modifySubscribers(requestBody, dmslTeamEmail);
+    } else {
+      //add the subscriber to aweber with the trigger btn
+      const requestBody = {
+        custom_fields: {
+          sender_email: senderEmail,
+          contact_us_subject: subject,
+          contact_us_message: message,
+        },
+        name: "Support team",
+        email: dmslTeamEmail,
+        tags: ["send_contact_message"],
+      };
+      // add dmsl support emal to subscriber List
+      await addDmslTeamToAweber(requestBody)
+    }
 
-    //add trigger
-    await modifySubscribers(requestBody, dmslTeamEmail);
-
-    //remove trigger
-    await modifySubscribers(
+    //remove trigger tag
+    /* await modifySubscribers(
       {
         tags: {
           remove: ["send_contact_message"],
         },
       },
       dmslTeamEmail
-    );
-  } else {
-    requestBody = {
-      custom_fields: {
-        contact_us_subject: subject,
-        contact_us_message: message,
-      },
-      email: dmslTeamEmail,
-      tags: {
-        add: ["send_contact_message"],
-      },
-    };
-
-    await addDmslTeamToAweber(requestBody);
+    ); */
+  } catch (err) {
+    console.error(`An error occurred: ${err.message}`);
   }
-  //add the sender email as a subscriber
 }
 
 //remeber to schedule when the notification is made on the dashboard

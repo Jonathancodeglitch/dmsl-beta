@@ -16,7 +16,7 @@ export default function ContactUs() {
   async function onSubmit(data) {
     const { email, subject, message } = data;
     try {
-      const response = await fetch("https://dmsl-beta-xrq6.vercel.app/contact-us", {
+      const response = await fetch("http://localhost:8000/contact-us", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
