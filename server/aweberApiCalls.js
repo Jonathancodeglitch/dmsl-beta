@@ -375,19 +375,20 @@ async function sendMessageFromContactUsFormToDmslTeam(
         email: dmslTeamEmail,
         tags: ["send_contact_message"],
       };
-      // add dmsl support emal to subscriber List
-      await addDmslTeamToAweber(requestBody)
-    }
 
-    //remove trigger tag
-    await modifySubscribers(
-      {
-        tags: {
-          remove: ["send_contact_message"],
+      //remove trigger tag
+      await modifySubscribers(
+        {
+          tags: {
+            remove: ["send_contact_message"],
+          },
         },
-      },
-      dmslTeamEmail
-    );
+        dmslTeamEmail
+      );
+      
+      // add dmsl support emal to subscriber List
+      await addDmslTeamToAweber(requestBody);
+    }
   } catch (err) {
     console.error(`An error occurred: ${err.message}`);
   }
