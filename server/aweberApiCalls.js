@@ -380,14 +380,14 @@ async function sendMessageFromContactUsFormToDmslTeam(
     }
 
     //remove trigger tag
-    /* await modifySubscribers(
+    await modifySubscribers(
       {
         tags: {
           remove: ["send_contact_message"],
         },
       },
       dmslTeamEmail
-    ); */
+    );
   } catch (err) {
     console.error(`An error occurred: ${err.message}`);
   }
