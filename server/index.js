@@ -13,7 +13,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://dmsl-beta-client.vercel.app", "http://localhost:5173","https://www.digitalandmediaservices.com"],
+    origin: [
+      "https://dmsl-beta-client.vercel.app",
+      "http://localhost:5173",
+      "https://www.digitalandmediaservices.com",
+    ],
   })
 ); // Allow requests only from this domain
 
