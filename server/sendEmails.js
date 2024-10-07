@@ -2,23 +2,20 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
 dotenv.config();
+
 const transporter = nodemailer.createTransport({
   host: "send.one.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.email,
     pass: process.env.email_password,
   },
 });
 
-console.log(process.env.email_password);
-
-console.log(process.env.email);
 async function sendContactUsFormMessage(emailBody) {
   try {
-    const info = await transporter;
-    info.sendMail({
+    const info = await transporter.sendMail({
       from: `"Dmsl" "${process.env.email}"`,
       to: "jonathankendrick697@gmail.com",
       subject: "Message from contact form",
