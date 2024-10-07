@@ -1,12 +1,14 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
+dotenv.config();
 const transporter = nodemailer.createTransport({
   host: "send.one.com",
   port: 587,
   secure: false, // true for port 465, false for other ports
   auth: {
-    user: "jonathanohwevwo@brinicon.com",
-    pass: "Awontialara$$!",
+    user: process.env.email,
+    pass: process.env.email_password,
   },
 });
 
