@@ -375,16 +375,6 @@ async function sendMessageFromContactUsFormToDmslTeam(
         email: dmslTeamEmail,
         tags: ["send_contact_message"],
       };
-
-      //remove trigger tag
-      /* await modifySubscribers(
-        {
-          tags: {
-            remove: ["send_contact_message"],
-          },
-        },
-        dmslTeamEmail
-      ); */
       
       // add dmsl support emal to subscriber List
       await addDmslTeamToAweber(requestBody);
