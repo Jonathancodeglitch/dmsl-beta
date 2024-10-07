@@ -17,7 +17,8 @@ console.log(process.env.email_password);
 console.log(process.env.email);
 async function sendContactUsFormMessage(emailBody) {
   try {
-    const info = await transporter.sendMail({
+    const info = await transporter;
+    info.sendMail({
       from: `"Dmsl" "${process.env.email}"`,
       to: "jonathankendrick697@gmail.com",
       subject: "Message from contact form",
