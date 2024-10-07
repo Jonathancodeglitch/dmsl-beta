@@ -6,6 +6,10 @@ dotenv.config();
 const transporter = nodemailer.createTransport({
   host: "send.one.com",
   port: 587,
+  tls: {
+    rejectUnauthorized: false,
+    minVersion: "TLSv1.2"
+}
   secure: false,
   auth: {
     user: process.env.email,
