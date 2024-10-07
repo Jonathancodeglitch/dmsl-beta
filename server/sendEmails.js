@@ -8,8 +8,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   tls: {
     rejectUnauthorized: false,
-    minVersion: "TLSv1.2"
-}
+    minVersion: "TLSv1.2",
+  },
   secure: false,
   auth: {
     user: process.env.email,
@@ -33,6 +33,7 @@ async function sendContactUsFormMessage(emailBody) {
   };
 
   await new Promise((resolve, reject) => {
+    console.log("hiii");
     transporter.sendMail(mailInfo, (err, info) => {
       if (err) {
         console.error(err);
