@@ -39,9 +39,6 @@ stripeCheckOutRouter.post("/", express.json(), async (req, res) => {
       mode: "subscription",
       success_url: `${process.env.CLIENT_URL}/success-page`,
       cancel_url: process.env.CLIENT_URL,
-      subscription_data: {
-        trial_period_days: 14,
-      },
     });
 
     //work on this later
