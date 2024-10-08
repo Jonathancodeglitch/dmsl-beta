@@ -16,16 +16,13 @@ export default function ContactUs() {
   async function onSubmit(data) {
     const { email, subject, message } = data;
     try {
-      const response = await fetch(
-        "https://dmsl-beta-xrq6.vercel.app/contact-us",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, subject, message }),
-        }
-      );
+      const response = await fetch("https://dmsl-beta-xrq6.vercel.app/contact-us", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, subject, message }),
+      });
 
       if (response.ok) {
         setStatus("Message sent successfully!");
