@@ -20,6 +20,8 @@ async function getSubscribers() {
   }
 }
 
+console.log(await getSubscribers())
+
 //get a particular subscriber
 async function getSubscriber(subcriberEmail) {
   try {
@@ -375,7 +377,7 @@ async function sendMessageFromContactUsFormToDmslTeam(
         email: dmslTeamEmail,
         tags: ["send_contact_message"],
       };
-      
+
       // add dmsl support emal to subscriber List
       await addDmslTeamToAweber(requestBody);
     }
