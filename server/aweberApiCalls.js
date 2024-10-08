@@ -3,7 +3,7 @@ import { retriveAccessTokenFromDb } from "./db.js";
 
 //Get all subscribers
 async function getSubscribers() {
-  const Token = await retriveAccessTokenFromDb();
+  const Token = await retriveAccessTokenFromDb()
   try {
     const headers = {
       Accept: "application/json",
