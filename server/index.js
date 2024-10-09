@@ -17,6 +17,7 @@ app.use(
       "https://dmsl-beta-client.vercel.app",
       "http://localhost:5173",
       "https://www.digitalandmediaservices.com",
+      "https://digitalandmediaservices.com",
     ],
   })
 ); // Allow requests only from this domain
