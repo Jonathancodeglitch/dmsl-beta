@@ -30,7 +30,7 @@ async function sendContactUsFormMessage(emailBody) {
                 <div style="text-align: center; font-size: 14px; color: #888; margin-top: 20px;">
                     &copy; 2024 Dmsl. All rights reserved.
                 </div>
-            </div>`, // html body
+            </div>`,
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -38,6 +38,5 @@ async function sendContactUsFormMessage(emailBody) {
     console.log(error, "while are sending mail");
   }
 }
-
 
 export { sendContactUsFormMessage };
