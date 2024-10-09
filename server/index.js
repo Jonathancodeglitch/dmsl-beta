@@ -29,10 +29,10 @@ app.use(userLocation);
 app.post("/contact-us", express.json(), async (req, res) => {
   try {
     const { email, subject, message } = req.body;
-    sendContactUsFormMessage({ email, subject, message });
+    await sendContactUsFormMessage({ email, subject, message });
     res.send("message received!!");
   } catch (error) {
-    console.log("while get contact us form data", error);
+    console.log("while getting contact form data", error);
     res.send("message not received!!");
   }
 });
