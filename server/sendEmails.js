@@ -21,7 +21,7 @@ async function sendContactUsFormMessage(emailBody) {
   try {
     const info = await transporter.sendMail({
       from: `"Dmsl" "${process.env.email}"`,
-      to: "jonathankendrick697@gmail.com",
+      to: "hello@digitalandmediaservices.com",
       subject: "Message from contact form",
       html: `  <div style="max-width: 600px; margin: auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); font-size:20px;">
                 <img src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1728264772/Logo-dark_zi7avz_tarasa.png" alt="dmsl logo" style="width: 150px;"/>
