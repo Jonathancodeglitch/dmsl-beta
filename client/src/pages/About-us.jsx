@@ -25,6 +25,7 @@ export default function AboutUsPage() {
           <FontAwesomeIcon icon={faDiamond} className="diamond" />
           <img
             className="secondary-hero_img"
+            loading="lazy"
             src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745308/DMSL-BETA/about-us-hero-img_lqoiuh.png"
             alt="a business woman img"
           />

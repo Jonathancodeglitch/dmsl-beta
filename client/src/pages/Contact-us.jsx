@@ -19,6 +19,7 @@ export default function ContactUsPage() {
           <FontAwesomeIcon icon={faDiamond} className="diamond" />
           <img
             className="secondary-hero_img"
+            loading="lazy"
             src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745313/DMSL-BETA/businesswoman-img_ognyly.png"
             alt="a business woman img"
           />
@@ -29,14 +30,4 @@ export default function ContactUsPage() {
   );
 }
 
-{
-  /*
-<SecondaryHeroSection
-heroIntro=""
-heroBigText={heroBigText}
-heroDesc="Questions? Comments? Concerns? We are here for your everyday Digital needs. Send us a message, We’d love to hear from you"
-heroImg="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745313/DMSL-BETA/businesswoman-img_ognyly.png"
-name=""
-/> 
-*/
-}
+

@@ -15,13 +15,11 @@ export default function Plan() {
     const hash = location.hash;
     // Check the hash and scroll to the corresponding section
     if (hash === "#packages" && planSectionRef.current) {
-      setTimeout(() => {
-        planSectionRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "nearest",
-        });
-      }, 500);
+      planSectionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
     }
   }, [location]); // Trigger the effect whenever the location changes
 

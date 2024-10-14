@@ -11,13 +11,11 @@ export default function Benefits() {
     const hash = location.hash;
     // Check the hash and scroll to the corresponding section
     if (hash === "#services" && servicesRef.current) {
-      setTimeout(() => {
-        servicesRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "nearest",
-        });
-      }, 100);
+      servicesRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
     }
   }, [location]); // Trigger the effect whenever the location changes
 
@@ -27,7 +25,8 @@ export default function Benefits() {
       <div className="benefits-card-container">
         <div className="card">
           <img
-            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745312/DMSL-BETA/digitalservice-img_kym7at.png"
+            loading="lazy"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1728882982/digitalservice-img-min_pggsx5.png"
             alt="tech image"
           />
           <h3>Digital Services Consultancy</h3>
@@ -39,7 +38,8 @@ export default function Benefits() {
         </div>
         <div className="card">
           <img
-            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745335/DMSL-BETA/mediaproduct-img_q1cmyp.png"
+            loading="lazy"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1728882982/mediaproduct-img-min_wkkaut.png"
             alt="tech image"
           />
           <h3>Digital and Media Products</h3>
@@ -50,7 +50,8 @@ export default function Benefits() {
         </div>
         <div className="card">
           <img
-            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1719745308/DMSL-BETA/copywrite-img_v3wiir.png"
+            loading="lazy"
+            src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1728882981/copywrite-img-min_pqmi8f.png"
             alt="tech image"
           />
           <h3>Copy Writing and Content Creation Services</h3>
