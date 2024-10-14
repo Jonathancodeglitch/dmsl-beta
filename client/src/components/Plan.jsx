@@ -21,16 +21,12 @@ export default function Plan() {
           block: "start",
           inline: "nearest",
         });
-      }, 100);
+      }, 500);
     }
   }, [location]); // Trigger the effect whenever the location changes
 
   return (
-    <section
-      className="plan"
-      ref={planSectionRef}
-      style={{ border: "1px solid red" }}
-    >
+    <section className="plan" ref={planSectionRef}>
       <div className="container row">
         <div className="plan-content">
           <h4>CHOOSE YOUR PLAN</h4>
