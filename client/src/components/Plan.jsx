@@ -15,12 +15,22 @@ export default function Plan() {
     const hash = location.hash;
     // Check the hash and scroll to the corresponding section
     if (hash === "#packages" && planSectionRef.current) {
-      planSectionRef.current.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        planSectionRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+      }, 100);
     }
   }, [location]); // Trigger the effect whenever the location changes
 
   return (
-    <section className="plan" ref={planSectionRef}>
+    <section
+      className="plan"
+      ref={planSectionRef}
+      style={{ border: "1px solid red" }}
+    >
       <div className="container row">
         <div className="plan-content">
           <h4>CHOOSE YOUR PLAN</h4>
@@ -136,35 +146,6 @@ function ServiceListing({ serviceName, serviceListing }) {
 
 function CheckOutButton({ id }) {
   const [loading, setLoading] = useState(false);
-
-  /* async function handleClick(itemId) {
-    setCardClick(true);
-    //post a request to the server https://dmsl-beta-xrq6.vercel.app
-    fetch("https://dmsl-beta-xrq6.vercel.app/create-checkout-session", {
-      method: "post",
-      headers: {
-        "content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: itemId,
-      }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((json) => {
-            Promise.reject(json);
-          });
-        }
-      })
-      .then(({ url }) => {
-        window.location = url;
-      })
-      .catch((e) => {
-        console.error(e.error);
-      });
-  } */
 
   async function handleClick(itemId) {
     try {

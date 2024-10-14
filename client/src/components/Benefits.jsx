@@ -11,7 +11,13 @@ export default function Benefits() {
     const hash = location.hash;
     // Check the hash and scroll to the corresponding section
     if (hash === "#services" && servicesRef.current) {
-      servicesRef.current.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        servicesRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+      }, 100);
     }
   }, [location]); // Trigger the effect whenever the location changes
 
