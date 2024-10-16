@@ -1,30 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import packages from "../planPackages.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router-dom";
 
-export default function Plan() {
-  // Create refs for the sections you want to scroll to
-  const planSectionRef = useRef(null);
-  // Get the current location (to detect hash changes)
-  const location = useLocation();
-  // Handle routing and scrolling to the section
-  useEffect(() => {
-    const hash = location.hash;
-    // Check the hash and scroll to the corresponding section
-    if (hash === "#packages" && planSectionRef.current) {
-      planSectionRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    }
-  }, [location]); // Trigger the effect whenever the location changes
-
+export default function Plan({ isPackagesPage = false }) {
   return (
-    <section className="plan" ref={planSectionRef}>
+    <section className={`plan ${isPackagesPage ? "packages_page" : ""}`}>
       <div className="container row">
         <div className="plan-content">
           <h4>CHOOSE YOUR PLAN</h4>
@@ -125,7 +107,7 @@ function ServiceListing({ serviceName, serviceListing }) {
   return (
     <div className="service_list">
       <h3 className="service_list-title" onClick={handleServiceListClick}>
-        <FontAwesomeIcon icon={faCaretDown} /> {" " + serviceName + " "}
+        <FontAwesomeIcon icon={faCaretRight} /> {"  " + serviceName + " "}
       </h3>
       {serviceList && (
         <ul>

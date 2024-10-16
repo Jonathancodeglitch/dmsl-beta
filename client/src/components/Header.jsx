@@ -42,7 +42,6 @@ export default function Header() {
                 ].join(" ")
               }
               to="/"
-              
             >
               Home
             </NavLink>
@@ -58,28 +57,12 @@ export default function Header() {
             </NavLink>
           </li>
           <li className="nav_list">
-            <NavLink
-              to="/#services"
-              className={({ isActive }) =>
-                [
-                  "nav_link",
-                  isActive && location.hash == "#services" ? "active" : "",
-                ].join(" ")
-              }
-            >
+            <NavLink className="nav_link" to="services">
               SERVICES
             </NavLink>
           </li>
           <li className="nav_list">
-            <NavLink
-              to="/#packages"
-              className={({ isActive }) =>
-                [
-                  "nav_link",
-                  isActive && location.hash == "#packages" ? "active" : "",
-                ].join(" ")
-              }
-            >
+            <NavLink className="nav_link" to="packages">
               PACKAGES
             </NavLink>
           </li>
