@@ -747,8 +747,6 @@ header .row {
 .plan-cards .card {
   padding: 80px 38px 26px 38px;
   border-radius: 32px;
-  display: grid;
-  align-items: start;
 }
 
 .plan-cards .card:nth-child(1) {
@@ -837,8 +835,6 @@ header .row {
   font-size: 18px;
   font-weight: 700;
   width: 100%;
-  align-self: end;
-  height: auto;
 }
 
 .plan-cards .card:nth-child(3) .btn {
@@ -1824,13 +1820,12 @@ header.project-overview .nav_link {
   }
 
   .plan-cards {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 400px));
+    grid-template-columns: repeat(auto-fill, minmax(230px, 350px));
     margin-top: 80px;
     width: 100%;
     margin-left: auto;
-    align-items: stretch;
     justify-content: center;
-    gap: 30px 13px;
+    gap: 30px;
   }
 
   .plan-cards .card {
