@@ -918,9 +918,10 @@ header .row {
 .testimonials .row {
   display: flex;
   justify-content: space-around;
-  overflow-x: scroll;
+  overflow-x: auto;
   padding: 96px 20px 20px;
-  flex-wrap: nowrap;
+  background-color: red;
+  width: 100%;
 }
 
 .testimonials .card {
