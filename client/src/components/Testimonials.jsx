@@ -9,26 +9,6 @@ export default function Testimonial() {
       <div className="row">
         <div className="card">
           <div className="testimonial">
-            <video controls>
-              <source
-                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1727968095/DMSL-BETA/testimonial-video-1_lkk5kz.mp4"
-                type="video/mp4"
-              />
-            </video>
-          </div>
-          <div className="client-info">
-            <img
-              className="profile"
-              src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1727992124/DMSL-BETA/kids_interiors_iithip.png"
-            />
-            <div className="col">
-              <div className="client-name">Madina King</div>
-              <div className="business-name">MK Kids Interiors</div>
-            </div>
-          </div>
-        </div>
-        <div className="card">
-          <div className="testimonial">
             <div className="card__testimonial-text">
               <FontAwesomeIcon icon={faQuoteLeft} />
               <p>
@@ -50,6 +30,28 @@ export default function Testimonial() {
             </div>
           </div>
         </div>
+
+        <div className="card">
+          <div className="testimonial">
+            <video controls>
+              <source
+                src="https://res.cloudinary.com/dv6uz0bks/video/upload/v1727968095/DMSL-BETA/testimonial-video-1_lkk5kz.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+          <div className="client-info">
+            <img
+              className="profile"
+              src="https://res.cloudinary.com/dv6uz0bks/image/upload/v1727992124/DMSL-BETA/kids_interiors_iithip.png"
+            />
+            <div className="col">
+              <div className="client-name">Madina King</div>
+              <div className="business-name">MK Kids Interiors</div>
+            </div>
+          </div>
+        </div>
+
         <div className="card">
           <div className="testimonial">
             <video controls>
