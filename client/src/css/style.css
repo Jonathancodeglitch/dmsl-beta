@@ -917,10 +917,9 @@ header .row {
 
 .testimonials .row {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   overflow-x: auto;
-  padding: 96px 20px 20px;
-  background-color: red;
+  padding: 96px 100px 20px;
   width: 100%;
 }
 
