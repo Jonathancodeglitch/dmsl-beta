@@ -917,19 +917,19 @@ header .row {
 
 .testimonials .row {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-x: auto;
   padding: 96px 20px 20px;
-  background-color: green;
   width: 100%;
+  background-color: red;
 }
 
 .testimonials .card {
- 
   position: relative;
   display: grid;
   grid-template-rows: 1fr auto;
-  width: 320px;
+  min-width: 320px;
+  flex: 1;
   border-radius: 16px 16px 0px 0px;
   background-color: #fff;
   box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.1), 0 -1px 3px rgba(0, 0, 0, 0.1);
