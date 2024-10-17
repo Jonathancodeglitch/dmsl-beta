@@ -912,27 +912,26 @@ header .row {
 .testimonial_subtitle {
   color: #00376e;
   font-size: var(--font-xxxl);
-  margin-top: 26px;
+  margin: 26px 0px 0px 0px;
 }
 
 .testimonials .row {
   display: flex;
-  align-items: center;
   justify-content: space-around;
-  padding: 96px 0px 20px 0px;
-  overflow-x: auto;
+  overflow-x: scroll;
+  padding: 96px 20px 20px;
   flex-wrap: nowrap;
 }
 
 .testimonials .card {
-  flex: 1;
-  border-radius: 16px;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-width: 320px;
+  width: 100%;
+  border-radius: 16px 16px 0px 0px;
   background-color: #fff;
   box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.1), 0 -1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.testimonials .card .testimonial {
-  height: 320px;
 }
 
 .testimonials .card + .card {
@@ -956,12 +955,13 @@ header .row {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 0px 10px 40px 10px;
+  padding: 30px 10px 60px;
 }
 
 .testimonials .testimonial video {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+  object-fit: cover;
 }
 
 .testimonials .testimonial video,
@@ -1648,10 +1648,6 @@ header.project-overview .nav_link {
     text-align: center;
   }
 
-  .testimonials .card .testimonial {
-    height: 300px;
-  }
-
   .testimonials .profile {
     height: 70px;
     width: 70px;
@@ -1851,11 +1847,6 @@ header.project-overview .nav_link {
   }
 
   /* testimonials */
-
-  .testimonials .card {
-    min-width: 320px;
-  }
-
   .testimonials .profile {
     height: 80px;
     width: 80px;
@@ -2081,9 +2072,6 @@ header.project-overview .nav_link {
   }
 
   /* testimonial */
-  .testimonials .card .testimonial {
-    height: 320px;
-  }
 
   .testimonials .profile {
     background-color: white;
@@ -2494,10 +2482,6 @@ header.project-overview .nav_link {
     text-align: center;
   }
 
-  .testimonials .card .testimonial {
-    height: 270px;
-  }
-
   .card__testimonial-text .fa-quote-left {
     font-size: 2rem;
     padding-bottom: 20px;
@@ -2787,10 +2771,6 @@ header.project-overview .nav_link {
     padding: 30px 0px 0px 0px;
   }
 
-  /* testimonial */
-  .testimonials .card {
-    min-width: 300px;
-  }
   /* overview-hero */
 
   .overview-hero .project-name {
