@@ -5,15 +5,10 @@ import { NavLink, useParams, useLocation } from "react-router-dom";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
-  // to check if we are currently on the project overview page
-  // check if the property exist
-  //if it does add a class to the header
-  const location = useLocation();
 
-  // Helper function to determine if a link is active
-  const isActive = (path, hash) => {
-    return location.pathname === path && location.hash === hash;
-  };
+  function handleNavigationToggle() {
+    setOpen(!isOpen);
+  }
 
   return (
     <header className={"projectName" in useParams() ? "project-overview" : ""}>
@@ -33,41 +28,55 @@ export default function Header() {
         <ul className={isOpen ? "nav show" : "nav"}>
           <li className="nav_list">
             <NavLink
-              className={({ isActive }) =>
-                [
-                  "nav_link",
-                  isActive && location.pathname == "/" && location.hash == ""
-                    ? "active"
-                    : "",
-                ].join(" ")
-              }
+              onClick={handleNavigationToggle}
+              className="nav_link"
               to="/"
             >
               Home
             </NavLink>
           </li>
           <li className="nav_list">
-            <NavLink className="nav_link" to="about-us">
+            <NavLink
+              onClick={handleNavigationToggle}
+              className="nav_link"
+              to="about-us"
+            >
               ABOUT US
             </NavLink>
           </li>
           <li className="nav_list">
-            <NavLink className="nav_link" to="/projects">
+            <NavLink
+              onClick={handleNavigationToggle}
+              className="nav_link"
+              to="/projects"
+            >
               OUR PROJECTS
             </NavLink>
           </li>
           <li className="nav_list">
-            <NavLink className="nav_link" to="services">
+            <NavLink
+              onClick={handleNavigationToggle}
+              className="nav_link"
+              to="services"
+            >
               SERVICES
             </NavLink>
           </li>
           <li className="nav_list">
-            <NavLink className="nav_link" to="packages">
+            <NavLink
+              onClick={handleNavigationToggle}
+              className="nav_link"
+              to="packages"
+            >
               PACKAGES
             </NavLink>
           </li>
           <li className="nav_list">
-            <NavLink className="nav_link  nav_btn btn" to="/contact-us">
+            <NavLink
+              onClick={handleNavigationToggle}
+              className="nav_link  nav_btn btn"
+              to="/contact-us"
+            >
               CONTACT US
             </NavLink>
           </li>

@@ -923,11 +923,28 @@ header .row {
   width: 100%;
 }
 
+/* width */
+.testimonials .row::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* Track */
+.testimonials .row::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+.testimonials .row::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
 .testimonials .card {
   position: relative;
   display: grid;
   grid-template-rows: 1fr auto;
-  min-width: 320px;
+  min-width: 300px;
   flex: 1;
   border-radius: 16px 16px 0px 0px;
   background-color: #fff;
@@ -1909,10 +1926,14 @@ header.project-overview .nav_link {
   }
 
   .nav {
-    display: none;
+    display: block;
+    max-height: 0; /* Start with no height */
+    overflow: hidden;
+    opacity: 0;
     width: 100%;
-    padding: 20px 0px 10px 0px;
+    padding: 0px;
     position: relative;
+    transition: all 0.5s ease-in-out;
   }
 
   .nav_link:not(.nav_btn)::after {
@@ -1930,7 +1951,10 @@ header.project-overview .nav_link {
 
   /* show  hidden nav item */
   .nav.show {
+    padding: 20px 0px 10px 0px;
     display: block;
+    max-height: 500px;
+    opacity: 1;
   }
 
   .nav_list {
