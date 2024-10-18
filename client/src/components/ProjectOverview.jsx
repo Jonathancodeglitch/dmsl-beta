@@ -192,7 +192,7 @@ export default function ProjectOverview() {
               <br />
               Let's make your brand the next success story
             </p>
-            <Link to="/#packages" className="enquiry-btn">
+            <Link to="/packages" className="enquiry-btn">
               Get Started!
             </Link>
           </div>
